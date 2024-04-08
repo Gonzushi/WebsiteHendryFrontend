@@ -56,7 +56,7 @@ export default function RootLayout() {
         </div>
       </nav>
 
-      <main className="container mx-auto min-h-80 max-w-screen-xl">
+      <main className="container mx-auto min-h-96 max-w-screen-xl">
         <Outlet />
       </main>
 
@@ -85,7 +85,7 @@ export default function RootLayout() {
               </Link>
             </li>
             <li>
-              <Link to="/contact" className="mr-4 hover:underline md:mr-6 ">
+              <Link to="/contact" className="hover:underline">
                 Contact
               </Link>
             </li>
