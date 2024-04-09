@@ -2,29 +2,47 @@ import ProfilePicture from "../assetts/hendry_profile_picture.jpg";
 import AbbottLogo from "../assetts/abbott__logo.jpg";
 import UOTLogo from "../assetts/theuniversityoftexasataustin__logo.jpg";
 import UMNLogo from "../assetts/university_of_minnesota_logo.jpg";
+import EcowaterLogo from "../assetts/ecowater_systems_llc_logo.jpg";
+import InkoteLogo from "../assetts/inkote_logo.jpg";
+import PeninsulaLogo from "../assetts/peninsula_college_logo.jpg";
+import RecisLogo from "../assetts/regina_pacis_logo.jpg";
+import clsx from "clsx";
 
 function Resume() {
+  const currentDate = new Date();
+  const abbottStartDate = new Date(2021, 8, 1);
+  const monthDiff =
+    14 -
+    abbottStartDate.getMonth() +
+    currentDate.getMonth() +
+    12 * (currentDate.getFullYear() - abbottStartDate.getFullYear() - 1);
+  const years = Math.floor(monthDiff / 12);
+  const months = monthDiff % 12;
+  const period = clsx(years + " yrs", months > 0 && " " + months + " mos");
+
   return (
-    <>
-      <div className="mx-4 mt-6 min-h-96 rounded-lg bg-gray-200 tracking-tight md:mx-0">
-        <section className="relative">
+    <div className="text-md mx-auto max-w-5xl">
+      <section className="mx-4 mt-6 min-h-96 rounded-lg bg-gray-200 tracking-tight">
+        <div className="relative">
           <div className="min-h-56 rounded-t-lg bg-gray-400"></div>
           <div className="min-h-56 rounded-b-lg pb-8 md:grid md:grid-cols-2">
             <div className="mx-10 mt-24">
               <p className="text-2xl font-semibold">Hendry Widyanto</p>
-              <p className="text-lg">Product Performance Engineer</p>
-              <p className="text-lg">Bogor, Jawa Barat, Indonesia</p>
+              <p className="mt-1">
+                Data Analyst / Product Performance Engineer
+              </p>
+              <p className="mt-1">Bogor, West Java, Indonesia</p>
             </div>
-            <div className="mx-10 mt-5 flex flex-col space-y-2 font-semibold md:ms-60 md:mt-24">
-              <div className="inline-flex items-center text-lg">
+            <div className="mx-10 mt-5 flex flex-col space-y-2 font-semibold md:mt-24">
+              <div className="inline-flex items-center">
                 <img src={AbbottLogo} className="mr-3 size-6 rounded-full" />
                 Abbott
               </div>
-              <div className="inline-flex items-center text-lg">
+              <div className="inline-flex items-center">
                 <img src={UOTLogo} className="mr-3 size-6 rounded-full" />
                 University of Texas Austin
               </div>
-              <div className="inline-flex items-center text-lg">
+              <div className="inline-flex items-center">
                 <img src={UMNLogo} className="mr-3 size-6 rounded-full" />
                 University of Minnesota Twin Cities
               </div>
@@ -36,9 +54,234 @@ function Resume() {
               className="size-42 mx-auto rounded-full"
             />
           </div>
-        </section>
-      </div>
-    </>
+        </div>
+      </section>
+
+      <section className="mx-4 my-4 min-h-96 rounded-lg bg-gray-200 px-10 py-6 tracking-tight">
+        <div className="text-2xl font-semibold">Experience</div>
+
+        <div className="mt-4 inline-flex w-full items-start justify-start border-b border-gray-400 py-4">
+          <img
+            src={AbbottLogo}
+            className="hidden size-10 rounded-lg md:block md:size-16"
+          />
+          <div className="w-full px-3 md:px-8 ">
+            <p className="font-semibold">
+              Data Analyst / Product Performance Engineer
+            </p>
+            <p>Abbott</p>
+            <p className="font">Aug 2021 - Present · {period} </p>
+            <p>Temecula, California, United States</p>
+            <div className="mx-4 my-4 ms-7">
+              <ul className="list-disc">
+                <li>
+                  Build a website for internal use to publish custom report.
+                  Technology used: backend (Python, FastAPI), frontend (React,
+                  HTML, JS, CSS), database (Salesforce, Azure SQL), and cloud
+                  service (Azure Functions, Azure App Service, Entra ID)
+                </li>
+                <li>
+                  Create an application to receive a complaint from the client
+                  and sales team using PowerApps as the user interface and
+                  Python (with FastAPI) as the backend. Then, transfer the data
+                  to Salesforce
+                </li>
+                <li>
+                  Build dashboard for the group using Power Platform (Power BI
+                  and Power Automate)
+                </li>
+                <li>
+                  Identify, analyze, investigate, monitor, and document
+                  patterns/trends in post marketing surveillance data as part of
+                  the CAPA system
+                </li>
+                <li>
+                  Analyze and investigate product complaints from the field as
+                  part of post market surveillance requirements
+                </li>
+                <li>
+                  Ensure that information and insight gained from the
+                  investigations and corrective actions are fed back to the R&D
+                  and marketing organizations as part of the risk management and
+                  design input systems
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div className="mt-4 inline-flex w-full items-start justify-start border-b border-gray-400 py-4">
+          <img
+            src={EcowaterLogo}
+            className="hidden size-10 rounded-lg md:block md:size-16"
+          />
+          <div className="w-full px-3 md:px-8">
+            <p className="font-semibold">Engineering Co-op</p>
+            <p>Ecowater</p>
+            <p className="font">Sep 2019 - Aug 2020 · 1 yr</p>
+            <p>Woodbury, Minnesota, United States</p>
+            <div className="mx-4 my-4 ms-7">
+              <ul className="list-disc">
+                <li>
+                  Design and assemble automation stand to test the viability of
+                  new brine valve prototype for water softener and the lifespan
+                  of MgO block to produce alkaline water from the Reverse
+                  Osmosis water
+                </li>
+                <li>
+                  Create an application to receive a complaint from the client
+                  and sales team using PowerApps as the user interface and
+                  Python (with FastAPI) as the backend. Then, transfer the data
+                  to Salesforce
+                </li>
+                <li>
+                  Install and program PLCs to control the system and collect
+                  data for analysis
+                </li>
+                <li>
+                  Operate and maintain pilot-scale equipment to analyze resin
+                  capacity and optimize the resin in water softener to reduce
+                  production cost and increase the efficiency of ion exchange
+                </li>
+                <li>
+                  Develop Process Flow Diagram and improve manuals for existing
+                  and new automation system
+                </li>
+                <li>
+                  Design and assemble automation stand that includes heat
+                  exchanger and pump sizing to test the strength of salt tank
+                  for water softener at high temperature
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div className="mt-4 inline-flex w-full items-start justify-start border-b border-gray-400 py-4">
+          <img
+            src={InkoteLogo}
+            className="hidden size-10 rounded-lg md:block md:size-16"
+          />
+          <div className="w-full px-3 md:px-8">
+            <p className="font-semibold">Research And Development Intern</p>
+            <p>PT. Inkote Indonesia</p>
+            <p className="font">Jun 2019 - Aug 2019 · 3 mos</p>
+            <p>Bekasi, West Java, Indonesia</p>
+            <div className="mx-4 my-4 ms-7">
+              <ul className="list-disc">
+                <li>
+                  Formulate composition of industrial coating according to the
+                  specification given by the clients
+                </li>
+                <li>
+                  Reduce cost production by evaluating substitute raw materials
+                  such as resin, pigment, and additives from suppliers
+                </li>
+                <li>
+                  Demonstrate techniques to analyze the coating such as color
+                  matching, testing pigment color strength, checking viscosity,
+                  measuring solid content of paint, and paint spray application
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div className="mt-4 inline-flex w-full items-start justify-start py-4">
+          <img
+            src={PeninsulaLogo}
+            className="hidden size-10 rounded-lg md:block md:size-16"
+          />
+          <div className="w-full px-3 md:px-8">
+            <p className="font-semibold">Math Tutor</p>
+            <p>Peninsula College</p>
+            <p className="font">Jan 2016 - Jun 2017 · 1 yr 6 mos</p>
+            <p>Port Angeles, Washington, United States</p>
+            <div className="mx-4 my-4 ms-7">
+              <ul className="list-disc">
+                <li>
+                  One of the instructors of a federally funded college
+                  preparatory program that aids low-income and first-generation
+                  college-bound high school students
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="mx-4 my-4 min-h-96 rounded-lg bg-gray-200 px-10 py-6 tracking-tight">
+        <div className="text-2xl font-semibold">Education</div>
+
+        <div className="grid grid-cols-1">
+          <div className="my-4 inline-flex items-center">
+            <img
+              src={UOTLogo}
+              className="size-10 rounded-lg md:block md:size-16"
+            />
+            <div className="mx-6">
+              <p className="font-semibold">University of Texas Austin</p>
+              <p>Master in Data Sceince - M.S, Data Science</p>
+              <p>Aug 2024 - Dec 2025</p>
+            </div>
+          </div>
+
+          <div className="my-4 inline-flex items-center">
+            <img
+              src={UMNLogo}
+              className="size-10 rounded-lg md:block md:size-16"
+            />
+            <div className="mx-6">
+              <p className="font-semibold">
+                University of Minnesota Twin Cities
+              </p>
+              <p>
+                Bachelor of Chemical Engineering - B.Ch.E, Chemical Engineering
+              </p>
+              <p>Jan 2017 - May 2021</p>
+            </div>
+          </div>
+
+          <div className="my-4 inline-flex items-center">
+            <img
+              src={UMNLogo}
+              className="size-10 rounded-lg md:block md:size-16"
+            />
+            <div className="mx-6">
+              <p className="font-semibold">
+                University of Minnesota Twin Cities
+              </p>
+              <p>Bachelor of Science - B.S, Chemistry</p>
+              <p>Jan 2017 - May 2021</p>
+            </div>
+          </div>
+
+          <div className="my-4 inline-flex items-center">
+            <img
+              src={PeninsulaLogo}
+              className="size-10 rounded-lg md:block md:size-16"
+            />
+            <div className="mx-6">
+              <p className="font-semibold">Peninsula College</p>
+              <p>Associate in Science</p>
+              <p>2015 - 2017</p>
+            </div>
+          </div>
+
+          <div className="my-4 inline-flex items-center">
+            <img
+              src={RecisLogo}
+              className="size-10 rounded-lg md:block md:size-16"
+            />
+            <div className="mx-6">
+              <p className="font-semibold">SMA Regina Pacis Bogor</p>
+              <p>High School</p>
+              <p>2012 - 2015</p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
   );
 }
 
