@@ -8,7 +8,7 @@ export default function Navbar() {
   const [menuHidden, setMenuHidden] = useState(true);
   const styleMenu = clsx(menuHidden && "hidden", "w-full md:block md:w-auto");
   const styleLink = clsx(
-    "block rounded px-3 py-2 text-lg hover:bg-blue-700 hover:text-white dark:text-white md:bg-transparent md:p-0 md:text-black md:hover:bg-transparent md:hover:text-primary-500",
+    "block rounded-xl px-3 py-2 text-lg hover:bg-blue-700 hover:text-white md:bg-transparent md:p-0 md:text-black md:hover:bg-transparent md:hover:text-primary-500",
   );
 
   const changeMenuHidden = () => {
@@ -51,11 +51,20 @@ export default function Navbar() {
             </li>
             <li>
               <NavLink
-                to="/about"
+                to="/resume"
                 className={styleLink}
                 onClick={() => changeMenuHidden()}
               >
-                About
+                Resume
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to="/contact"
+                className={styleLink}
+                onClick={() => changeMenuHidden()}
+              >
+                Contact
               </NavLink>
             </li>
           </ul>

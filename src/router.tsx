@@ -8,7 +8,8 @@ import {
 // pages
 import Home from "./pages/Home";
 import Portfolio from "./pages/Portfolio";
-import About from "./pages/About";
+import Resume from "./pages/Resume";
+import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
 
 // layout
@@ -22,7 +23,8 @@ const router = createBrowserRouter(
       <Route path="portfolio" element={<PortfolioLayout />}>
         <Route path="trial" element={<Portfolio />} />
       </Route>
-      <Route path="about" element={<About />} />
+      <Route path="resume" element={<Resume />} />
+      <Route path="contact" element={<Contact />} />
 
       <Route path="*" element={<NotFound />} />
     </Route>,

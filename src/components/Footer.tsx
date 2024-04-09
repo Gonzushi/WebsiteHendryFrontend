@@ -19,13 +19,13 @@ export default function Footer() {
         </p>
         <ul className="mb-6 flex flex-wrap items-center justify-center space-x-4 text-gray-900 dark:text-white">
           <li>
-            <Link to="/about" className="hover:underline">
-              About
+            <Link to="/portfolio" className="hover:underline">
+              Portfolio
             </Link>
           </li>
           <li>
-            <Link to="/portfolio" className="hover:underline">
-              Portfolio
+            <Link to="/resume" className="hover:underline">
+              Resume
             </Link>
           </li>
           <li>
