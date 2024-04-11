@@ -22,9 +22,9 @@ function Resume() {
 
   return (
     <div className="text-md mx-auto max-w-5xl">
-      <section className="mx-4 mt-6 min-h-96 rounded-lg bg-gray-200 tracking-tight">
+      <section className="mx-4 mt-6 min-h-96 overflow-hidden rounded-lg border border-gray-300 tracking-tight shadow-lg">
         <div className="relative">
-          <div className="min-h-56 rounded-t-lg bg-gray-400"></div>
+          <div className="min-h-56  bg-gray-400"></div>
           <div className="min-h-56 rounded-b-lg pb-8 md:grid md:grid-cols-2">
             <div className="mx-10 mt-24">
               <p className="text-2xl font-semibold">Hendry Widyanto</p>
@@ -57,7 +57,7 @@ function Resume() {
         </div>
       </section>
 
-      <section className="mx-4 my-4 min-h-96 rounded-lg bg-gray-200 px-10 py-6 tracking-tight">
+      <section className="mx-4 my-4 min-h-96 overflow-hidden rounded-lg border border-gray-300 px-10 py-6 tracking-tight shadow-lg">
         <div className="text-2xl font-semibold">Experience</div>
 
         <div className="mt-4 inline-flex w-full items-start justify-start border-b border-gray-400 py-4">
@@ -210,7 +210,7 @@ function Resume() {
         </div>
       </section>
 
-      <section className="mx-4 my-4 min-h-96 rounded-lg bg-gray-200 px-10 py-6 tracking-tight">
+      <section className="mx-4 my-4 min-h-96 overflow-hidden rounded-lg border border-gray-300 px-10 py-6 tracking-tight shadow-lg">
         <div className="text-2xl font-semibold">Education</div>
 
         <div className="grid grid-cols-1">
@@ -221,7 +221,7 @@ function Resume() {
             />
             <div className="mx-6">
               <p className="font-semibold">University of Texas Austin</p>
-              <p>Master in Data Sceince - M.S, Data Science</p>
+              <p>Master in Data Science - M.S, Data Science</p>
               <p>Aug 2024 - Dec 2025</p>
             </div>
           </div>
@@ -238,7 +238,7 @@ function Resume() {
               <p>
                 Bachelor of Chemical Engineering - B.Ch.E, Chemical Engineering
               </p>
-              <p>Jan 2017 - May 2021</p>
+              <p>Aug 2017 - May 2021</p>
             </div>
           </div>
 
@@ -252,7 +252,7 @@ function Resume() {
                 University of Minnesota Twin Cities
               </p>
               <p>Bachelor of Science - B.S, Chemistry</p>
-              <p>Jan 2017 - May 2021</p>
+              <p>Aug 2017 - May 2021</p>
             </div>
           </div>
 
