@@ -10,7 +10,7 @@ import Home from "./pages/Home";
 import Portfolio from "./pages/portfolio/Portfolio";
 import ProjectCrud from "./pages/portfolio/ProjectCrud";
 import Resume from "./pages/Resume";
-import Contact from "./pages/Contact";
+// import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
 import InProgress from "./pages/InProgress";
 
