@@ -18,7 +18,7 @@ export default function Portfolio() {
 
           <div className="mb-6 grid gap-8 md:grid-cols-2 lg:mb-16">
             <div className="items-center rounded-lg border border-gray-300  px-4 py-4 shadow-lg sm:flex">
-              <div className="mx-auto size-48 min-w-48 place-content-center rounded-lg border-2 border-gray-200 shadow-md">
+              <div className="mx-auto py-14 size-48 min-w-48 rounded-lg border-2 border-gray-200 shadow-md">
                 <IconWip />
                 <p className="text-center font-bold">Work in Progress</p>
               </div>
@@ -35,7 +35,7 @@ export default function Portfolio() {
             </div>
 
             <div className="items-center rounded-lg border border-gray-300  px-4 py-4 shadow-lg sm:flex">
-              <div className="mx-auto size-48 min-w-48 place-content-center rounded-lg border-2 border-gray-200 shadow-md">
+              <div className="mx-auto size-48 min-w-48 rounded-lg border-2 border-gray-200 shadow-md py-14">
                 <IconWip />
                 <p className="text-center font-bold">Work in Progress</p>
               </div>
@@ -52,7 +52,7 @@ export default function Portfolio() {
             </div>
 
             <div className="items-center rounded-lg border border-gray-300  px-4 py-4 shadow-lg sm:flex">
-              <div className="mx-auto size-48 min-w-48 place-content-center rounded-lg border-2 border-gray-200 shadow-md">
+              <div className="mx-auto size-48 min-w-48 rounded-lg border-2 border-gray-200 shadow-md py-14">
                 <IconWip />
                 <p className="text-center font-bold">Work in Progress</p>
               </div>
@@ -69,7 +69,7 @@ export default function Portfolio() {
             </div>
 
             <div className="items-center rounded-lg border border-gray-300  px-4 py-4 shadow-lg sm:flex">
-              <div className="mx-auto size-48 min-w-48 place-content-center rounded-lg border-2 border-gray-200 shadow-md">
+              <div className="mx-auto size-48 min-w-48 rounded-lg border-2 border-gray-200 shadow-md py-14">
                 <IconWip />
                 <p className="text-center font-bold">Work in Progress</p>
               </div>
