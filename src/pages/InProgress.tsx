@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { HomeIcon } from "@heroicons/react/24/solid";
 
 export default function InProgress() {
   return (
@@ -22,9 +23,10 @@ export default function InProgress() {
         </p>
         <Link
           to="/"
-          className="mt-10 inline-flex rounded-lg bg-primary-600 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-primary-800 focus:outline-none focus:ring-4 focus:ring-primary-300"
+          className="mt-5 inline-flex items-center justify-center rounded-lg bg-blue-700 px-5 py-3 text-center text-base font-medium text-white hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-900"
         >
           Back to Homepage
+          <HomeIcon className="ms-3 h-6 w-6 text-white" />
         </Link>
       </div>
     </section>

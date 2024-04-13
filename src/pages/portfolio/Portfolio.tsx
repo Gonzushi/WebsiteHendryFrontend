@@ -11,7 +11,7 @@ export default function Portfolio() {
               My Personal Projects
             </h2>
             <p className="font-light text-gray-500 dark:text-gray-400 sm:text-xl lg:mb-16">
-              Explore the collection of my personal projects. Learned new stuff
+              Explore the collection of my personal projects. Learn new stuff
               everyday!
             </p>
           </div>

@@ -30,7 +30,7 @@ export default function Navbar() {
           <Bars3Icon className="h-10 w-10 text-primary-600 hover:cursor-pointer hover:text-primary-800" />
         </button>
         <div className={styleMenu} id="navbar-default">
-          <ul className="mt-4 flex flex-col rounded-xl border-2 border-gray-300 bg-gray-50 p-4 font-medium dark:border-gray-700 dark:bg-gray-800 md:mt-0 md:flex-row md:space-x-8 md:border-0 md:bg-white md:p-0 md:dark:bg-gray-900">
+          <ul className="mt-4 flex flex-col rounded-xl border border-gray-300 p-4 font-medium shadow-lg md:mt-0 md:flex-row md:space-x-8 md:border-0 md:bg-white md:p-0 md:shadow-none md:dark:bg-gray-900">
             <li>
               <NavLink
                 to="/"
