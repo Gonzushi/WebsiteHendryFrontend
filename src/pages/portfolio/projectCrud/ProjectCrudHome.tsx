@@ -2,6 +2,7 @@ import Table, { columnDetailsType } from "../../../components/Table";
 import ModalAdd from "../../../components/ModalAdd";
 import { useEffect, useRef, useState } from "react";
 import axios from "axios";
+import API from "../../../utilites/api";
 
 type brandData = {
   id: number;
@@ -24,12 +25,13 @@ export default function ProjectCrudHome() {
   const abortControllerRef = useRef<AbortController | null>(null);
   const [showModal, setShowModal] = useState(false);
   const [totalData, setTotalData] = useState(0);
+  const API_URL = API();
 
   useEffect(() => {
     fetchData(1);
   }, []);
 
-  console.log(error)
+  console.log(error);
 
   const columnDetails: columnDetailsType[] = [
     {
@@ -46,7 +48,7 @@ export default function ProjectCrudHome() {
     SetIsLoading(true);
     axios({
       method: "delete",
-      url: "/api/project_crud/brand/" + brandId,
+      url: API_URL + "/project_crud/brand/" + brandId,
     }).then(() => fetchData(1));
   };
 
@@ -60,7 +62,7 @@ export default function ProjectCrudHome() {
 
     axios({
       method: "post",
-      url: "/api/project_crud/brand/",
+      url: API_URL + "/project_crud/brand/",
       data: brandData,
       headers: {
         "Access-Control-Allow-Origin": "*",
@@ -79,9 +81,8 @@ export default function ProjectCrudHome() {
     SetIsLoading(true);
 
     try {
-      const url = "/api/project_crud/brand?limit=10&skip=" + (page - 1) * 10;
-      console.log(url)
-
+      const url =
+        API_URL + "/project_crud/brand?limit=10&skip=" + (page - 1) * 10;
       const response = await fetch(url, {
         signal: abortControllerRef.current?.signal,
       });
