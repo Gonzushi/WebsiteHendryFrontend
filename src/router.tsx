@@ -9,6 +9,8 @@ import {
 import Home from "./pages/Home";
 import Portfolio from "./pages/portfolio/Portfolio";
 import ProjectCrudHome from "./pages/portfolio/projectCrud/ProjectCrudHome";
+import ProjectCrudBrand from "./pages/portfolio/projectCrud/ProjectCrudBrand";
+import ProjectCrudProduct from "./pages/portfolio/projectCrud/ProjectCrudProduct";
 import Resume from "./pages/Resume";
 // import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
@@ -27,8 +29,8 @@ const router = createBrowserRouter(
         <Route index element={<Portfolio />} />
         <Route path="project-crud" element={<ProjectCrudLayout />}>
           <Route index element={<ProjectCrudHome />} />
-          <Route path="brand" element={<ProjectCrudHome />} />
-          <Route path="product" element={<ProjectCrudHome />} />
+          <Route path="brand" element={<ProjectCrudBrand />} />
+          <Route path="product" element={<ProjectCrudProduct />} />
         </Route>
       </Route>
       <Route path="resume" element={<Resume />} />
