@@ -80,6 +80,7 @@ export default function ProjectCrudHome() {
 
     try {
       const url = "/api/project_crud/brand?limit=10&skip=" + (page - 1) * 10;
+      console.log(url)
 
       const response = await fetch(url, {
         signal: abortControllerRef.current?.signal,
