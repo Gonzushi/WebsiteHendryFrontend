@@ -56,20 +56,20 @@ export default function SideBar(props: SideBarProps) {
               <ul id="dropdown-pages" className={styleChildTable}>
                 <li>
                   <Link
-                    to="users"
+                    to="brand"
                     className="group flex w-full items-center rounded-lg p-2 pl-11 text-base font-normal text-gray-900 transition duration-75 hover:bg-gray-100"
                     onClick={props.itemOnClick}
                   >
-                    Users
+                    Brands
                   </Link>
                 </li>
                 <li>
                   <Link
-                    to="books"
+                    to="product"
                     className="group flex w-full items-center rounded-lg p-2 pl-11 text-base font-normal text-gray-900 transition duration-75 hover:bg-gray-100"
                     onClick={props.itemOnClick}
                   >
-                    Books
+                    Products
                   </Link>
                 </li>
               </ul>

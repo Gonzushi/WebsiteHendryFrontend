@@ -27,8 +27,8 @@ const router = createBrowserRouter(
         <Route index element={<Portfolio />} />
         <Route path="project-crud" element={<ProjectCrudLayout />}>
           <Route index element={<ProjectCrudHome />} />
-          <Route path="users" element={<ProjectCrudHome />} />
-          <Route path="books" element={<ProjectCrudHome />} />
+          <Route path="brand" element={<ProjectCrudHome />} />
+          <Route path="product" element={<ProjectCrudHome />} />
         </Route>
       </Route>
       <Route path="resume" element={<Resume />} />

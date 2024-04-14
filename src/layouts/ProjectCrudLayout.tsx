@@ -29,7 +29,7 @@ export default function ProjectCrudLayout() {
         </div>
       </section>
 
-      <section className="mx-auto md:flex">
+      <section className="mx-auto mt-4 md:flex">
         <SideBar className={styleMenu} itemOnClick={() => updateShowMenu()} />
         <main className="w-full">
           <Outlet />
