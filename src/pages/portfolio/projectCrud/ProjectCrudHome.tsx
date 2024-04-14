@@ -1,5 +1,5 @@
 import Table, { columnDetailsType } from "../../../components/Table";
-import ModalAdd from "../../../components/ModalAdd";
+import ModalAdd from "../../../components/Modal";
 import { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import API from "../../../utilites/api";
