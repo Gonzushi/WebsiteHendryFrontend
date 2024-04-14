@@ -3,7 +3,7 @@ export default function API() {
   if (import.meta.env.MODE === "development") {
     API = "/api";
   } else {
-    API = "https://api.hendrywidyanto.com/";
+    API = "https://api.hendrywidyanto.com";
   }
   return API;
 }
