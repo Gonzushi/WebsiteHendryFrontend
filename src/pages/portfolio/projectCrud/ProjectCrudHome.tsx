@@ -107,9 +107,9 @@ export default function ProjectCrudHome() {
 
   return (
     <div className="mx-4 mt-2">
-      <div className="flex flex-col items-center justify-between space-y-3 rounded-lg border border-gray-300 p-2  shadow-md md:flex-row md:space-x-4 md:space-y-0">
+      <div className="flex flex-col items-center justify-between space-y-3 rounded-lg border border-gray-300 p-2 shadow-md md:flex-row md:space-x-4 md:space-y-0">
         <div className="flex w-full flex-shrink-0 flex-col items-stretch justify-end space-y-2 md:w-full md:flex-row md:items-center md:justify-between md:space-x-3 md:space-y-0">
-          <div className=" ms-3 text-center font-semibold md:mb-0">
+          <div className=" m ms-3 text-center font-semibold md:mb-0">
             Table Brand
           </div>
           <ModalAdd
@@ -151,7 +151,7 @@ export default function ProjectCrudHome() {
         </div>
       </div>
       <Table<brandData>
-        className="mt-6"
+        className="mt-4"
         data={data}
         columnDetails={columnDetails}
         deleteData={deleteBrand}

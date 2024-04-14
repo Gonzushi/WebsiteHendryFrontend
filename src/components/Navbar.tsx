@@ -1,24 +1,29 @@
 import { Link, NavLink } from "react-router-dom";
-import { SparklesIcon } from "@heroicons/react/24/solid";
+import { SparklesIcon, XMarkIcon } from "@heroicons/react/24/solid";
 import { Bars3Icon } from "@heroicons/react/24/solid";
 import clsx from "clsx";
-import { useState, useRef } from "react";
-// import ReactDOM from "react-dom";
+import { useState, useRef, useEffect } from "react";
 
 export default function Navbar() {
   const [menuHidden, setMenuHidden] = useState(true);
-  const newRef = useRef(null);
+  const menuRef = useRef<HTMLDivElement>(null);
+  const buttonRef = useRef<HTMLButtonElement>(null);
 
-  // useEffect(() => {
-  //   document.addEventListener("mousedown", (e) => handleOutsideClick(e));
-  //   return () => {
-  //     document.removeEventListener("mousedown", (e) => handleOutsideClick(e));
-  //   };
-  // });
+  useEffect(() => {
+    document.addEventListener("mousedown", (e) => handleOutsideClick(e));
+    return () => {
+      document.removeEventListener("mousedown", (e) => handleOutsideClick(e));
+    };
+  });
 
-  // const handleOutsideClick = (e: MouseEvent) => {
-  //   console.log(newRef.current)
-  // };
+  const handleOutsideClick = (e: any) => {
+    if (
+      menuRef.current?.contains(e.target) == false &&
+      buttonRef.current?.contains(e.target) == false
+    ) {
+      setMenuHidden(true);
+    }
+  };
 
   const styleMenu = clsx(
     menuHidden && "hidden",
@@ -40,13 +45,15 @@ export default function Navbar() {
           <span className="text-2xl font-semibold">Hendry Widyanto</span>
         </Link>
         <button
-          className="inline-flex h-10 w-10 items-center justify-center rounded-lg p-2 text-sm text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600 md:hidden"
+          className="inline-flex h-10 w-10 items-center justify-center rounded-lg p-1 text-sm text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200  md:hidden"
           onClick={() => changeMenuHidden()}
+          ref={buttonRef}
         >
           <span className="sr-only">Open main menu</span>
-          <Bars3Icon className="h-10 w-10 text-primary-600 hover:cursor-pointer hover:text-primary-800" />
+          {menuHidden && <Bars3Icon className="h-10 w-10 text-primary-600 hover:cursor-pointer hover:text-primary-800" />}
+          {!menuHidden && <XMarkIcon className="h-10 w-10 text-primary-600 hover:cursor-pointer hover:text-primary-800" />}
         </button>
-        <div className={styleMenu} id="navbar-default" ref={newRef}>
+        <div className={styleMenu} id="navbar-default" ref={menuRef}>
           <ul className="flex flex-col rounded-xl border border-gray-300 p-4 font-medium shadow-lg md:mt-0 md:flex-row md:space-x-8 md:border-0 md:bg-white md:p-0 md:shadow-none md:dark:bg-gray-900">
             <li>
               <NavLink
