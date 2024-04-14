@@ -1,6 +1,6 @@
 import Table, { columnDetailsType } from "../../../components/Table";
 import Modal from "../../../components/Modal";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import API from "../../../utilites/api";
 
