@@ -27,6 +27,8 @@ export default function ProjectCrudHome() {
   const [totalData, setTotalData] = useState(0);
   const API_URL = API();
 
+  console.log(error);
+
   useEffect(() => {
     fetchData(1);
   }, []);
