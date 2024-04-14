@@ -2,7 +2,6 @@ import Table, { columnDetailsType } from "../../../components/Table";
 import ModalAdd from "../../../components/Modal";
 import { useEffect, useRef, useState } from "react";
 import axios from "axios";
-import API from "../../../utilites/api";
 
 type brandData = {
   id: number;
@@ -25,9 +24,11 @@ export default function ProjectCrudHome() {
   const abortControllerRef = useRef<AbortController | null>(null);
   const [showModal, setShowModal] = useState(false);
   const [totalData, setTotalData] = useState(0);
-  const API_URL = API();
+  // const API_URL = "http://localhost:7071";
+  const API_URL = "https://api.hendrywidyanto.com";
 
-  console.log(error);
+  if (error) {
+  }
 
   useEffect(() => {
     fetchData(1);
