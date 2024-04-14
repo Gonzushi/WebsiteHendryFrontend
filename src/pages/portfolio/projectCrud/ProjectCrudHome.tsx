@@ -31,8 +31,6 @@ export default function ProjectCrudHome() {
     fetchData(1);
   }, []);
 
-  console.log(error);
-
   const columnDetails: columnDetailsType[] = [
     {
       key: "id",
@@ -64,11 +62,6 @@ export default function ProjectCrudHome() {
       method: "post",
       url: API_URL + "/project_crud/brand/",
       data: brandData,
-      // headers: {
-      //   "Access-Control-Allow-Origin": "*",
-      //   "Access-Control-Allow-Headers": "Content-Type",
-      //   "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
-      // },
     }).then(() => {
       fetchData(1);
     });
@@ -82,7 +75,7 @@ export default function ProjectCrudHome() {
 
     try {
       const url =
-        API_URL + "/project_crud/brand?limit=10&skip=" + (page - 1) * 10;
+        API_URL + "/project_crud/brand/?limit=10&skip=" + (page - 1) * 10;
       const response = await fetch(url, {
         signal: abortControllerRef.current?.signal,
       });
