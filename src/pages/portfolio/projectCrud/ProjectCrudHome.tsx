@@ -123,12 +123,12 @@ export default function ProjectCrudHome() {
       .catch((error) => handleAxiosError(error))
       .then((res) => {
         if (res?.status == 200) {
-          setData(res?.data.records);
-          setTotalData(res?.data.total);
+          const data: brandResponse = res?.data
+          setData(data.records);
+          setTotalData(data.total);
         }
-      });
-
-    SetIsLoading(false);
+      })
+      .finally(() => SetIsLoading(false));
   };
 
   const updateShowModalAdd = () => {
