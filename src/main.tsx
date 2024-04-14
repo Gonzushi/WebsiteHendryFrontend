@@ -4,7 +4,7 @@ import RouterDOM from "./router";
 import "./index.css";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
-  // <React.StrictMode>
-  <RouterDOM />,
-  // </React.StrictMode>
+  <React.StrictMode>
+    <RouterDOM />,
+  </React.StrictMode>,
 );
