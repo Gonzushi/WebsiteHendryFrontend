@@ -27,7 +27,7 @@ export default function ProjectCrudLayout() {
 
   const styleMenu = clsx(
     !showMenu && "hidden",
-    "absolute left-0 z-50 w-full bg-white px-4 md:static md:mx-0  md:my-2 md:block md:w-60",
+    "absolute left-0 z-50 w-full px-4 md:static md:mx-0  md:my-2 md:block md:w-60",
   );
 
   const updateShowMenu = () => {

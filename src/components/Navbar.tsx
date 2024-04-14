@@ -27,7 +27,7 @@ export default function Navbar() {
 
   const styleMenu = clsx(
     menuHidden && "hidden",
-    "absolute left-0 top-0 z-50 mt-20 w-full bg-white px-4 md:static md:mt-0 md:block md:w-auto",
+    "absolute left-0 top-0 z-50 mt-20 w-full px-4 md:static md:mt-0 md:block md:w-auto",
   );
   const styleLink = clsx(
     "block rounded-xl px-3 py-2 text-lg hover:bg-blue-700 hover:text-white md:bg-transparent md:p-0 md:text-black md:hover:bg-transparent md:hover:text-primary-500",
@@ -54,7 +54,7 @@ export default function Navbar() {
           {!menuHidden && <XMarkIcon className="h-10 w-10 text-primary-600 hover:cursor-pointer hover:text-primary-800" />}
         </button>
         <div className={styleMenu} id="navbar-default" ref={menuRef}>
-          <ul className="flex flex-col rounded-xl border border-gray-300 p-4 font-medium shadow-lg md:mt-0 md:flex-row md:space-x-8 md:border-0 md:bg-white md:p-0 md:shadow-none md:dark:bg-gray-900">
+          <ul className="flex bg-white flex-col rounded-xl border border-gray-300 p-4 font-medium shadow-lg md:mt-0 md:flex-row md:space-x-8 md:border-0 md:bg-white md:p-0 md:shadow-none md:dark:bg-gray-900">
             <li>
               <NavLink
                 to="/"

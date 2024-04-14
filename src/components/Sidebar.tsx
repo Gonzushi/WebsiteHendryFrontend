@@ -23,7 +23,7 @@ export default function SideBar(props: SideBarProps) {
 
   return (
     <div className={props.className}>
-      <section className="w-full rounded-lg border border-gray-300 shadow-lg">
+      <section className="w-full bg-white rounded-lg border border-gray-300 shadow-lg">
         <div className="overflow-hidden px-3 py-5">
           <ul className="space-y-2">
             <li>
