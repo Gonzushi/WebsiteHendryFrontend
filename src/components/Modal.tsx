@@ -11,7 +11,7 @@ type modalProps = {
 export default function ModalAdd(props: modalProps) {
   const styleMainModal = clsx(
     !props.showModal && "hidden",
-    "fixed left-0 top-0 z-50 h-[calc(100dvh)] w-full content-center p-8",
+    "fixed left-0 top-0 z-50 h-[100svh] h-screen w-full content-center p-8",
   );
 
   return (
