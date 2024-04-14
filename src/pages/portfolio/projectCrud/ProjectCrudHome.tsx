@@ -29,6 +29,8 @@ export default function ProjectCrudHome() {
     fetchData(1);
   }, []);
 
+  console.log(error)
+
   const columnDetails: columnDetailsType[] = [
     {
       key: "id",
