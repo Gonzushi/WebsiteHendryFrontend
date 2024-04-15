@@ -126,6 +126,8 @@ export default function ProjectCruddBrand() {
         totalData={totalData}
         fetchData={fetchData}
         showEditMenu={false}
+        updateButtonPressed={() => {}}
+        deleteData={() => {}}
       />
     </div>
   );
