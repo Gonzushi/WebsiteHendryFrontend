@@ -417,6 +417,7 @@ export default function ProjectCrudProduct() {
         isLoading={isLoading}
         totalData={totalData}
         fetchData={fetchData}
+        showEditMenu={true}
       />
     </div>
   );

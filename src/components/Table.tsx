@@ -18,9 +18,10 @@ type tableProps<dataType> = {
   idKey: string;
   isLoading: boolean;
   totalData: number;
-  updateButtonPressed: (data: dataType) => void;
   fetchData: (page: number) => void;
-  deleteData: (id: number) => void;
+  showEditMenu: boolean;
+  updateButtonPressed?: (data: dataType) => void;
+  deleteData?: (id: number) => void;
 };
 
 export default function Table<dataType>(props: tableProps<dataType>) {
@@ -52,16 +53,18 @@ export default function Table<dataType>(props: tableProps<dataType>) {
             </td>
           );
         })}
-        <td className="flex items-center justify-center space-x-4 px-4 py-3">
-          <PencilIcon
-            className="h-8 w-8 rounded-lg p-2 font-extrabold text-gray-600 hover:bg-gray-100 hover:text-primary-600"
-            onClick={() => props.updateButtonPressed(rowData)}
-          />
-          <XMarkIcon
-            className="h-8 w-8 rounded-lg p-1 font-extrabold text-gray-600 hover:bg-gray-100 hover:text-primary-600"
-            onClick={() => props.deleteData(rowData[props.idKey])}
-          />
-        </td>
+        {props.showEditMenu && (
+          <td className="flex items-center justify-center space-x-4 px-4 py-3">
+            <PencilIcon
+              className="h-8 w-8 rounded-lg p-2 font-extrabold text-gray-600 hover:bg-gray-100 hover:text-primary-600"
+              onClick={() => (props.updateButtonPressed ? rowData : false)}
+            />
+            <XMarkIcon
+              className="h-8 w-8 rounded-lg p-1 font-extrabold text-gray-600 hover:bg-gray-100 hover:text-primary-600"
+              onClick={() => (props.deleteData ? rowData[props.idKey] : false)}
+            />
+          </td>
+        )}
       </tr>
     );
   };
