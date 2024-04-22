@@ -13,10 +13,14 @@ export default function Footer() {
           <SparklesIcon className="me-2 h-8 w-8 text-primary-600 hover:cursor-pointer hover:text-primary-800" />
           Hendry
         </Link>
-        <p className="my-6 text-gray-500">
+        <p className="mb-3 mt-6 text-gray-500">
           The capacity to learn is a gift; the ability to learn is a skill; the
           willingness to learn is a choice
         </p>
+        <div className="mb-6 inline-flex font-semibold text-gray-700">
+          Contact:{" "}
+          <span className="ml-2 underline">hendrywidyanto97@gmail.com</span>
+        </div>
         <ul className="mb-6 flex flex-wrap items-center justify-center space-x-4 text-gray-900 dark:text-white">
           <li>
             <Link to="/portfolio" className="hover:underline">
@@ -29,9 +33,9 @@ export default function Footer() {
             </Link>
           </li>
           <li>
-            <Link to="/contact" className="hover:underline">
-              Contact
-            </Link>
+            <a href="https://github.com/Gonzushi" className="hover:underline" target="_blank">
+              Github
+            </a>
           </li>
         </ul>
         <span className="text-sm text-gray-500">

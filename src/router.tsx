@@ -12,9 +12,8 @@ import ProjectCrudHome from "./pages/portfolio/projectCrud/ProjectCrudHome";
 import ProjectCrudBrand from "./pages/portfolio/projectCrud/ProjectCrudBrand";
 import ProjectCrudProduct from "./pages/portfolio/projectCrud/ProjectCrudProduct";
 import Resume from "./pages/Resume";
-// import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
-import InProgress from "./pages/InProgress";
+// import InProgress from "./pages/InProgress";
 
 // layout
 import RootLayout from "./layouts/RootLayout";
@@ -34,7 +33,6 @@ const router = createBrowserRouter(
         </Route>
       </Route>
       <Route path="resume" element={<Resume />} />
-      <Route path="contact" element={<InProgress />} />
 
       <Route path="*" element={<NotFound />} />
     </Route>,

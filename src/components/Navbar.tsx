@@ -37,6 +37,14 @@ export default function Navbar() {
     setMenuHidden(!menuHidden);
   };
 
+  const scrollToBottom = () => {
+    window.scrollTo({
+      top: document.documentElement.scrollHeight,
+      behavior: "smooth",
+    });
+    setMenuHidden(!menuHidden);
+  };
+
   return (
     <nav className="relative border-b-2 border-gray-200 bg-white shadow-sm">
       <div className=" mx-auto flex max-w-screen-xl flex-wrap items-center justify-between p-3">
@@ -50,11 +58,15 @@ export default function Navbar() {
           ref={buttonRef}
         >
           <span className="sr-only">Open main menu</span>
-          {menuHidden && <Bars3Icon className="h-10 w-10 text-primary-600 hover:cursor-pointer hover:text-primary-800" />}
-          {!menuHidden && <XMarkIcon className="h-10 w-10 text-primary-600 hover:cursor-pointer hover:text-primary-800" />}
+          {menuHidden && (
+            <Bars3Icon className="h-10 w-10 text-primary-600 hover:cursor-pointer hover:text-primary-800" />
+          )}
+          {!menuHidden && (
+            <XMarkIcon className="h-10 w-10 text-primary-600 hover:cursor-pointer hover:text-primary-800" />
+          )}
         </button>
         <div className={styleMenu} id="navbar-default" ref={menuRef}>
-          <ul className="flex bg-white flex-col rounded-xl border border-gray-300 p-4 font-medium shadow-lg md:mt-0 md:flex-row md:space-x-8 md:border-0 md:bg-white md:p-0 md:shadow-none md:dark:bg-gray-900">
+          <ul className="flex flex-col rounded-xl border border-gray-300 bg-white p-4 font-medium shadow-lg md:mt-0 md:flex-row md:space-x-8 md:border-0 md:bg-white md:p-0 md:shadow-none md:dark:bg-gray-900">
             <li>
               <NavLink
                 to="/"
@@ -83,13 +95,19 @@ export default function Navbar() {
               </NavLink>
             </li>
             <li>
-              <NavLink
-                to="/contact"
+              <a
                 className={styleLink}
-                onClick={() => changeMenuHidden()}
+                onClick={() => setMenuHidden(!menuHidden)}
+                href="https://github.com/Gonzushi"
+                target="_blank"
               >
+                Github
+              </a>
+            </li>
+            <li>
+              <a className={styleLink} onClick={() => scrollToBottom()}>
                 Contact
-              </NavLink>
+              </a>
             </li>
           </ul>
         </div>

@@ -1,6 +1,6 @@
 import ProfilePicture from "../assetts/hendry_profile_picture.jpg";
 import AbbottLogo from "../assetts/abbott__logo.jpg";
-import UOTLogo from "../assetts/theuniversityoftexasataustin__logo.jpg";
+// import UOTLogo from "../assetts/theuniversityoftexasataustin__logo.jpg";
 import UMNLogo from "../assetts/university_of_minnesota_logo.jpg";
 import EcowaterLogo from "../assetts/ecowater_systems_llc_logo.jpg";
 import InkoteLogo from "../assetts/inkote_logo.jpg";
@@ -38,10 +38,10 @@ function Resume() {
                 <img src={AbbottLogo} className="mr-3 size-6 rounded-full" />
                 Abbott
               </div>
-              <div className="inline-flex items-center">
+              {/* <div className="inline-flex items-center">
                 <img src={UOTLogo} className="mr-3 size-6 rounded-full" />
                 University of Texas Austin
-              </div>
+              </div> */}
               <div className="inline-flex items-center">
                 <img src={UMNLogo} className="mr-3 size-6 rounded-full" />
                 University of Minnesota Twin Cities
@@ -55,6 +55,28 @@ function Resume() {
             />
           </div>
         </div>
+      </section>
+
+      <section className=" mx-4 my-4 rounded-lg border border-gray-300 px-10 py-6 tracking-tight shadow-lg">
+        <div className="text-2xl font-semibold">About Me</div>
+        <p className="py-4">
+          I am currently working as Data Analyst / Product Performance Engineer
+          at Abbott Laboratories. I joined Abbott as an engineer to handle the
+          product quality issue for medical devices. I applied my analytical
+          skills to find pattern within data history. I also created custom
+          report for the group for a quick decision based on the data.
+        </p>
+        <p className="py-4">Relevant Skills:</p>
+        <ul className="ml-8 list-disc">
+          <li>Language: Python, Javascipt, Typescript, Matlab, HTML, CSS</li>
+          <li>
+            Python Libray: pandas, selenium, scikit-learn, FastAPI, django,
+            matplotlib, numpy
+          </li>
+          <li>Web Framework: React JS</li>
+          <li>Cloud Solution: Microsoft Azure</li>
+          <li>BI Tools: Power BI, Tableau, Qlik Sense</li>
+        </ul>
       </section>
 
       <section className="mx-4 my-4 min-h-96 overflow-hidden rounded-lg border border-gray-300 px-10 py-6 tracking-tight shadow-lg">
@@ -214,7 +236,7 @@ function Resume() {
         <div className="text-2xl font-semibold">Education</div>
 
         <div className="grid grid-cols-1">
-          <div className="my-4 inline-flex items-center">
+          {/* <div className="my-4 inline-flex items-center">
             <img
               src={UOTLogo}
               className="size-10 rounded-lg md:block md:size-16"
@@ -224,7 +246,7 @@ function Resume() {
               <p>Master in Data Science - M.S, Data Science</p>
               <p>Aug 2024 - Dec 2025</p>
             </div>
-          </div>
+          </div> */}
 
           <div className="my-4 inline-flex items-center">
             <img
