@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import {
   ArrowRightCircleIcon,
-  CpuChipIcon,
   CogIcon,
   BookOpenIcon,
   GlobeAsiaAustraliaIcon,
