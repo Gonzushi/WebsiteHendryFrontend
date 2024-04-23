@@ -88,7 +88,7 @@ function Resume() {
           <li>BI Tools: Power BI, Tableau, Qlik Sense</li>
         </ul>
         <div className="mt-8 grid grid-cols-3 border-t border-gray-400 pb-2 pt-8 text-center font-semibold text-primary-700">
-          <a href={ResumePDF} target="_blank">
+          <a href={ResumePDF}>
             <div className="rounded-full p-2 hover:cursor-pointer hover:bg-blue-700 hover:text-white">
               Resume
             </div>
