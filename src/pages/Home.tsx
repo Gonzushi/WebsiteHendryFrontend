@@ -54,7 +54,7 @@ function home() {
                 Language
               </h3>
               <p className="text-gray-500 dark:text-gray-400">
-                Python, Javascipt, Typescript, Matlab, HTML, CSS
+                Python, Javascipt, Typescript, Matlab, HTML, CSS, SQL
               </p>
             </div>
 
@@ -67,7 +67,7 @@ function home() {
               </h3>
               <p className="text-gray-500 dark:text-gray-400">
                 pandas, selenium, scikit-learn, FastAPI, django, matplotlib,
-                numpy
+                numpy, SQLAlchemy
               </p>
             </div>
 
@@ -136,7 +136,9 @@ function home() {
                 {/* <span className="text-sm">14 days ago</span> */}
               </div>
               <h2 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-                <a href="#">Build CRUD application from scratch</a>
+                <Link to="portfolio/project-crud">
+                  Build CRUD application from scratch
+                </Link>
               </h2>
               <p className="mb-5 font-light text-gray-500 dark:text-gray-400">
                 I create a simple application to build two tables for product

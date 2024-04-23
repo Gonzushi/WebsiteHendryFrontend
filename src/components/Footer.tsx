@@ -33,8 +33,21 @@ export default function Footer() {
             </Link>
           </li>
           <li>
-            <a href="https://github.com/Gonzushi" className="hover:underline" target="_blank">
+            <a
+              href="https://github.com/Gonzushi"
+              className="hover:underline"
+              target="_blank"
+            >
               Github
+            </a>
+          </li>
+          <li>
+            <a
+              href="https://www.linkedin.com/in/hendry-widyanto/"
+              className="hover:underline"
+              target="_blank"
+            >
+              LinkedIn
             </a>
           </li>
         </ul>

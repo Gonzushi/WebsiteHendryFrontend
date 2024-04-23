@@ -1,11 +1,12 @@
 import ProfilePicture from "../assetts/hendry_profile_picture.jpg";
 import AbbottLogo from "../assetts/abbott__logo.jpg";
-// import UOTLogo from "../assetts/theuniversityoftexasataustin__logo.jpg";
+import UOTLogo from "../assetts/theuniversityoftexasataustin__logo.jpg";
 import UMNLogo from "../assetts/university_of_minnesota_logo.jpg";
 import EcowaterLogo from "../assetts/ecowater_systems_llc_logo.jpg";
 import InkoteLogo from "../assetts/inkote_logo.jpg";
 import PeninsulaLogo from "../assetts/peninsula_college_logo.jpg";
 import RecisLogo from "../assetts/regina_pacis_logo.jpg";
+import ResumePDF from "../assetts/Resume - Hendry - 2024.pdf";
 import clsx from "clsx";
 
 function Resume() {
@@ -38,10 +39,10 @@ function Resume() {
                 <img src={AbbottLogo} className="mr-3 size-6 rounded-full" />
                 Abbott
               </div>
-              {/* <div className="inline-flex items-center">
+              <div className="inline-flex items-center">
                 <img src={UOTLogo} className="mr-3 size-6 rounded-full" />
                 University of Texas Austin
-              </div> */}
+              </div>
               <div className="inline-flex items-center">
                 <img src={UMNLogo} className="mr-3 size-6 rounded-full" />
                 University of Minnesota Twin Cities
@@ -59,24 +60,53 @@ function Resume() {
 
       <section className=" mx-4 my-4 rounded-lg border border-gray-300 px-10 py-6 tracking-tight shadow-lg">
         <div className="text-2xl font-semibold">About Me</div>
-        <p className="py-4">
+        <p className="py-2">
           I am currently working as Data Analyst / Product Performance Engineer
-          at Abbott Laboratories. I joined Abbott as an engineer to handle the
-          product quality issue for medical devices. I applied my analytical
-          skills to find pattern within data history. I also created custom
-          report for the group for a quick decision based on the data.
+          at Abbott Laboratories. I joined Abbott as an engineer to analyze and
+          handle the product quality issue for medical devices. I applied my
+          analytical skills to find pattern within data history. I also created
+          custom report for the group for a quick decision based on the given
+          data.
         </p>
-        <p className="py-4">Relevant Skills:</p>
+        <p className="py-2">
+          I find joy in coding to solve the solution for myself and many people.
+          I taught myself during my free time. I just got accepted by University
+          of Texas Austin to continue my master in Data Science. So, I will be a
+          part time student while working in Indonesia.
+        </p>
+        <p className="py-2">Relevant Skills:</p>
         <ul className="ml-8 list-disc">
-          <li>Language: Python, Javascipt, Typescript, Matlab, HTML, CSS</li>
+          <li>
+            Language: Python, Javascipt, Typescript, Matlab, HTML, CSS, SQL
+          </li>
           <li>
             Python Libray: pandas, selenium, scikit-learn, FastAPI, django,
-            matplotlib, numpy
+            matplotlib, numpy, SQLAlchemy
           </li>
           <li>Web Framework: React JS</li>
           <li>Cloud Solution: Microsoft Azure</li>
           <li>BI Tools: Power BI, Tableau, Qlik Sense</li>
         </ul>
+        <div className="mt-8 grid grid-cols-3 border-t border-gray-400 pb-2 pt-8 text-center font-semibold text-primary-700">
+          <a href={ResumePDF} target="_blank">
+            <div className="rounded-full p-2 hover:cursor-pointer hover:bg-blue-700 hover:text-white">
+              Resume
+            </div>
+          </a>
+          <a href="https://github.com/Gonzushi" target="_blank">
+            <div className="rounded-full p-2 hover:cursor-pointer hover:bg-blue-700 hover:text-white">
+              Github
+            </div>
+          </a>
+          <a
+            href="https://www.linkedin.com/in/hendry-widyanto/"
+            target="_blank"
+          >
+            <div className="rounded-full p-2 hover:cursor-pointer hover:bg-blue-700 hover:text-white">
+              LinkedIn
+            </div>
+          </a>
+        </div>
       </section>
 
       <section className="mx-4 my-4 min-h-96 overflow-hidden rounded-lg border border-gray-300 px-10 py-6 tracking-tight shadow-lg">
@@ -99,8 +129,8 @@ function Resume() {
                 <li>
                   Build a website for internal use to publish custom report.
                   Technology used: backend (Python, FastAPI), frontend (React,
-                  HTML, JS, CSS), database (Salesforce, Azure SQL), and cloud
-                  service (Azure Functions, Azure App Service, Entra ID)
+                  HTML, JS, CSS), database (Salesforce, MS SQL Server), and
+                  cloud service (Azure)
                 </li>
                 <li>
                   Create an application to receive a complaint from the client
@@ -109,17 +139,12 @@ function Resume() {
                   to Salesforce
                 </li>
                 <li>
-                  Build dashboard for the group using Power Platform (Power BI
-                  and Power Automate)
+                  Build dashboard for the group using Power BI and Qlik Sense
                 </li>
                 <li>
                   Identify, analyze, investigate, monitor, and document
                   patterns/trends in post marketing surveillance data as part of
                   the CAPA system
-                </li>
-                <li>
-                  Analyze and investigate product complaints from the field as
-                  part of post market surveillance requirements
                 </li>
                 <li>
                   Ensure that information and insight gained from the
@@ -151,12 +176,6 @@ function Resume() {
                   Osmosis water
                 </li>
                 <li>
-                  Create an application to receive a complaint from the client
-                  and sales team using PowerApps as the user interface and
-                  Python (with FastAPI) as the backend. Then, transfer the data
-                  to Salesforce
-                </li>
-                <li>
                   Install and program PLCs to control the system and collect
                   data for analysis
                 </li>
@@ -179,7 +198,7 @@ function Resume() {
           </div>
         </div>
 
-        <div className="mt-4 inline-flex w-full items-start justify-start border-b border-gray-400 py-4">
+        <div className="mt-4 inline-flex w-full items-start justify-start border-gray-400 py-4">
           <img
             src={InkoteLogo}
             className="hidden size-10 rounded-lg md:block md:size-16"
@@ -236,17 +255,17 @@ function Resume() {
         <div className="text-2xl font-semibold">Education</div>
 
         <div className="grid grid-cols-1">
-          {/* <div className="my-4 inline-flex items-center">
+          <div className="my-4 inline-flex items-center">
             <img
               src={UOTLogo}
               className="size-10 rounded-lg md:block md:size-16"
             />
             <div className="mx-6">
-              <p className="font-semibold">University of Texas Austin</p>
+              <p className="font-semibold">University of Texas Austin </p>
               <p>Master in Data Science - M.S, Data Science</p>
-              <p>Aug 2024 - Dec 2025</p>
+              <p>Aug 2024 - Dec 2025 (Incoming Part Time Student)</p>
             </div>
-          </div> */}
+          </div>
 
           <div className="my-4 inline-flex items-center">
             <img

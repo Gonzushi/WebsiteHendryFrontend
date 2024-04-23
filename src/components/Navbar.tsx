@@ -105,6 +105,16 @@ export default function Navbar() {
               </a>
             </li>
             <li>
+              <a
+                className={styleLink}
+                onClick={() => setMenuHidden(!menuHidden)}
+                href="https://www.linkedin.com/in/hendry-widyanto/"
+                target="_blank"
+              >
+                LinkedIn
+              </a>
+            </li>
+            <li>
               <a className={styleLink} onClick={() => scrollToBottom()}>
                 Contact
               </a>
