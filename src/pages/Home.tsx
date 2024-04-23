@@ -172,7 +172,7 @@ function home() {
         </div>
       </section>
 
-      {/* <section className="mt-10 bg-white md:mt-0">
+      <section className="mt-10 bg-white md:mt-0">
         <div className="mx-auto max-w-screen-xl items-center gap-16 px-4 py-8 lg:grid lg:grid-cols-2 lg:px-6 lg:py-16">
           <div className="font-normal text-gray-500 dark:text-gray-400 sm:text-lg">
             <h2 className="mb-4 text-4xl font-extrabold tracking-tight text-gray-900 dark:text-white">
@@ -180,8 +180,9 @@ function home() {
             </h2>
             <p className="mb-4">
               This site is a living project which will be updated whenever I
-              work with new personal project. I build this site from scract
-              using React JS. All components on this site were made by me.
+              work with new personal project. I build this site from scratch
+              using React JS, Typescript, Python, FastAPI, SQLAlchemy, MS SQL
+              Server, and Azure. All components on this site were also made by me.
             </p>
           </div>
           <div className="mt-8 grid grid-cols-2 gap-4">
@@ -197,7 +198,7 @@ function home() {
             />
           </div>
         </div>
-      </section> */}
+      </section>
     </>
   );
 }

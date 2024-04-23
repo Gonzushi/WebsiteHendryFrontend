@@ -26,8 +26,6 @@ export default function Portfolio() {
                     alt="crud_logo"
                     className="absolute top-0 mx-auto"
                   />
-                  {/* <IconWip />
-                  <p className="text-center font-bold">Work in Progress</p> */}
                 </div>
                 <div className="p-5 text-center">
                   <h3 className="text-gray-90 text-xl font-bold tracking-tight">
