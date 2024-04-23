@@ -198,7 +198,7 @@ function Resume() {
           </div>
         </div>
 
-        <div className="mt-4 inline-flex w-full items-start justify-start border-gray-400 py-4">
+        <div className="mt-4 inline-flex w-full items-start justify-start border-b border-gray-400 py-4">
           <img
             src={InkoteLogo}
             className="hidden size-10 rounded-lg md:block md:size-16"
