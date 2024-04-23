@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
-import IconWip from "../../assetts/icons/IconWip";
-import CrudLogo from "../..//assetts/crud_application.jpg";
+import IconWip from "../assetts/icons/IconWip";
+import CrudLogo from "../assetts/crud_application.jpg";
 
 export default function Portfolio() {
   return (
@@ -20,8 +20,12 @@ export default function Portfolio() {
           <div className="mb-6 grid gap-8 md:grid-cols-2 lg:mb-16">
             <Link to="project-crud">
               <div className="items-center rounded-lg border border-gray-300 px-4 py-4 shadow-md  hover:shadow-lg sm:flex">
-                <div className="mx-auto size-48 min-w-48 content-center overflow-hidden rounded-lg border-2 border-gray-200 py-14 shadow-md">
-                  <img src={CrudLogo} alt="crud_logo" />
+                <div className="relative mx-auto size-48 min-w-48 overflow-hidden rounded-lg border-2 border-gray-200 py-14 shadow-md">
+                  <img
+                    src={CrudLogo}
+                    alt="crud_logo"
+                    className="absolute top-0 mx-auto"
+                  />
                   {/* <IconWip />
                   <p className="text-center font-bold">Work in Progress</p> */}
                 </div>

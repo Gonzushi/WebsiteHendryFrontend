@@ -7,7 +7,7 @@ import {
 
 // pages
 import Home from "./pages/Home";
-import Portfolio from "./pages/portfolio/Portfolio";
+import Portfolio from "./pages/Portfolio";
 import ProjectCrudHome from "./pages/portfolio/projectCrud/ProjectCrudHome";
 import ProjectCrudBrand from "./pages/portfolio/projectCrud/ProjectCrudBrand";
 import ProjectCrudProduct from "./pages/portfolio/projectCrud/ProjectCrudProduct";
