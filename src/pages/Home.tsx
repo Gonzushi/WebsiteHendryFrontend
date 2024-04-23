@@ -36,18 +36,19 @@ function home() {
         </Link>
       </div>
 
-      <section className="bg-white">
+      <section className="mt-10 bg-white md:mt-0">
         <div className="mx-auto max-w-screen-xl px-4 py-8 sm:py-16 lg:px-6">
-          <div className="mb-8 max-w-screen-md lg:mb-16">
-            <h2 className="mb-4 text-4xl font-extrabold tracking-tight text-gray-900 dark:text-white">
-              Relevant Skill
+          <div className="mb-8 text-center lg:mb-16">
+            <h2 className="mb-4 text-3xl font-extrabold tracking-tight text-gray-900 lg:text-4xl">
+              Relevant Skills
             </h2>
             {/* <p className="text-gray-500 dark:text-gray-400 sm:text-xl">Empty</p> */}
           </div>
+
           <div className="space-y-8 md:grid md:grid-cols-2 md:gap-12 md:space-y-0 lg:grid-cols-3">
-            <div>
-              <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-full bg-primary-100 dark:bg-primary-900 lg:h-12 lg:w-12">
-                <CogIcon className="h-12 w-12 rounded-full bg-blue-100 p-3 text-blue-700" />
+            <div className="text-center">
+              <div className="mb-4  bg-white">
+                <CogIcon className="mx-auto h-12 w-12 rounded-full bg-blue-100 p-3 text-blue-700" />
               </div>
               <h3 className="mb-2 text-xl font-bold dark:text-white">
                 Language
@@ -56,9 +57,10 @@ function home() {
                 Python, Javascipt, Typescript, Matlab, HTML, CSS
               </p>
             </div>
-            <div>
-              <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-full bg-primary-100 dark:bg-primary-900 lg:h-12 lg:w-12">
-                <BookOpenIcon className="h-12 w-12 rounded-full bg-blue-100 p-3 text-blue-700" />
+
+            <div className="text-center">
+              <div className="mb-4  bg-white">
+                <BookOpenIcon className="mx-auto h-12 w-12 rounded-full bg-blue-100 p-3 text-blue-700" />
               </div>
               <h3 className="mb-2 text-xl font-bold dark:text-white">
                 Python Library
@@ -68,18 +70,20 @@ function home() {
                 numpy
               </p>
             </div>
-            <div>
-              <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-full bg-primary-100 dark:bg-primary-900 lg:h-12 lg:w-12">
-                <GlobeAsiaAustraliaIcon className="h-12 w-12 rounded-full bg-blue-100 p-3 text-blue-700" />
+
+            <div className="text-center">
+              <div className="mb-4  bg-white">
+                <GlobeAsiaAustraliaIcon className="mx-auto h-12 w-12 rounded-full bg-blue-100 p-3 text-blue-700" />
               </div>
               <h3 className="mb-2 text-xl font-bold dark:text-white">
                 Web Framework
               </h3>
               <p className="text-gray-500 dark:text-gray-400">React JS</p>
             </div>
-            <div>
-              <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-full bg-primary-100 dark:bg-primary-900 lg:h-12 lg:w-12">
-                <CloudIcon className="h-12 w-12 rounded-full bg-blue-100 p-3 text-blue-700" />
+
+            <div className="text-center">
+              <div className="mb-4  bg-white">
+                <CloudIcon className="mx-auto h-12 w-12 rounded-full bg-blue-100 p-3 text-blue-700" />
               </div>
               <h3 className="mb-2 text-xl font-bold dark:text-white">
                 Cloud Solution
@@ -88,9 +92,10 @@ function home() {
                 Microsoft Azure
               </p>
             </div>
-            <div>
-              <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-full bg-primary-100 dark:bg-primary-900 lg:h-12 lg:w-12">
-                <ArchiveBoxIcon className="h-12 w-12 rounded-full bg-blue-100 p-3 text-blue-700" />
+
+            <div className="text-center">
+              <div className="mb-4  bg-white">
+                <ArchiveBoxIcon className="mx-auto h-12 w-12 rounded-full bg-blue-100 p-3 text-blue-700" />
               </div>
               <h3 className="mb-2 text-xl font-bold dark:text-white">
                 Business Inteligence Tools
@@ -103,7 +108,7 @@ function home() {
         </div>
       </section>
 
-      <section className="mt-10 bg-white md:mt-">
+      <section className="md:mt- mt-10 bg-white">
         <div className="mx-auto px-4 py-8 lg:px-6 lg:py-16">
           <div className="mx-auto mb-8 max-w-screen-sm text-center lg:mb-12">
             <h2 className="mb-4 text-3xl font-extrabold tracking-tight text-gray-900 lg:text-4xl">
