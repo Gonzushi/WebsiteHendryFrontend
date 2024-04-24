@@ -8,7 +8,7 @@ import { useLocation } from "react-router-dom";
 
 export default function RootLayout() {
   const location = useLocation();
-  console.log(location)
+  // console.log(location)
   useEffect(() => {
     ReactGA.send({
       hitType: "pageview",
@@ -19,6 +19,8 @@ export default function RootLayout() {
   return (
     <div>
       <ScrollRestoration />
+
+      <div className="text-center font-semibold">{location.pathname + location.search}</div>
 
       <Navbar />
 
