@@ -63,16 +63,16 @@ function Resume() {
         <p className="py-2">
           I am currently working as Data Analyst / Product Performance Engineer
           at Abbott Laboratories. I joined Abbott as an engineer to analyze and
-          handle the product quality issue for medical devices. I applied my
-          analytical skills to find pattern within data history. I also created
-          custom report for the group for a quick decision based on the given
-          data.
+          handle product quality issues for medical devices. I applied my
+          analytical skills to find pattern/trend within data history. I also
+          created custom reports for the group to make a quick decision based on
+          the given data.
         </p>
         <p className="py-2">
           I find joy in coding to solve the solution for myself and many people.
-          I taught myself during my free time. I just got accepted by University
-          of Texas Austin to continue my master in Data Science. So, I will be a
-          part time student while working in Indonesia.
+          I taught myself during my free time. I also just got accepted by
+          University of Texas Austin to continue my master in Data Science. So,
+          I will be a part time student while working in Indonesia.
         </p>
         <p className="py-2">Relevant Skills:</p>
         <ul className="ml-8 list-disc">

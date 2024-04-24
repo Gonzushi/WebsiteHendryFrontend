@@ -33,8 +33,8 @@ export default function Portfolio() {
                   </h3>
                   <span className="text-gray-500">FastAPI, SQL Server</span>
                   <p className="mb-4 mt-3 font-normal text-gray-500">
-                    This project is to build an API using FastAPI and SQL
-                    Alchemy to perform CRUD operation.
+                    This project is to build an API and relational database
+                    using FastAPI and SQL Alchemy to perform CRUD operation.
                   </p>
                 </div>
               </div>

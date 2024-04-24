@@ -91,7 +91,7 @@ export default function ProjectCruddBrand() {
       <div className="my-6  px-4">
         <p className="text-xl font-semibold">CRUD Application</p>
         <p className="py-3">
-          I create a simple application to build two tables for product pricing.
+          I create a simple application to build a relational database and API.
           The data is stored in MS SQL Server database that is hosted in
           Microsoft Azure. In this database, there are 2 tables. To interact
           with the database, I build an API using FastAPI. Then, I use this site
@@ -124,14 +124,14 @@ export default function ProjectCruddBrand() {
           </ul>
         </p>
         <p className="py-3">
-          The first table is for brand, which has the following property:
+          The first table is for brand with the following properties:
           <ul className="ml-8 list-disc">
             <li>id: Brand ID</li>
             <li>name: Brand Name</li>
           </ul>
         </p>
         <p className="py-3">
-          The second table is for product, which has the following property:
+          The second table is for product with the following properties:
           <ul className="ml-8 list-disc">
             <li>id: Product ID</li>
             <li>name: Product Name</li>
@@ -141,19 +141,21 @@ export default function ProjectCruddBrand() {
           </ul>
         </p>
         <p className="py-3">
-          In this project, the relationship of the brand is one-to-many. It
-          means that there can be multiple products for one brand. You may add a
-          brand and products if you want by clicking the tables on the project
-          menu. You can also add the data using the API directly. If you want to
-          play around with the API, you can go to the following{" "}
+          In this project, the relationship of the brand and products is
+          one-to-many. It means that there can be multiple products for one
+          brand. You may add a brand and products if you want by clicking the
+          tables on the project menu. You can also add the data using the API
+          directly. If you want to play around with the API, you can go to the
+          following:{" "}
           <a
             href="https://api.hendrywidyanto.com/docs"
             className="text-blue-500 underline"
             target="_blank"
           >
-            link
-          </a>
-          .
+            API
+          </a>{" "}
+          (I am using Azure Function which will be paused due to inactivity. So,
+          the API might need a few seconds to start)
         </p>
         <p className="py-3">
           Below is the final table when two tables are combined:

@@ -141,11 +141,11 @@ function home() {
                 </Link>
               </h2>
               <p className="mb-5 font-light text-gray-500 dark:text-gray-400">
-                I create a simple application to build two tables for product
-                pricing. The data is stored in MS SQL Server database that is
-                hosted in Microsoft Azure. To interact with the database, I
-                build an API using FastAPI. Then, I use this site as my frontend
-                to display the data and interact with the API.
+                I create a simple application to build a relational database and API. The
+                data is stored in MS SQL Server database that is hosted in
+                Microsoft Azure. To interact with the database, I build an API
+                using FastAPI. Then, I use this site as my frontend to display
+                the data and interact with the API.
               </p>
               <div className="flex items-center justify-between">
                 <div className="flex items-center space-x-4">
@@ -182,7 +182,8 @@ function home() {
               This site is a living project which will be updated whenever I
               work with new personal project. I build this site from scratch
               using React JS, Typescript, Python, FastAPI, SQLAlchemy, MS SQL
-              Server, and Azure. All components on this site were also made by me.
+              Server, and Azure. All components on this site were also made by
+              me.
             </p>
           </div>
           <div className="mt-8 grid grid-cols-2 gap-4">
