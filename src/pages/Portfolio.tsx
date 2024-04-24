@@ -29,7 +29,7 @@ export default function Portfolio() {
                 </div>
                 <div className="p-5 text-center">
                   <h3 className="text-gray-90 text-xl font-bold tracking-tight">
-                    <Link to="project-crud">CRUD Operation</Link>
+                    CRUD Operation
                   </h3>
                   <span className="text-gray-500">FastAPI, SQL Server</span>
                   <p className="mb-4 mt-3 font-normal text-gray-500">
@@ -40,7 +40,7 @@ export default function Portfolio() {
               </div>
             </Link>
 
-            <Link to="" className="bg-gray-100">
+            <Link to="#" className="bg-gray-100">
               <div className="items-center rounded-lg border border-gray-300 px-4 py-4 shadow-md  hover:shadow-lg sm:flex">
                 <div className="mx-auto size-48 min-w-48 rounded-lg border-2 border-gray-200 py-14 shadow-md">
                   <IconWip />
@@ -48,7 +48,7 @@ export default function Portfolio() {
                 </div>
                 <div className="p-5 text-center">
                   <h3 className="text-gray-90 text-xl font-bold tracking-tight">
-                    <Link to="">Placeholder</Link>
+                    Placeholder
                   </h3>
                   <span className="text-gray-500">Lorem ipsum dolor sit.</span>
                   <p className="mb-4 mt-3 font-normal text-gray-500">
@@ -58,7 +58,8 @@ export default function Portfolio() {
                 </div>
               </div>
             </Link>
-            <Link to="" className="bg-gray-100">
+
+            <Link to="#" className="bg-gray-100">
               <div className="items-center rounded-lg border border-gray-300 px-4 py-4 shadow-md  hover:shadow-lg sm:flex">
                 <div className="mx-auto size-48 min-w-48 rounded-lg border-2 border-gray-200 py-14 shadow-md">
                   <IconWip />
@@ -66,7 +67,7 @@ export default function Portfolio() {
                 </div>
                 <div className="p-5 text-center">
                   <h3 className="text-gray-90 text-xl font-bold tracking-tight">
-                    <Link to="">Placeholder</Link>
+                    Placeholder
                   </h3>
                   <span className="text-gray-500">Lorem ipsum dolor sit.</span>
                   <p className="mb-4 mt-3 font-normal text-gray-500">
@@ -76,7 +77,8 @@ export default function Portfolio() {
                 </div>
               </div>
             </Link>
-            <Link to="" className="bg-gray-100">
+
+            <Link to="#" className="bg-gray-100">
               <div className="items-center rounded-lg border border-gray-300 px-4 py-4 shadow-md  hover:shadow-lg sm:flex">
                 <div className="mx-auto size-48 min-w-48 rounded-lg border-2 border-gray-200 py-14 shadow-md">
                   <IconWip />
@@ -84,7 +86,7 @@ export default function Portfolio() {
                 </div>
                 <div className="p-5 text-center">
                   <h3 className="text-gray-90 text-xl font-bold tracking-tight">
-                    <Link to="">Placeholder</Link>
+                    Placeholder
                   </h3>
                   <span className="text-gray-500">Lorem ipsum dolor sit.</span>
                   <p className="mb-4 mt-3 font-normal text-gray-500">

@@ -97,7 +97,7 @@ export default function ProjectCruddBrand() {
           with the database, I build an API using FastAPI. Then, I use this site
           as my frontend to display the data and interact with the API.
         </p>
-        <p className="py-3">
+        <div className="py-3">
           If you would like to see the source code, you can visit my github:
           <ul className="ml-8 list-disc">
             <li>
@@ -122,15 +122,15 @@ export default function ProjectCruddBrand() {
               : the code for this specific project is under ./apps/project_crud
             </li>
           </ul>
-        </p>
-        <p className="py-3">
+        </div>
+        <div className="py-3">
           The first table is for brand with the following properties:
           <ul className="ml-8 list-disc">
             <li>id: Brand ID</li>
             <li>name: Brand Name</li>
           </ul>
-        </p>
-        <p className="py-3">
+        </div>
+        <div className="py-3">
           The second table is for product with the following properties:
           <ul className="ml-8 list-disc">
             <li>id: Product ID</li>
@@ -139,7 +139,7 @@ export default function ProjectCruddBrand() {
             <li>price: Product Price</li>
             <li>brand_id: Brand ID</li>
           </ul>
-        </p>
+        </div>
         <p className="py-3">
           In this project, the relationship of the brand and products is
           one-to-many. It means that there can be multiple products for one

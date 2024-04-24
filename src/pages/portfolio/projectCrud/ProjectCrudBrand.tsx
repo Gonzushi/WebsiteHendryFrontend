@@ -125,7 +125,7 @@ export default function ProjectCruddBrand() {
       .catch((error) => handleAxiosError(error))
       .then((res) => {
         if (res?.status == 200) {
-          const data: brandResponse = res?.data
+          const data: brandResponse = res?.data;
           setData(data.records);
           setTotalData(data.total);
         }

@@ -2,8 +2,9 @@ import {
   createBrowserRouter,
   createRoutesFromElements,
   Route,
-  RouterProvider,
+  RouterProvider
 } from "react-router-dom";
+
 
 // pages
 import Home from "./pages/Home";
