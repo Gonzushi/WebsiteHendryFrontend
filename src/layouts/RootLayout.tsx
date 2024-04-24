@@ -8,6 +8,7 @@ import { useLocation } from "react-router-dom";
 
 export default function RootLayout() {
   const location = useLocation();
+  console.log(location)
   useEffect(() => {
     ReactGA.send({
       hitType: "pageview",
