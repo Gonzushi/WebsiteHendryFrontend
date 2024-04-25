@@ -2,18 +2,18 @@ import { Outlet, ScrollRestoration } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 
-import { useEffect } from "react";
-import ReactGA from "react-ga4";
-import { useLocation } from "react-router-dom";
+// import { useEffect } from "react";
+// import ReactGA from "react-ga4";
+// import { useLocation } from "react-router-dom";
 
 export default function RootLayout() {
-  const location = useLocation();
-  useEffect(() => {
-    ReactGA.send({
-      hitType: "pageview",
-      page: location.pathname + location.search,
-    });
-  }, [location]);
+  // const location = useLocation();
+  // useEffect(() => {
+  //   ReactGA.send({
+  //     hitType: "pageview",
+  //     page: location.pathname + location.search,
+  //   });
+  // }, [location]);
 
   return (
     <div>
