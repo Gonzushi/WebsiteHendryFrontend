@@ -50,7 +50,7 @@ export default function WebsiteAnalytics() {
   // ]);
 
   return (
-    <div className="mx-auto mt-4 max-w-screen-lg p-6">
+    <div className="mx-auto mt-2 max-w-screen-lg p-6">
       <h1 className="text-xl font-semibold">Website Analytics</h1>
 
       <div id="background" className="py-3">
@@ -204,7 +204,13 @@ export default function WebsiteAnalytics() {
           developing this site. Right now, I only have one type of event which
           is "page_view". But, it can be used for more. I just don't have other
           use case for now, and I only want to know how many unique users and
-          the most visited pages.
+          the most visited pages. You can try to refresh this page, then check
+          the number of "/porfolio/website-analytics". It should increase by 1.
+        </p>
+        <p className="py-4">
+          In future, I would like to add a 2D heat map that will show the number
+          of visitor from each city. I think that would be cool. But for now,
+          this should be enough for me.
         </p>
         <div className="mt-6 h-96 overflow-hidden rounded-lg border border-gray-300 p-4 shadow-lg">
           <AgChartsReact options={options} />
