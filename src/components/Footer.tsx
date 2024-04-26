@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { SparklesIcon } from "@heroicons/react/24/solid";
+import IconHW from "../assetts/icons/IconHW";
 
 export default function Footer() {
   const year = new Date().getFullYear();
@@ -10,7 +10,7 @@ export default function Footer() {
           to="/"
           className="flex items-center justify-center text-2xl font-semibold text-gray-900"
         >
-          <SparklesIcon className="me-2 h-8 w-8 text-primary-600 hover:cursor-pointer hover:text-primary-800" />
+          <IconHW className="me-2 h-8 w-8 fill-primary-600 hover:fill-primary-800 hover:cursor-pointer" />
           Hendry
         </Link>
         <p className="mb-3 mt-6 text-gray-500">

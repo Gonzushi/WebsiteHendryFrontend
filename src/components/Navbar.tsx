@@ -1,5 +1,6 @@
 import { Link, NavLink } from "react-router-dom";
-import { SparklesIcon, XMarkIcon } from "@heroicons/react/24/solid";
+import { XMarkIcon } from "@heroicons/react/24/solid";
+import IconHW from "../assetts/icons/IconHW";
 import { Bars3Icon } from "@heroicons/react/24/solid";
 import clsx from "clsx";
 import { useState, useRef, useEffect } from "react";
@@ -49,7 +50,7 @@ export default function Navbar() {
     <nav className="relative border-b-2 border-gray-200 bg-white shadow-sm">
       <div className=" mx-auto flex max-w-screen-xl flex-wrap items-center justify-between p-3">
         <Link to="/" className="flex items-center space-x-4">
-          <SparklesIcon className="h-8 w-8 text-primary-600 hover:cursor-pointer hover:text-primary-800" />
+          <IconHW className="h-10 w-10 fill-primary-600 hover:fill-primary-800" />
           <span className="text-2xl font-semibold">Hendry Widyanto</span>
         </Link>
         <button
