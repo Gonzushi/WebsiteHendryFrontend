@@ -117,7 +117,7 @@ export default function ProjectCruddBrand() {
                 className="text-blue-500 underline"
                 target="_blank"
               >
-                API / Backend
+                Backend/API
               </a>
               : the code for this specific project is under ./apps/project_crud
             </li>

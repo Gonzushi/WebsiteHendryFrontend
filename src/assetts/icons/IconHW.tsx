@@ -12,7 +12,7 @@ export default function IconHW(props: propsIconHw) {
       y="0px"
       width="100%"
       viewBox="0 0 1858 1308"
-      enable-background="new 0 0 1858 1308"
+      enableBackground="new 0 0 1858 1308"
       className={props.className}
     >
       <path

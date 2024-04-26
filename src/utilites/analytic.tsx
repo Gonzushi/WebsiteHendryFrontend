@@ -1,5 +1,5 @@
 import axios from "axios";
-import API from "../utilites/api";
+import API from "./api";
 
 type resIp = {
   ip: string;

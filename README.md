@@ -7,3 +7,4 @@ Steps:
 
 Projects:
 1. Project CRUD: ./src/pages/portfolio/projectCrud
+2. Project Website Analytics: ./src/utilites/analytics.tsx

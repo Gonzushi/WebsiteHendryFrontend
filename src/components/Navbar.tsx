@@ -116,7 +116,7 @@ export default function Navbar() {
               </a>
             </li>
             <li>
-              <a className={styleLink} onClick={() => scrollToBottom()}>
+              <a className={styleLink + " hover:cursor-pointer"} onClick={() => scrollToBottom()}>
                 Contact
               </a>
             </li>

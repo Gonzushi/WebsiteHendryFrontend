@@ -1,9 +1,9 @@
 export default function api() {
-  let x = "";
+  let api_address: string;
   if (import.meta.env.MODE == "development") {
-    x = "http://127.0.0.1:8000";
+    api_address = "http://127.0.0.1:8000";
   } else {
-    x = "https://api.hendrywidyanto.com";
+    api_address = "https://api.hendrywidyanto.com";
   }
-  return x;
+  return api_address;
 }
