@@ -56,7 +56,7 @@ export default function RootLayout() {
 
   useEffect(() => {
     uploadEvent();
-  }, []);
+  }, [location]);
 
   return (
     <div>
