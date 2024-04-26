@@ -28,12 +28,6 @@ export default function WebsiteAnalytics() {
     });
   };
 
-  // const [data, setData] = useState([
-  //   { latitude: -6.1944, longitude: 106.8229, total: 100 },
-  //   { latitude: 37.7833, longitude: -122.4167, total: 200 },
-  //   { latitude: 37.78825, longitude: -122.4, total: 300 },
-  // ]);
-
   useEffect(() => {
     fetchDataView();
     setOptions({
@@ -48,6 +42,12 @@ export default function WebsiteAnalytics() {
       ],
     });
   }, [dataView]);
+
+  // const [data, setData] = useState([
+  //   { latitude: -6.1944, longitude: 106.8229, total: 100 },
+  //   { latitude: 37.7833, longitude: -122.4167, total: 200 },
+  //   { latitude: 37.78825, longitude: -122.4, total: 300 },
+  // ]);
 
   return (
     <div className="mx-auto mt-4 max-w-screen-lg p-6">
@@ -206,7 +206,7 @@ export default function WebsiteAnalytics() {
           use case for now, and I only want to know how many unique users and
           the most visited pages.
         </p>
-        <div className="mt-6 rounded-lg border border-gray-300 p-4 shadow-lg">
+        <div className="mt-6 max-h-96 overflow-hidden rounded-lg border border-gray-300 p-4 shadow-lg">
           <AgChartsReact options={options} />
         </div>
 
