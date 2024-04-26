@@ -206,7 +206,7 @@ export default function WebsiteAnalytics() {
           use case for now, and I only want to know how many unique users and
           the most visited pages.
         </p>
-        <div className="mt-6 max-h-96 overflow-hidden rounded-lg border border-gray-300 p-4 shadow-lg">
+        <div className="mt-6 h-96 overflow-hidden rounded-lg border border-gray-300 p-4 shadow-lg">
           <AgChartsReact options={options} />
         </div>
 
