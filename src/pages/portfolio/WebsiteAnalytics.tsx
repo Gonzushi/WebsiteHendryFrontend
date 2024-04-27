@@ -24,24 +24,25 @@ export default function WebsiteAnalytics() {
       if (res?.status == 200) {
         const data: dataPageView[] = res?.data;
         setDataView(data);
+        setOptions({
+          data: data as dataPageView[],
+          series: [
+            {
+              type: "bar",
+              xKey: "path",
+              yKey: "total",
+              fill: "#2563eb",
+            } as AgBarSeriesOptions,
+          ],
+        });
       }
     });
   };
 
   useEffect(() => {
     fetchDataView();
-    setOptions({
-      data: dataView as dataPageView[],
-      series: [
-        {
-          type: "bar",
-          xKey: "path",
-          yKey: "total",
-          fill: "#2563eb",
-        } as AgBarSeriesOptions,
-      ],
-    });
-  }, [dataView]);
+  }, []);
+  
 
   // const [data, setData] = useState([
   //   { latitude: -6.1944, longitude: 106.8229, total: 100 },
