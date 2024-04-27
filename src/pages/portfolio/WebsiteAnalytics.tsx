@@ -12,7 +12,6 @@ type dataPageView = {
 };
 
 export default function WebsiteAnalytics() {
-  const [dataView, setDataView] = useState<dataPageView[]>([]);
   const [options, setOptions] = useState<AgChartOptions>({});
   const API_URL = API();
 
@@ -23,7 +22,6 @@ export default function WebsiteAnalytics() {
     }).then((res) => {
       if (res?.status == 200) {
         const data: dataPageView[] = res?.data;
-        setDataView(data);
         setOptions({
           data: data as dataPageView[],
           series: [
