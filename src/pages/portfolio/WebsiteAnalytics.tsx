@@ -1,8 +1,8 @@
 import { AgChartsReact } from "ag-charts-react";
 import { AgBarSeriesOptions, AgChartOptions } from "ag-charts-community";
 import { useState, useEffect } from "react";
-// import { Map, Marker } from "react-map-gl";
-// import { XCircleIcon } from "@heroicons/react/24/solid";
+import { Map, Marker } from "react-map-gl";
+import { MapPinIcon } from "@heroicons/react/24/solid";
 import axios from "axios";
 import API from "../../utilites/api";
 
@@ -11,8 +11,14 @@ type dataPageView = {
   total: number;
 };
 
+type dataLocation = {
+  latitude: number;
+  longitude: number;
+};
+
 export default function WebsiteAnalytics() {
   const [options, setOptions] = useState<AgChartOptions>({});
+  const [dataLocation, setDataLocation] = useState<dataLocation[]>([]);
   const API_URL = API();
 
   const fetchDataView = async () => {
@@ -37,15 +43,22 @@ export default function WebsiteAnalytics() {
     });
   };
 
+  const fetchDataLocation = async () => {
+    axios({
+      method: "get",
+      url: API_URL + "/analytics/visitor/location",
+    }).then((res) => {
+      if (res?.status == 200) {
+        const data: dataLocation[] = res?.data;
+        setDataLocation(data);
+      }
+    });
+  };
+
   useEffect(() => {
     fetchDataView();
+    fetchDataLocation();
   }, []);
-
-  // const [data, setData] = useState([
-  //   { latitude: -6.1944, longitude: 106.8229, total: 100 },
-  //   { latitude: 37.7833, longitude: -122.4167, total: 200 },
-  //   { latitude: 37.78825, longitude: -122.4, total: 300 },
-  // ]);
 
   return (
     <div className="mx-auto mt-2 max-w-screen-lg p-6">
@@ -215,34 +228,31 @@ export default function WebsiteAnalytics() {
           <AgChartsReact options={options} />
         </div>
 
-        {/* <div className="overflow-hidden">
+        <div className="mt-8 rounded-lg border border-gray-300 shadow-lg">
           <Map
             mapboxAccessToken="pk.eyJ1IjoiaGVuZHJ5d2lkeWFudG8iLCJhIjoiY2x2aDhhNXl5MHc2YzJvbzF3M3liOHY2NiJ9.6Z29oynUALXdbYqXT_z84w"
             initialViewState={{
               longitude: 106.8229,
               latitude: -6.1944,
-              zoom: 10,
+              zoom: 3.5,
             }}
-            style={{ width: 600, height: 400 }}
-            mapStyle="mapbox://styles/hendrywidyanto/clvh8f1wi030a01ph1p260c6y"
+            style={{ height: 400 }}
+            mapStyle="mapbox://styles/mapbox/light-v11"
           >
-            {data.map((item) => (
+            {dataLocation.map((item) => (
               <Marker
                 key={item.latitude}
                 latitude={item.latitude}
                 longitude={item.longitude}
                 anchor="bottom"
-                offsetLeft={-20}
-                offsetTop={-10}
               >
                 <div className="marker">
-                  <XCircleIcon className="h-8 w-8" />
-                  <p>{item.total}</p>
+                  <MapPinIcon className="h-4 w-4 text-primary-600" />
                 </div>
               </Marker>
             ))}
           </Map>
-        </div> */}
+        </div>
       </div>
     </div>
   );
