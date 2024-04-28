@@ -119,7 +119,7 @@ function home() {
               projects.
             </p>
           </div>
-          <div className="grid gap-8 lg:grid-cols-1">
+          <div className="grid gap-8 lg:grid-cols-2">
             <article className="rounded-lg border border-gray-200 bg-white p-6 shadow-md">
               <div className="mb-5 flex items-center justify-between text-gray-500">
                 <span className="inline-flex items-center rounded bg-primary-100 px-2.5 py-0.5 text-xs font-medium text-primary-800 dark:bg-primary-200 dark:text-primary-800">
@@ -141,11 +141,11 @@ function home() {
                 </Link>
               </h2>
               <p className="mb-5 font-light text-gray-500 dark:text-gray-400">
-                I create a simple application to build a relational database and API. The
-                data is stored in MS SQL Server database that is hosted in
-                Microsoft Azure. To interact with the database, I build an API
-                using FastAPI. Then, I use this site as my frontend to display
-                the data and interact with the API.
+                I create a simple application to build a relational database and
+                API. The data is stored in MS SQL Server database that is hosted
+                in Microsoft Azure. To interact with the database, I build an
+                API using FastAPI. Then, I use this site as my frontend to
+                display the data and interact with the API.
               </p>
               <div className="flex items-center justify-between">
                 <div className="flex items-center space-x-4">
@@ -156,6 +156,54 @@ function home() {
                 </div>
                 <Link
                   to="/portfolio/project-crud"
+                  className="inline-flex items-center font-medium text-primary-600 hover:underline dark:text-primary-500"
+                >
+                  Read more
+                  <svg
+                    className="ml-2 h-4 w-4"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                    xmlns="http://www.w3.org/2000/svg"
+                  ></svg>
+                </Link>
+              </div>
+            </article>
+
+            <article className="rounded-lg border border-gray-200 bg-white p-6 shadow-md">
+              <div className="mb-5 flex items-center justify-between text-gray-500">
+                <span className="inline-flex items-center rounded bg-primary-100 px-2.5 py-0.5 text-xs font-medium text-primary-800 dark:bg-primary-200 dark:text-primary-800">
+                  <svg
+                    className="mr-2 h-3 w-3"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path d="M2 6a2 2 0 012-2h6a2 2 0 012 2v8a2 2 0 01-2 2H4a2 2 0 01-2-2V6zM14.553 7.106A1 1 0 0014 8v4a1 1 0 00.553.894l2 1A1 1 0 0018 13V7a1 1 0 00-1.447-.894l-2 1z"></path>
+                  </svg>
+                  API, SQL, FastAPI, Analytics
+                </span>
+                {/* <span className="text-sm">14 days ago</span> */}
+              </div>
+              <h2 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+                <Link to="portfolio/website-analytics">Website Analytics</Link>
+              </h2>
+              <p className="mb-5 font-light text-gray-500 dark:text-gray-400">
+                I am curious who visited my website. So, I want to keep track
+                the visitors and the most visited pages. I have tried to use
+                Google Analytics but it is just a bit too overkill for me and it
+                honestly don't work very well with React JS. Then, I think it
+                would be a good idea to create my own analytics tool since I
+                have my own database and API.
+              </p>
+              <div className="flex items-center justify-between">
+                <div className="flex items-center space-x-4">
+                  <img src={ProfilePicture} className="h-7 w-7 rounded-full" />
+                  <span className="font-medium dark:text-white">
+                    Hendry Widyanto
+                  </span>
+                </div>
+                <Link
+                  to="/portfolio/website-analytics"
                   className="inline-flex items-center font-medium text-primary-600 hover:underline dark:text-primary-500"
                 >
                   Read more

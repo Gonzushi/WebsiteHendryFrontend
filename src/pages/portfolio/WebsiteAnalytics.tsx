@@ -40,7 +40,6 @@ export default function WebsiteAnalytics() {
   useEffect(() => {
     fetchDataView();
   }, []);
-  
 
   // const [data, setData] = useState([
   //   { latitude: -6.1944, longitude: 106.8229, total: 100 },
@@ -57,9 +56,10 @@ export default function WebsiteAnalytics() {
         <p>
           I am curious who visited my website. So, I want to keep track the
           visitors and the most visited pages. I have tried to use Google
-          Analytics but it is just a bit too overkill for me. Then, I think it
-          would be a good idea to create my own analytics tool since I have my
-          own database and API.
+          Analytics but it is just a bit too overkill for me and it honestly
+          don't work very well with React JS. Then, I think it would be a good
+          idea to create my own analytics tool since I have my own database and
+          API.
         </p>
       </div>
 
@@ -211,7 +211,7 @@ export default function WebsiteAnalytics() {
           of visitor from each city. I think that would be cool. But for now,
           this should be enough for me.
         </p>
-        <div className="mt-6 h-96 overflow-hidden rounded-lg border border-gray-300 p-4 shadow-lg">
+        <div className="pointer-events-none mt-6 h-96 overflow-auto rounded-lg border border-gray-300 p-4 shadow-lg md:pointer-events-auto">
           <AgChartsReact options={options} />
         </div>
 
