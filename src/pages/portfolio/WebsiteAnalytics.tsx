@@ -228,7 +228,7 @@ export default function WebsiteAnalytics() {
           <AgChartsReact options={options} />
         </div>
 
-        <div className="mt-8 rounded-lg border border-gray-300 shadow-lg">
+        <div className="mt-8 rounded-lg border border-gray-300 shadow-lg overflow-hidden">
           <Map
             mapboxAccessToken="pk.eyJ1IjoiaGVuZHJ5d2lkeWFudG8iLCJhIjoiY2x2aDhhNXl5MHc2YzJvbzF3M3liOHY2NiJ9.6Z29oynUALXdbYqXT_z84w"
             initialViewState={{
