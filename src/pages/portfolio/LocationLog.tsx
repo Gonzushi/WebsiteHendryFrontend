@@ -46,9 +46,9 @@ export default function LocationLog() {
       >
         Get Location
       </button>
+      <p>Error: {String(error)}</p>
       {location && (
         <div>
-          <p>Error: {String(error)}</p>
           <p>Latitude: {location.coords.latitude}</p>
           <p>Longitude: {location.coords.longitude}</p>
           <p>
