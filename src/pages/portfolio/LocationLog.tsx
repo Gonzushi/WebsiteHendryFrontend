@@ -11,11 +11,24 @@ export default function LocationLog() {
       (position) => {
         setLocation(position);
       },
-      (errorMessage) => {
-        setError(errorMessage)
-        console.log(error);
+      (error) => {
+        showError(error);
       },
     );
+  };
+
+  const showError = (error: GeolocationPositionError) => {
+    switch (error.code) {
+      case error.PERMISSION_DENIED:
+        setError("User denied the request for Geolocation.");
+        break;
+      case error.POSITION_UNAVAILABLE:
+        setError("Location information is unavailable.");
+        break;
+      case error.TIMEOUT:
+        setError("The request to get user location timed out.");
+        break;
+    }
   };
 
   return (
