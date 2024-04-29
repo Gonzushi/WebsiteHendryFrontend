@@ -7,14 +7,20 @@ export default function LocationLog() {
   const [error, setError] = useState<any>();
 
   const getLocation = () => {
-    navigator.geolocation.getCurrentPosition(
-      (position) => {
-        setLocation(position);
-      },
-      (error) => {
-        showError(error);
-      },
-    );
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+          (position) => {
+            setLocation(position);
+          },
+          (error) => {
+            showError(error);
+          },
+          {timeout:60000}
+        );
+    } else {
+        alert("Your browser does not support geolocation")
+    }
+
   };
 
   const showError = (error: GeolocationPositionError) => {
@@ -28,6 +34,7 @@ export default function LocationLog() {
       case error.TIMEOUT:
         setError("The request to get user location timed out.");
         break;
+
     }
   };
 
