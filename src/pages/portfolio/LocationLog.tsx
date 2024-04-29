@@ -4,13 +4,15 @@ import { MapPinIcon } from "@heroicons/react/24/solid";
 
 export default function LocationLog() {
   const [location, setLocation] = useState<GeolocationPosition | null>(null);
+  const [error, setError] = useState<any>();
 
   const getLocation = () => {
     navigator.geolocation.getCurrentPosition(
       (position) => {
         setLocation(position);
       },
-      (error) => {
+      (errorMessage) => {
+        setError(errorMessage)
         console.log(error);
       },
     );
@@ -26,6 +28,7 @@ export default function LocationLog() {
       </button>
       {location && (
         <div>
+          <p>Error: {String(error)}</p>
           <p>Latitude: {location.coords.latitude}</p>
           <p>Longitude: {location.coords.longitude}</p>
           <p>
