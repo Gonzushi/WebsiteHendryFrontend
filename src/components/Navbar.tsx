@@ -51,7 +51,7 @@ export default function Navbar() {
       <div className=" mx-auto flex max-w-screen-xl flex-wrap items-center justify-between p-3">
         <Link to="/" className="flex items-center space-x-4">
           <IconHW className="h-10 w-10 fill-primary-600 hover:fill-primary-800" />
-          <span className="text-2xl font-semibold">Hendry Widyanto 2</span>
+          <span className="text-2xl font-semibold">Hendry Widyanto 4</span>
         </Link>
         <button
           className="inline-flex h-10 w-10 items-center justify-center rounded-lg p-1 text-sm text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200  md:hidden"
