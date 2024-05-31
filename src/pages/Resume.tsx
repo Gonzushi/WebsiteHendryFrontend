@@ -122,7 +122,7 @@ function Resume() {
               Data Analyst / Product Performance Engineer
             </p>
             <p>Abbott</p>
-            <p className="font">Aug 2021 - Present · 2 yrs 10 mos </p>
+            <p className="font">Aug 2021 - May 2024 · 2 yrs 10 mos </p>
             <p>Temecula, California, United States</p>
             <div className="mx-4 my-4 ms-7">
               <ul className="list-disc">
