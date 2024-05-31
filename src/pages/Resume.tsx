@@ -7,19 +7,19 @@ import InkoteLogo from "../assetts/inkote_logo.jpg";
 import PeninsulaLogo from "../assetts/peninsula_college_logo.jpg";
 import RecisLogo from "../assetts/regina_pacis_logo.jpg";
 import ResumePDF from "../assetts/Resume - Hendry - 2024.pdf";
-import clsx from "clsx";
+// import clsx from "clsx";
 
 function Resume() {
-  const currentDate = new Date();
-  const abbottStartDate = new Date(2021, 8, 1);
-  const monthDiff =
-    14 -
-    abbottStartDate.getMonth() +
-    currentDate.getMonth() +
-    12 * (currentDate.getFullYear() - abbottStartDate.getFullYear() - 1);
-  const years = Math.floor(monthDiff / 12);
-  const months = monthDiff % 12;
-  const period = clsx(years + " yrs", months > 0 && " " + months + " mos");
+  // const currentDate = new Date();
+  // const abbottStartDate = new Date(2021, 8, 1);
+  // const monthDiff =
+  //   14 -
+  //   abbottStartDate.getMonth() +
+  //   currentDate.getMonth() +
+  //   12 * (currentDate.getFullYear() - abbottStartDate.getFullYear() - 1);
+  // const years = Math.floor(monthDiff / 12);
+  // const months = monthDiff % 12;
+  // const period = clsx(years + " yrs", months > 0 && " " + months + " mos");
 
   return (
     <div className="text-md mx-auto max-w-5xl">
