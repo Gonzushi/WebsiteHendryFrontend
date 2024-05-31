@@ -32,7 +32,7 @@ function Resume() {
               <p className="mt-1">
                 Data Analyst / Product Performance Engineer
               </p>
-              <p className="mt-1">Bogor, West Java, Indonesia</p>
+              <p className="mt-1">Jakarta, West Java, Indonesia</p>
             </div>
             <div className="mx-10 mt-5 flex flex-col space-y-2 font-semibold md:mt-24">
               <div className="inline-flex items-center">
