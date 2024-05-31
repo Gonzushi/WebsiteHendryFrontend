@@ -61,7 +61,7 @@ function Resume() {
       <section className=" mx-4 my-4 rounded-lg border border-gray-300 px-10 py-6 tracking-tight shadow-lg">
         <div className="text-2xl font-semibold">About Me</div>
         <p className="py-2">
-          I am currently working as Data Analyst / Product Performance Engineer
+          I worked as a Data Analyst / Product Performance Engineer
           at Abbott Laboratories. I joined Abbott as an engineer to analyze and
           handle product quality issues for medical devices. I applied my
           analytical skills to find pattern/trend within data history. I also
@@ -122,7 +122,7 @@ function Resume() {
               Data Analyst / Product Performance Engineer
             </p>
             <p>Abbott</p>
-            <p className="font">Aug 2021 - Present · {period} </p>
+            <p className="font">Aug 2021 - Present · 2 yrs 10 mos </p>
             <p>Temecula, California, United States</p>
             <div className="mx-4 my-4 ms-7">
               <ul className="list-disc">
@@ -263,7 +263,7 @@ function Resume() {
             <div className="mx-6">
               <p className="font-semibold">University of Texas Austin </p>
               <p>Master in Data Science - M.S, Data Science</p>
-              <p>Aug 2024 - Dec 2025 (Incoming Part Time Student)</p>
+              <p>Aug 2024 - Dec 2025 (Incoming Student)</p>
             </div>
           </div>
 
