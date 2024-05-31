@@ -6,7 +6,7 @@ import EcowaterLogo from "../assetts/ecowater_systems_llc_logo.jpg";
 import InkoteLogo from "../assetts/inkote_logo.jpg";
 import PeninsulaLogo from "../assetts/peninsula_college_logo.jpg";
 import RecisLogo from "../assetts/regina_pacis_logo.jpg";
-import ResumePDF from "../assetts/Resume - Hendry - 2024.pdf";
+import ResumePDF from "../assetts/Resume - Hendry - 2024 2.pdf";
 // import clsx from "clsx";
 
 function Resume() {
