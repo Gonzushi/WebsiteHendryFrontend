@@ -1,6 +1,7 @@
 import React from "react";
 import MapComponent from "../../components/MapComponent";
 import AlafamartLocationsJson from "../../data/alfamart_locations_fix.json";
+import IndomaretLocationsJson from "../../data/indomaret_locations_fix.json";
 import { NestedLocation } from "../../components/MapComponent";
 
 export interface MainLocation {
@@ -13,19 +14,35 @@ const AlfamartLocations: React.FC = () => {
   const centerLatitude = -6.4730792;
   const centerLongitude = 106.8448007;
   const totalRadiusKm = 100;
-  const locations: MainLocation[] = AlafamartLocationsJson as MainLocation[];
+  const alfamartLocations: MainLocation[] = AlafamartLocationsJson as MainLocation[];
+  const indomarettLocations: MainLocation[] = IndomaretLocationsJson as MainLocation[];
 
-  const allLocations: NestedLocation[] = [];
-  locations.forEach((entry) => {
+  const allAlfamartLocations: NestedLocation[] = [];
+  const allIndomaretLocations: NestedLocation[] = [];
+
+  alfamartLocations.forEach((entry) => {
     const locations = entry.locations;
     if (locations) {
-      allLocations.push(...locations);
+      allAlfamartLocations.push(...locations);
     }
   });
 
-  const uniqueLocations = Array.from(
+  indomarettLocations.forEach((entry) => {
+    const locations = entry.locations;
+    if (locations) {
+      allIndomaretLocations.push(...locations);
+    }
+  });
+
+  const uniqueAlfamartLocations = Array.from(
     new Map(
-      allLocations.map((location) => [location.place_id, location]),
+      allAlfamartLocations.map((location) => [location.place_id, location]),
+    ).values(),
+  );
+
+  const uniqueIndomaretLocations = Array.from(
+    new Map(
+      allIndomaretLocations.map((location) => [location.place_id, location]),
     ).values(),
   );
 
@@ -35,7 +52,8 @@ const AlfamartLocations: React.FC = () => {
         centerLatitude={centerLatitude}
         centerLongitude={centerLongitude}
         totalRadiusKm={totalRadiusKm}
-        locations={uniqueLocations}
+        alfamartLocations={uniqueAlfamartLocations}
+        indomaretLocations={uniqueIndomaretLocations}
       />
     </div>
   );
