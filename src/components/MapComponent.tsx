@@ -37,7 +37,9 @@ const MapComponent: React.FC<Props> = ({
   totalRadiusKm,
   locations,
 }) => {
-  const [userPosition, setUserPosition] = useState<[number, number] | null>(null);
+  const [userPosition, setUserPosition] = useState<[number, number] | null>(
+    null,
+  );
 
   useEffect(() => {
     if (navigator.geolocation) {
@@ -69,6 +71,14 @@ const MapComponent: React.FC<Props> = ({
     html: '<div style="background-color: blue; border-radius: 50%; width: 10px; height: 10px;"></div>',
     iconSize: [10, 10],
     iconAnchor: [5, 5],
+  });
+
+  // Custom icon for Alfamart locations
+  const alfamartIcon = L.icon({
+    iconUrl: "/marker-icon-2x.png", // replace with the actual path to the Alfamart icon image
+    iconSize: [17, 28], // size of the icon
+    iconAnchor: [12, 25], // point of the icon which will correspond to marker's location
+    popupAnchor: [0, -20], // point from which the popup should open relative to the iconAnchor
   });
 
   return (
@@ -104,6 +114,7 @@ const MapComponent: React.FC<Props> = ({
               location.geometry.location.lat,
               location.geometry.location.lng,
             ]}
+            icon={alfamartIcon}
           >
             <Popup>
               <strong>
