@@ -10,6 +10,7 @@ import {
 import Home from "./pages/Home";
 import Portfolio from "./pages/Portfolio";
 import WebsiteAnalytics from "./pages/portfolio/WebsiteAnalytics";
+import AlfamartLocations from "./pages/portfolio/AlfamartLocations";
 import LocationLog from "./pages/portfolio/LocationLog";
 import ProjectCrudHome from "./pages/portfolio/projectCrud/ProjectCrudHome";
 import ProjectCrudBrand from "./pages/portfolio/projectCrud/ProjectCrudBrand";
@@ -35,6 +36,7 @@ const router = createBrowserRouter(
           <Route path="product" element={<ProjectCrudProduct />} />
         </Route>
         <Route path="website-analytics" element={<WebsiteAnalytics/>}/>
+        <Route path="alfamart-locations" element={<AlfamartLocations/>}/>
         <Route path="location-log" element={<LocationLog/>}/>
       </Route>
       <Route path="resume" element={<Resume />} />

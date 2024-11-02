@@ -64,20 +64,23 @@ export default function Portfolio() {
               </div>
             </Link>
 
-            <Link to="#" className="bg-gray-100">
+            <Link to="alfamart-locations">
               <div className="items-center rounded-lg border border-gray-300 px-4 py-4 shadow-md  hover:shadow-lg sm:flex">
-                <div className="mx-auto size-48 min-w-48 rounded-lg border-2 border-gray-200 py-14 shadow-md">
-                  <IconWip />
-                  <p className="text-center font-bold">Work in Progress</p>
+                <div className="relative mx-auto size-48 min-w-48 overflow-hidden rounded-lg border-2 border-gray-200 py-14 shadow-md">
+                  <img
+                    src={WebsiteAnalyticsLogo}
+                    alt="Alfmart"
+                    className="absolute top-0 mx-auto"
+                  />
                 </div>
                 <div className="p-5 text-center">
                   <h3 className="text-gray-90 text-xl font-bold tracking-tight">
-                    Placeholder
+                    Alfamart Locations
                   </h3>
-                  <span className="text-gray-500">Lorem ipsum dolor sit.</span>
+                  <span className="text-gray-500">Google Places API</span>
                   <p className="mb-4 mt-3 font-normal text-gray-500">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Non
-                    blanditiis culpa dolore?
+                    This project is to list all Alfamarts locations. The purpose
+                    is to find potential locations for Alfamart.
                   </p>
                 </div>
               </div>
