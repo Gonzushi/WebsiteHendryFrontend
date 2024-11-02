@@ -1,10 +1,8 @@
-// App.tsx
 import React from "react";
 import MapComponent from "../../components/MapComponent";
 import AlafamartLocationsJson from "../../data/alfamart_locations_fix.json";
 import { NestedLocation } from "../../components/MapComponent";
 
-// Define the interface for main locations
 export interface MainLocation {
   lat: number;
   lng: number;
@@ -31,10 +29,8 @@ const AlfamartLocations: React.FC = () => {
     ).values(),
   );
 
-  console.log(uniqueLocations.length)
-
   return (
-    <div>
+    <div className="fixed inset-0 z-50">
       <MapComponent
         centerLatitude={centerLatitude}
         centerLongitude={centerLongitude}
