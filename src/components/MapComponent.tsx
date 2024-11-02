@@ -97,7 +97,7 @@ const MapComponent: React.FC<Props> = ({
         center={[centerLatitude, centerLongitude]}
         radius={totalRadiusKm * 1000}
         color="green"
-        fillOpacity={0.1}
+        fillOpacity={0}
       />
 
       {/* Center point as a red dot */}
