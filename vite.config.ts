@@ -27,6 +27,7 @@ export default defineConfig({
       workbox: {
         // Configure Workbox options here
         globPatterns: ["**/*.{js,css,html,png,jpg,jpeg,svg,json}"],
+        maximumFileSizeToCacheInBytes: 50 * 1024 * 1024, // Set to 50 MB or another limit as needed
       },
     }),
     react(),
