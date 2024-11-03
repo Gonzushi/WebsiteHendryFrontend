@@ -65,9 +65,19 @@ export const RotateControl = () => {
   };
 
   return (
-    <div className="absolute right-2 top-2 z-20">
-      <button onClick={rotateLeft}>Rotate Left</button>
-      <button onClick={rotateRight}>Rotate Right</button>
+    <div className="absolute right-2 top-2 space-x-2" style={{ zIndex: 2000 }}>
+      <button
+        onClick={rotateLeft}
+        className="rounded-md bg-blue-500 px-4 py-2 text-white shadow-md transition duration-200 hover:bg-blue-600"
+      >
+        Rotate Left
+      </button>
+      <button
+        onClick={rotateRight}
+        className="rounded-md bg-green-500 px-4 py-2 text-white shadow-md transition duration-200 hover:bg-green-600"
+      >
+        Rotate Right
+      </button>
     </div>
   );
 };

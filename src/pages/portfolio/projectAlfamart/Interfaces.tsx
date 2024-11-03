@@ -26,3 +26,13 @@ export interface Props {
   alfamartLocations: NestedLocation[];
   indomaretLocations: NestedLocation[];
 }
+
+export interface LocationData {
+  latitude: number;
+  longitude: number;
+  phone_number?: string;
+  area?: number;
+  type?: string;
+  price?: number;
+  comment?: string;
+}

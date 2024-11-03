@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import {
   MapContainer,
   TileLayer,
@@ -9,7 +9,7 @@ import {
 } from "react-leaflet";
 import MarkerClusterGroup from "react-leaflet-markercluster";
 import { useForm } from "react-hook-form";
-import { Props } from "./Interfaces";
+import { LocationData, Props } from "./Interfaces";
 import {
   alfamartIcon,
   indomaretIcon,
@@ -21,6 +21,7 @@ import ClickHandler from "./ClickHandler";
 import "leaflet/dist/leaflet.css";
 import "react-leaflet-markercluster/dist/styles.min.css";
 import { RotateControl, RotateMap } from "./RotateMap";
+import createLocation from "./createLocation";
 
 const TypedMarkerClusterGroup = MarkerClusterGroup as React.ComponentType<any>;
 
@@ -39,7 +40,7 @@ const FocusToUserLocationButton: React.FC<{
     <button
       className="absolute bottom-24 right-4 rounded-full bg-white p-4 text-left text-white shadow-lg"
       onClick={handleFocus}
-      style={{ zIndex: 400 }} 
+      style={{ zIndex: 400 }}
     >
       <img src="/arrow.svg" alt="arrow" className="h-8 w-8 rotate-90" />
     </button>
@@ -63,15 +64,21 @@ const MapComponent: React.FC<Props> = ({
   const [showAlfamartCircles, setShowAlfamartCircles] = useState(false);
   const [showIndomaretCircles, setShowIndomaretCircles] = useState(false);
   const [addedPin, setAddedPin] = useState<[number, number] | null>(null);
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
   const { register, handleSubmit, reset } = useForm();
+  const popupRef = useRef<any>(null);
 
   const onSubmit = (data: any) => {
-    const formData = {
-      ...data,
-      latitude: addedPin ? addedPin[0] : null,
-      longitude: addedPin ? addedPin[1] : null,
+    const locationData: LocationData = {
+      latitude: addedPin ? addedPin[0] : 0,
+      longitude: addedPin ? addedPin[1] : 0,
+      phone_number: data.phoneNumber,
+      area: data.area,
+      type: data.type,
+      price: data.price,
+      comment: data.comment,
     };
-    console.log("Submitted Data:", formData);
+    createLocation(locationData);
     reset();
     setAddedPin(null);
   };
@@ -96,42 +103,19 @@ const MapComponent: React.FC<Props> = ({
     }
   }, []);
 
+  useEffect(() => {
+    if (popupRef.current) {
+      console.log(popupRef.current);
+      setIsPopupOpen(false);
+    }
+  }, [popupRef.current]);
+
   return (
     <MapContainer
       center={[centerLatitude, centerLongitude]}
       zoom={14}
       className="relative h-full w-full"
     >
-      <div
-        className="absolute right-2 top-2 flex flex-col space-y-2 sm:left-14 sm:top-4 sm:flex-row sm:space-x-2 sm:space-y-0"
-        style={{ zIndex: 400 }}
-      >
-        <button
-          className={`rounded px-4 py-2 text-white ${showAlfamart ? "bg-blue-600" : "bg-gray-400"}`}
-          onClick={() => setShowAlfamart(!showAlfamart)}
-        >
-          {showAlfamart ? "Alfamart" : "Alfamart"}
-        </button>
-        <button
-          className={`rounded px-4 py-2 text-white ${showAlfamartCircles ? "bg-blue-600" : "bg-gray-400"}`}
-          onClick={() => setShowAlfamartCircles(!showAlfamartCircles)}
-        >
-          {showAlfamartCircles ? "Alfamart O" : "Alfamart O"}
-        </button>
-        <button
-          className={`rounded px-4 py-2 text-white ${showIndomaret ? "bg-red-600" : "bg-gray-400"}`}
-          onClick={() => setShowIndomaret(!showIndomaret)}
-        >
-          {showIndomaret ? "Indomaret" : "Indomaret"}
-        </button>
-        <button
-          className={`rounded px-4 py-2 text-white ${showIndomaretCircles ? "bg-red-600" : "bg-gray-400"}`}
-          onClick={() => setShowIndomaretCircles(!showIndomaretCircles)}
-        >
-          {showIndomaretCircles ? "Indomaret O" : "Indomaret O"}
-        </button>
-      </div>
-
       <TileLayer
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -266,7 +250,7 @@ const MapComponent: React.FC<Props> = ({
       {addedPin && (
         <div style={{ zIndex: 1050 }}>
           <Marker position={addedPin} icon={sellIcon}>
-            <Popup>
+            <Popup ref={popupRef}>
               <a
                 href={`https://www.google.com/maps?q=${addedPin[0]},${addedPin[1]}`}
                 target="_blank"
@@ -276,10 +260,7 @@ const MapComponent: React.FC<Props> = ({
                 Location
               </a>
               <div className="relative">
-                <form
-                  onSubmit={handleSubmit(onSubmit)}
-                  className="mt-5 w-64"
-                >
+                <form onSubmit={handleSubmit(onSubmit)} className="mt-5 w-64">
                   <div className="mb-4">
                     <label className="block text-sm font-medium text-gray-700">
                       Phone Number:
@@ -387,6 +368,38 @@ const MapComponent: React.FC<Props> = ({
               </div>
             </Popup>
           </Marker>
+        </div>
+      )}
+
+      {!isPopupOpen && (
+        <div
+          className="absolute right-2 top-2 flex flex-col space-y-2 sm:left-14 sm:top-4 sm:flex-row sm:space-x-2 sm:space-y-0"
+          style={{ zIndex: 400 }}
+        >
+          <button
+            className={`rounded px-4 py-2 text-white ${showAlfamart ? "bg-blue-600" : "bg-gray-400"}`}
+            onClick={() => setShowAlfamart(!showAlfamart)}
+          >
+            {showAlfamart ? "Alfa" : "Alfa"}
+          </button>
+          <button
+            className={`rounded px-4 py-2 text-white ${showAlfamartCircles ? "bg-blue-600" : "bg-gray-400"}`}
+            onClick={() => setShowAlfamartCircles(!showAlfamartCircles)}
+          >
+            {showAlfamartCircles ? "Alfa O" : "Alfa O"}
+          </button>
+          <button
+            className={`rounded px-4 py-2 text-white ${showIndomaret ? "bg-red-600" : "bg-gray-400"}`}
+            onClick={() => setShowIndomaret(!showIndomaret)}
+          >
+            {showIndomaret ? "Indo" : "Indo"}
+          </button>
+          <button
+            className={`rounded px-4 py-2 text-white ${showIndomaretCircles ? "bg-red-600" : "bg-gray-400"}`}
+            onClick={() => setShowIndomaretCircles(!showIndomaretCircles)}
+          >
+            {showIndomaretCircles ? "Indo O" : "Indo O"}
+          </button>
         </div>
       )}
     </MapContainer>
