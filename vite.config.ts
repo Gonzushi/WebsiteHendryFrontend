@@ -6,41 +6,6 @@ export default defineConfig({
   plugins: [
     VitePWA({
       registerType: "autoUpdate",
-      manifest: {
-        name: "HW App",
-        short_name: "HW",
-        description: "An application for Hendry Widyanto",
-        start_url: "/",
-        display: "standalone",
-        background_color: "#FFFFFF",
-        theme_color: "#FFFFFF",
-        icons: [
-          {
-            src: "/pwa-192x192.png",
-            sizes: "192x192",
-            type: "image/png",
-            purpose: "any",
-          },
-          {
-            src: "/pwa-512x512.png",
-            sizes: "512x512",
-            type: "image/png",
-            purpose: "any",
-          },
-          {
-            src: "/pwa-maskable-192x192.png",
-            sizes: "192x192",
-            type: "image/png",
-            purpose: "maskable",
-          },
-          {
-            src: "/pwa-maskable-512x512.png",
-            sizes: "512x512",
-            type: "image/png",
-            purpose: "maskable",
-          },
-        ],
-      },
       workbox: {
         // Configure Workbox options here
         globPatterns: ["**/*.{js,css,html,png,jpg,jpeg,svg,json}"],
