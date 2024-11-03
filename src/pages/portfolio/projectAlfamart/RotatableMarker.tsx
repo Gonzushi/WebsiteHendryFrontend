@@ -18,7 +18,7 @@ const RotatableMarker: React.FC<RotatableMarkerProps> = ({
   rotationOrigin = "center",
   children,
 }) => {
-  const markerRef = useRef<L.Marker>(null);
+  const markerRef = useRef<L.Marker | null>(null);
 
   useEffect(() => {
     if (markerRef.current) {

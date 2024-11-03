@@ -8,6 +8,7 @@ import {
   useMap,
 } from "react-leaflet";
 import MarkerClusterGroup from "react-leaflet-markercluster";
+import { useForm } from "react-hook-form";
 import { Props } from "./Interfaces";
 import {
   alfamartIcon,
@@ -62,6 +63,18 @@ const MapComponent: React.FC<Props> = ({
   const [showAlfamartCircles, setShowAlfamartCircles] = useState(false);
   const [showIndomaretCircles, setShowIndomaretCircles] = useState(false);
   const [addedPin, setAddedPin] = useState<[number, number] | null>(null);
+  const { register, handleSubmit, reset } = useForm();
+
+  const onSubmit = (data: any) => {
+    const formData = {
+      ...data,
+      latitude: addedPin ? addedPin[0] : null,
+      longitude: addedPin ? addedPin[1] : null,
+    };
+    console.log("Submitted Data:", formData);
+    reset();
+    setAddedPin(null);
+  };
 
   useEffect(() => {
     if (navigator.geolocation) {
@@ -244,20 +257,104 @@ const MapComponent: React.FC<Props> = ({
               >
                 Your Location
               </a>
+              <br />
+              Lat: {userPosition[0]}
+              <br />
+              Lng: {userPosition[1]}
+              <br />
+              Heading: {heading}
             </Popup>
           </RotatableMarker>
         )}
 
         {addedPin && (
-          <Marker position={addedPin} icon={sellIcon}>
+          <Marker position={addedPin} icon={sellIcon} zIndexOffset={1000}>
             <Popup>
-              <a
-                href={`https://www.google.com/maps?q=${addedPin[0]},${addedPin[1]}`}
-                target="_blank"
-                rel="noopener noreferrer"
+              <button
+                onClick={() => setAddedPin(null)} // Assuming you have a way to reset addedPin
+                className="absolute z-50 right-1 top-1 flex h-8 w-8 items-center justify-center rounded-full bg-red-500 text-white hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-300"
+                aria-label="Close"
               >
-                New Pin
-              </a>
+                X
+              </button>
+              <div className="relative">
+                <form onSubmit={handleSubmit(onSubmit)} className="z-50 w-64">
+                  <div className="mb-4">
+                    <label className="block text-sm font-medium text-gray-700">
+                      Phone Number:
+                    </label>
+                    <input
+                      type="text"
+                      {...register("phoneNumber")}
+                      required
+                      className="mt-1 block h-10 w-full rounded-md border-2 border-gray-300 px-3 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                    />
+                  </div>
+                  <div className="mb-4">
+                    <label className="block text-sm font-medium text-gray-700">
+                      Area:
+                    </label>
+                    <input
+                      type="text"
+                      {...register("area")}
+                      className="mt-1 block h-10 w-full rounded-md border-2 border-gray-300 px-3 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                    />
+                  </div>
+                  <div className="mb-4">
+                    <label className="block text-sm font-medium text-gray-700">
+                      Type:
+                    </label>
+                    <select
+                      {...register("type")}
+                      required
+                      className="mt-1 block h-10 w-full rounded-md border-2 border-gray-300 px-3 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                    >
+                      <option value="">Select Type</option>
+                      <option value="Apartment">Apartment</option>
+                      <option value="Gudang">Gudang</option>
+                      <option value="Rumah">Rumah</option>
+                      <option value="Ruko">Ruko</option>
+                      <option value="Tanah">Tanah</option>
+                      <option value="Toko">Toko</option>
+                    </select>
+                  </div>
+                  <div className="mb-4">
+                    <label className="block text-sm font-medium text-gray-700">
+                      Price:
+                    </label>
+                    <div className="relative">
+                      <span className="absolute left-3 top-2.5 text-gray-500">
+                        Rp.
+                      </span>
+                      <input
+                        type="text"
+                        {...register("price", {
+                          required: true,
+                          validate: (value) =>
+                            !isNaN(value.replace(/,/g, "")) || "Invalid number",
+                        })}
+                        onChange={(e) => {
+                          const rawValue = e.target.value.replace(
+                            /[^0-9]/g,
+                            "",
+                          );
+                          const numericValue = Number(rawValue);
+                          e.target.value = new Intl.NumberFormat().format(
+                            numericValue,
+                          );
+                        }}
+                        className="mt-1 block h-10 w-full rounded-md border-2 border-gray-300 px-10 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                      />
+                    </div>
+                  </div>
+                  <button
+                    type="submit"
+                    className="w-full rounded-md bg-blue-600 py-2 text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                  >
+                    Submit
+                  </button>
+                </form>
+              </div>
             </Popup>
           </Marker>
         )}
