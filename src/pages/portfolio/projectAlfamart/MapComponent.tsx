@@ -1,99 +1,87 @@
 import React, { useEffect, useState } from "react";
-import { MapContainer, TileLayer, Marker, Circle, Popup } from "react-leaflet";
-import L from "leaflet";
-import MarkerClusterGroup from "react-leaflet-markercluster"; // Import as default
+import {
+  MapContainer,
+  TileLayer,
+  Marker,
+  Circle,
+  Popup,
+  useMap,
+} from "react-leaflet";
+import MarkerClusterGroup from "react-leaflet-markercluster";
+import { Props } from "./Interfaces";
+import {
+  alfamartIcon,
+  indomaretIcon,
+  arrowIcon,
+  sellIcon,
+} from "./MapComponentIcon";
+import RotatableMarker from "./RotatableMarker";
+import ClickHandler from "./ClickHandler";
 import "leaflet/dist/leaflet.css";
 import "react-leaflet-markercluster/dist/styles.min.css";
+import { RotateControl, RotateMap } from "./RotateMap";
 
 const TypedMarkerClusterGroup = MarkerClusterGroup as React.ComponentType<any>;
 
-// Define the interface for nested locations
-export interface NestedLocation {
-  business_status: string;
-  geometry: {
-    location: { lat: number; lng: number };
-    viewport?: {
-      northeast: { lat: number; lng: number };
-      southwest: { lat: number; lng: number };
-    };
+const FocusToUserLocationButton: React.FC<{
+  userPosition: [number, number] | null;
+}> = ({ userPosition }) => {
+  const map = useMap();
+
+  const handleFocus = () => {
+    if (userPosition) {
+      map.setView(userPosition, 18);
+    }
   };
-  name: string;
-  place_id: string;
-  vicinity: string;
-}
 
-// Define the props interface for the map component
-interface Props {
-  centerLatitude: number;
-  centerLongitude: number;
-  totalRadiusKm: number;
-  alfamartLocations: NestedLocation[];
-  indomaretLocations: NestedLocation[];
-}
+  return (
+    <button
+      className="absolute bottom-8 right-2 z-50 rounded-full bg-white p-4 text-left text-white shadow-lg"
+      onClick={handleFocus}
+      style={{ zIndex: 1000 }} // Ensure high z-index
+    >
+      <img src="/arrow.svg" alt="arrow" className="h-8 w-8 rotate-90" />
+    </button>
+  );
+};
 
-// Create the MapComponent
 const MapComponent: React.FC<Props> = ({
   centerLatitude,
   centerLongitude,
   totalRadiusKm,
+  point_radius_m,
   alfamartLocations,
   indomaretLocations,
 }) => {
   const [userPosition, setUserPosition] = useState<[number, number] | null>(
     null,
   );
-  const [showAlfamart, setShowAlfamart] = useState(true); // State for Alfamart visibility
-  const [showIndomaret, setShowIndomaret] = useState(true); // State for Indomaret visibility
-  const [showAlfamartCircles, setShowAlfamartCircles] = useState(true); // State for Alfamart circles visibility
-  const [showIndomaretCircles, setShowIndomaretCircles] = useState(true); // State for Indomaret circles visibility
+  const [heading, setHeading] = useState<number | null>(null);
+  const [showAlfamart, setShowAlfamart] = useState(false);
+  const [showIndomaret, setShowIndomaret] = useState(false);
+  const [showAlfamartCircles, setShowAlfamartCircles] = useState(false);
+  const [showIndomaretCircles, setShowIndomaretCircles] = useState(false);
+  const [addedPin, setAddedPin] = useState<[number, number] | null>(null);
 
   useEffect(() => {
     if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(
+      const watchId = navigator.geolocation.watchPosition(
         (position) => {
-          const { latitude, longitude } = position.coords;
+          const { latitude, longitude, heading } = position.coords;
           setUserPosition([latitude, longitude]);
+          if (heading !== null) setHeading(heading);
         },
         () => {
           alert("Unable to retrieve your location.");
         },
+        { enableHighAccuracy: true },
       );
+
+      return () => navigator.geolocation.clearWatch(watchId);
     } else {
       alert("Geolocation is not supported by this browser.");
     }
   }, []);
-
-  // Custom icon for the center point (red dot)
-  const redDotIcon = L.divIcon({
-    className: "red-dot",
-    html: '<div style="background-color: red; border-radius: 50%; width: 10px; height: 10px;"></div>',
-    iconSize: [10, 10],
-    iconAnchor: [5, 5],
-  });
-
-  // Custom icon for the user location (blue dot)
-  const blueDotIcon = L.divIcon({
-    className: "blue-dot",
-    html: '<div style="background-color: blue; border-radius: 50%; width: 10px; height: 10px;"></div>',
-    iconSize: [10, 10],
-    iconAnchor: [5, 5],
-  });
-
-  // Custom icon for Alfamart locations
-  const alfamartIcon = L.icon({
-    iconUrl: "/alfamart_pin.svg", // replace with the actual path to the Alfamart icon image
-    iconSize: [26, 42], // size of the icon
-    iconAnchor: [12, 25], // point of the icon which will correspond to marker's location
-    popupAnchor: [0, -20], // point from which the popup should open relative to the iconAnchor
-  });
-
-  // Custom icon for Indomaret locations
-  const indomaretIcon = L.icon({
-    iconUrl: "/indomaret_pin.svg", // replace with the actual path to the Indomaret icon image
-    iconSize: [26, 42], // size of the icon
-    iconAnchor: [12, 25], // point of the icon which will correspond to marker's location
-    popupAnchor: [0, -20], // point from which the popup should open relative to the iconAnchor
-  });
 
   return (
     <div className="relative">
@@ -128,27 +116,33 @@ const MapComponent: React.FC<Props> = ({
         center={[centerLatitude, centerLongitude]}
         zoom={14}
         style={{ height: "100vh", width: "100%" }}
-        className="z-10"
+        className="relative z-10"
+        touchZoom={true}
+        scrollWheelZoom={true}
+        doubleClickZoom={true}
       >
         <TileLayer
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         />
 
-        {/* Center circle */}
+        <RotateMap />
+
+        <RotateControl />
+
+        <FocusToUserLocationButton userPosition={userPosition} />
+
+        <ClickHandler setAddedPin={setAddedPin} />
+
         <Circle
-          center={[centerLatitude, centerLongitude]}
+          center={
+            userPosition ? userPosition : [centerLatitude, centerLongitude]
+          }
           radius={totalRadiusKm * 1000}
           color="green"
           fillOpacity={0}
         />
 
-        {/* Center point as a red dot */}
-        <Marker position={[centerLatitude, centerLongitude]} icon={redDotIcon}>
-          <Popup>Center Point</Popup>
-        </Marker>
-
-        {/* Alfamart locations with clustering */}
         {showAlfamart && (
           <TypedMarkerClusterGroup>
             {alfamartLocations.map((location) => (
@@ -178,7 +172,6 @@ const MapComponent: React.FC<Props> = ({
           </TypedMarkerClusterGroup>
         )}
 
-        {/* Indomaret locations with clustering */}
         {showIndomaret && (
           <TypedMarkerClusterGroup>
             {indomaretLocations.map((location) => (
@@ -208,7 +201,6 @@ const MapComponent: React.FC<Props> = ({
           </TypedMarkerClusterGroup>
         )}
 
-        {/* Green circles around each Alfamart location */}
         {showAlfamartCircles &&
           alfamartLocations.map((location) => (
             <Circle
@@ -217,13 +209,12 @@ const MapComponent: React.FC<Props> = ({
                 location.geometry.location.lat,
                 location.geometry.location.lng,
               ]}
-              radius={500} // 500 meters
+              radius={point_radius_m}
               color="#0096FF"
               fillOpacity={0.1}
             />
           ))}
 
-        {/* Green circles around each Indomaret location */}
         {showIndomaretCircles &&
           indomaretLocations.map((location) => (
             <Circle
@@ -232,16 +223,42 @@ const MapComponent: React.FC<Props> = ({
                 location.geometry.location.lat,
                 location.geometry.location.lng,
               ]}
-              radius={500} // 500 meters
+              radius={point_radius_m}
               color="#F76D57"
               fillOpacity={0.1}
             />
           ))}
 
-        {/* User location marker */}
         {userPosition && (
-          <Marker position={userPosition} icon={blueDotIcon}>
-            <Popup>Your Location</Popup>
+          <RotatableMarker
+            position={userPosition}
+            icon={arrowIcon}
+            rotationAngle={heading ?? 0}
+            rotationOrigin="center"
+          >
+            <Popup>
+              <a
+                href={`https://www.google.com/maps?q=${userPosition[0]},${userPosition[1]}`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Your Location
+              </a>
+            </Popup>
+          </RotatableMarker>
+        )}
+
+        {addedPin && (
+          <Marker position={addedPin} icon={sellIcon}>
+            <Popup>
+              <a
+                href={`https://www.google.com/maps?q=${addedPin[0]},${addedPin[1]}`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                New Pin
+              </a>
+            </Popup>
           </Marker>
         )}
       </MapContainer>

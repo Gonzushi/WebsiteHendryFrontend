@@ -1,21 +1,18 @@
 import React from "react";
-import MapComponent from "../../components/MapComponent";
-import AlafamartLocationsJson from "../../data/alfamart_locations_fix.json";
-import IndomaretLocationsJson from "../../data/indomaret_locations_fix.json";
-import { NestedLocation } from "../../components/MapComponent";
-
-export interface MainLocation {
-  lat: number;
-  lng: number;
-  locations: NestedLocation[];
-}
+import MapComponent from "./MapComponent";
+import AlafamartLocationsJson from "../../../data/alfamart_locations_fix.json";
+import IndomaretLocationsJson from "../../../data/indomaret_locations_fix.json";
+import { NestedLocation, MainLocation } from "./Interfaces";
 
 const AlfamartLocations: React.FC = () => {
   const centerLatitude = -6.4730792;
   const centerLongitude = 106.8448007;
   const totalRadiusKm = 100;
-  const alfamartLocations: MainLocation[] = AlafamartLocationsJson as MainLocation[];
-  const indomarettLocations: MainLocation[] = IndomaretLocationsJson as MainLocation[];
+  const point_radius_m = 300;
+  const alfamartLocations: MainLocation[] =
+    AlafamartLocationsJson as MainLocation[];
+  const indomarettLocations: MainLocation[] =
+    IndomaretLocationsJson as MainLocation[];
 
   const allAlfamartLocations: NestedLocation[] = [];
   const allIndomaretLocations: NestedLocation[] = [];
@@ -52,6 +49,7 @@ const AlfamartLocations: React.FC = () => {
         centerLatitude={centerLatitude}
         centerLongitude={centerLongitude}
         totalRadiusKm={totalRadiusKm}
+        point_radius_m={point_radius_m}
         alfamartLocations={uniqueAlfamartLocations}
         indomaretLocations={uniqueIndomaretLocations}
       />

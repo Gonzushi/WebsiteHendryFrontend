@@ -16,6 +16,8 @@
     "axios": "^1.6.8",
     "clsx": "^2.1.0",
     "leaflet": "^1.9.4",
+    "leaflet-rotate": "^0.2.8",
+    "leaflet-rotatedmarker": "^0.2.0",
     "lorem-ipsum": "^2.0.8",
     "mapbox-gl": "^3.3.0",
     "react": "^18.2.0",
