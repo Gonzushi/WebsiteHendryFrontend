@@ -25,9 +25,22 @@ export interface Props {
   point_radius_m: number;
   alfamartLocations: NestedLocation[];
   indomaretLocations: NestedLocation[];
+  savedLocations: LocationDataID[];
+  setSavedLocations: React.Dispatch<React.SetStateAction<LocationDataID[]>>;
 }
 
 export interface LocationData {
+  latitude: number;
+  longitude: number;
+  phone_number?: string;
+  area?: number;
+  type?: string;
+  price?: number;
+  comment?: string;
+}
+
+export interface LocationDataID {
+  id: number;
   latitude: number;
   longitude: number;
   phone_number?: string;

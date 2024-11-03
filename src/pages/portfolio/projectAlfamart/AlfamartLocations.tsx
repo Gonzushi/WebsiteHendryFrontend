@@ -1,8 +1,13 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import MapComponent from "./MapComponent";
 import AlafamartLocationsJson from "../../../data/alfamart_locations_fix.json";
 import IndomaretLocationsJson from "../../../data/indomaret_locations_fix.json";
-import { NestedLocation, MainLocation } from "./Interfaces";
+import {
+  NestedLocation,
+  MainLocation,
+  LocationDataID,
+} from "./helper/Interfaces";
+import readLocations from "./crud/readLocations";
 
 const AlfamartLocations: React.FC = () => {
   const centerLatitude = -6.4730792;
@@ -13,9 +18,15 @@ const AlfamartLocations: React.FC = () => {
     AlafamartLocationsJson as MainLocation[];
   const indomarettLocations: MainLocation[] =
     IndomaretLocationsJson as MainLocation[];
-
   const allAlfamartLocations: NestedLocation[] = [];
   const allIndomaretLocations: NestedLocation[] = [];
+  const [savedLocations, setSavedLocations] = useState<LocationDataID[]>([]);
+
+  useEffect(() => {
+    readLocations().then((data) => {
+      setSavedLocations(data);
+    });
+  }, []);
 
   alfamartLocations.forEach((entry) => {
     const locations = entry.locations;
@@ -52,6 +63,8 @@ const AlfamartLocations: React.FC = () => {
         point_radius_m={point_radius_m}
         alfamartLocations={uniqueAlfamartLocations}
         indomaretLocations={uniqueIndomaretLocations}
+        savedLocations={savedLocations}
+        setSavedLocations={setSavedLocations}
       />
     </div>
   );

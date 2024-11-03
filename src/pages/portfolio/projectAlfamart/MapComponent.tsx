@@ -9,19 +9,20 @@ import {
 } from "react-leaflet";
 import MarkerClusterGroup from "react-leaflet-markercluster";
 import { useForm } from "react-hook-form";
-import { LocationData, Props } from "./Interfaces";
+import { LocationData, Props } from "./helper/Interfaces";
 import {
   alfamartIcon,
   indomaretIcon,
   arrowIcon,
   sellIcon,
-} from "./MapComponentIcon";
-import RotatableMarker from "./RotatableMarker";
-import ClickHandler from "./ClickHandler";
+} from "./helper/MapComponentIcon";
+import RotatableMarker from "./helper/RotatableMarker";
+import ClickHandler from "./helper/ClickHandler";
 import "leaflet/dist/leaflet.css";
 import "react-leaflet-markercluster/dist/styles.min.css";
-import { RotateControl, RotateMap } from "./RotateMap";
-import createLocation from "./createLocation";
+import { RotateControl, RotateMap } from "./helper/RotateMap";
+import createLocation from "./crud/createLocation";
+import readLocations from "./crud/readLocations";
 
 const TypedMarkerClusterGroup = MarkerClusterGroup as React.ComponentType<any>;
 
@@ -54,6 +55,8 @@ const MapComponent: React.FC<Props> = ({
   point_radius_m,
   alfamartLocations,
   indomaretLocations,
+  savedLocations,
+  setSavedLocations,
 }) => {
   const [userPosition, setUserPosition] = useState<[number, number] | null>(
     null,
@@ -68,6 +71,8 @@ const MapComponent: React.FC<Props> = ({
   const { register, handleSubmit, reset } = useForm();
   const popupRef = useRef<any>(null);
 
+  console.log(savedLocations);
+
   const onSubmit = (data: any) => {
     const locationData: LocationData = {
       latitude: addedPin ? addedPin[0] : 0,
@@ -78,7 +83,11 @@ const MapComponent: React.FC<Props> = ({
       price: data.price,
       comment: data.comment,
     };
-    createLocation(locationData);
+    createLocation(locationData).then(() => {
+      readLocations().then((data) => {
+        setSavedLocations(data);
+      });
+    });
     reset();
     setAddedPin(null);
   };
@@ -402,6 +411,39 @@ const MapComponent: React.FC<Props> = ({
           </button>
         </div>
       )}
+
+      {/* Add Saved Location Pin */}
+      {savedLocations &&
+        savedLocations.map((location) => (
+          <Marker
+            key={location.id}
+            position={[location.latitude, location.longitude]}
+            icon={alfamartIcon}
+          >
+            <Popup>
+              <strong>
+                <a
+                  href={`https://www.google.com/maps?q=${location.latitude},${location.longitude}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Location
+                </a>
+              </strong>
+              <br />
+              Phone: {location.phone_number}
+              <br />
+              Area: {location.area}
+              <br />
+              Type: {location.type}
+              <br />
+              Price: {location.price}
+              <br />
+              Comment: {location.comment}
+              <br />
+            </Popup>
+          </Marker>
+        ))}
     </MapContainer>
   );
 };

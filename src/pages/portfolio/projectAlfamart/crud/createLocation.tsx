@@ -1,13 +1,12 @@
 import axios from "axios";
-import { LocationData } from "./Interfaces";
+import { LocationData } from "../helper/Interfaces";
 
 export default async function createLocation(locationData: LocationData) {
   try {
-    const response = await axios.post(
-      "http://api.hendrywidyanto.com/project_map/location/",
+    await axios.post(
+      "https://api.hendrywidyanto.com/project_map/location/",
       locationData,
     );
-    console.log("Location created successfully:", response.data);
   } catch (error) {
     console.error("Error creating location:", error);
   }
