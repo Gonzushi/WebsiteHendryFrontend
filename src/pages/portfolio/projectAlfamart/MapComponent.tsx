@@ -272,20 +272,39 @@ const MapComponent: React.FC<Props> = ({
             <Popup>
               <button
                 onClick={() => setAddedPin(null)} // Assuming you have a way to reset addedPin
-                className="absolute z-50 right-1 top-1 flex h-8 w-8 items-center justify-center rounded-full bg-red-500 text-white hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-300"
+                className="absolute right-1 top-1 z-50 flex h-8 w-8 items-center justify-center rounded-full bg-red-500 text-white hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-300"
                 aria-label="Close"
               >
                 X
               </button>
+              <a
+                href={`https://www.google.com/maps?q=${addedPin[0]},${addedPin[1]}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block text-xl font-medium text-gray-700"
+              >
+                Location
+              </a>
               <div className="relative">
-                <form onSubmit={handleSubmit(onSubmit)} className="z-50 w-64">
+                <form
+                  onSubmit={handleSubmit(onSubmit)}
+                  className="z-50 mt-5 w-64"
+                >
                   <div className="mb-4">
                     <label className="block text-sm font-medium text-gray-700">
                       Phone Number:
                     </label>
                     <input
-                      type="text"
-                      {...register("phoneNumber")}
+                      type="text" // Change to 'tel' for better mobile compatibility
+                      {...register("phoneNumber", {
+                        required: true,
+                        validate: (value) =>
+                          /^[0-9]+$/.test(value) || "Only numbers are allowed",
+                      })}
+                      onChange={(e) => {
+                        const rawValue = e.target.value.replace(/[^0-9]/g, "");
+                        e.target.value = rawValue; // Keep only numbers
+                      }}
                       required
                       className="mt-1 block h-10 w-full rounded-md border-2 border-gray-300 px-3 shadow-sm focus:border-blue-500 focus:ring-blue-500"
                     />
@@ -295,8 +314,16 @@ const MapComponent: React.FC<Props> = ({
                       Area:
                     </label>
                     <input
-                      type="text"
-                      {...register("area")}
+                      type="text" // Keep as text for area but restrict input
+                      {...register("area", {
+                        required: true,
+                        validate: (value) =>
+                          /^[0-9]+$/.test(value) || "Only numbers are allowed",
+                      })}
+                      onChange={(e) => {
+                        const rawValue = e.target.value.replace(/[^0-9]/g, "");
+                        e.target.value = rawValue; // Keep only numbers
+                      }}
                       className="mt-1 block h-10 w-full rounded-md border-2 border-gray-300 px-3 shadow-sm focus:border-blue-500 focus:ring-blue-500"
                     />
                   </div>
