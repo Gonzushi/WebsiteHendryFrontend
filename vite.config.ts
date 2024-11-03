@@ -7,20 +7,37 @@ export default defineConfig({
     VitePWA({
       registerType: "autoUpdate",
       manifest: {
-        name: "Your App Name",
-        short_name: "App Name",
-        description: "A brief description of your app.",
-        theme_color: "#317EFB",
+        name: "HW App",
+        short_name: "HW",
+        description: "An application for Hendry Widyanto",
+        start_url: "/",
+        display: "standalone",
+        background_color: "#FFFFFF",
+        theme_color: "#FFFFFF",
         icons: [
           {
-            src: "icon-192x192.png",
+            src: "/pwa-192x192.png",
             sizes: "192x192",
             type: "image/png",
+            purpose: "any",
           },
           {
-            src: "icon-512x512.png",
+            src: "/pwa-512x512.png",
             sizes: "512x512",
             type: "image/png",
+            purpose: "any",
+          },
+          {
+            src: "/pwa-maskable-192x192.png",
+            sizes: "192x192",
+            type: "image/png",
+            purpose: "maskable",
+          },
+          {
+            src: "/pwa-maskable-512x512.png",
+            sizes: "512x512",
+            type: "image/png",
+            purpose: "maskable",
           },
         ],
       },
