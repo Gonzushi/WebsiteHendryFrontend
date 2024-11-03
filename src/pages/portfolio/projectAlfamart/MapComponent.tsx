@@ -295,7 +295,7 @@ const MapComponent: React.FC<Props> = ({
                       Phone Number: *
                     </label>
                     <input
-                      type="text" // Change to 'tel' for better mobile compatibility
+                      type="number" // Change to 'tel' for better mobile compatibility
                       {...register("phoneNumber", {
                         required: true,
                         validate: (value) =>
@@ -314,7 +314,7 @@ const MapComponent: React.FC<Props> = ({
                       Area: *
                     </label>
                     <input
-                      type="text" // Keep as text for area but restrict input
+                      type="number" // Keep as text for area but restrict input
                       {...register("area", {
                         required: true,
                         validate: (value) =>
