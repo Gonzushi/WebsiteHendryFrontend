@@ -292,7 +292,7 @@ const MapComponent: React.FC<Props> = ({
                 >
                   <div className="mb-4">
                     <label className="block text-sm font-medium text-gray-700">
-                      Phone Number:
+                      Phone Number: *
                     </label>
                     <input
                       type="text" // Change to 'tel' for better mobile compatibility
@@ -311,7 +311,7 @@ const MapComponent: React.FC<Props> = ({
                   </div>
                   <div className="mb-4">
                     <label className="block text-sm font-medium text-gray-700">
-                      Area:
+                      Area: *
                     </label>
                     <input
                       type="text" // Keep as text for area but restrict input
