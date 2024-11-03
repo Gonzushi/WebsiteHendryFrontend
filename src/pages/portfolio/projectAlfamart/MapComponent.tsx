@@ -295,16 +295,10 @@ const MapComponent: React.FC<Props> = ({
                       Phone Number: *
                     </label>
                     <input
-                      type="number" // Change to 'tel' for better mobile compatibility
+                      type="number"
                       {...register("phoneNumber", {
                         required: true,
-                        validate: (value) =>
-                          /^[0-9]+$/.test(value) || "Only numbers are allowed",
                       })}
-                      onChange={(e) => {
-                        const rawValue = e.target.value.replace(/[^0-9]/g, "");
-                        e.target.value = rawValue; // Keep only numbers
-                      }}
                       required
                       className="mt-1 block h-10 w-full rounded-md border-2 border-gray-300 px-3 shadow-sm focus:border-blue-500 focus:ring-blue-500"
                     />
@@ -317,13 +311,7 @@ const MapComponent: React.FC<Props> = ({
                       type="number" // Keep as text for area but restrict input
                       {...register("area", {
                         required: true,
-                        validate: (value) =>
-                          /^[0-9]+$/.test(value) || "Only numbers are allowed",
                       })}
-                      onChange={(e) => {
-                        const rawValue = e.target.value.replace(/[^0-9]/g, "");
-                        e.target.value = rawValue; // Keep only numbers
-                      }}
                       className="mt-1 block h-10 w-full rounded-md border-2 border-gray-300 px-3 shadow-sm focus:border-blue-500 focus:ring-blue-500"
                     />
                   </div>
