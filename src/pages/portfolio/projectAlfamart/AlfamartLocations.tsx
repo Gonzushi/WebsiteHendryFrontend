@@ -44,7 +44,7 @@ const AlfamartLocations: React.FC = () => {
   );
 
   return (
-    <div className="fixed inset-0 z-50">
+    <div className="fixed inset-0 h-dvh w-full" style={{ zIndex: 50 }}>
       <MapComponent
         centerLatitude={centerLatitude}
         centerLongitude={centerLongitude}
