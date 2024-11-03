@@ -72,7 +72,7 @@ const MapComponent: React.FC<Props> = ({
           if (heading !== null) setHeading(heading);
         },
         () => {
-          alert("Unable to retrieve your location.");
+          // alert("Unable to retrieve your location.");
         },
         { enableHighAccuracy: true },
       );
