@@ -283,7 +283,7 @@ const MapComponent: React.FC<Props> = ({
           <Marker
             key={location.id}
             position={[location.latitude, location.longitude]}
-            icon={alfamartIcon}
+            icon={sellIcon}
           >
             <Popup>
               <FormLocation
