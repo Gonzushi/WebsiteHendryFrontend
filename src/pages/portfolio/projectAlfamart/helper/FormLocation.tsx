@@ -17,8 +17,7 @@ interface FormLocationProps {
 export default function FormLocation(props: FormLocationProps) {
   const { pinLocation, location, setSavedLocations, setAddedPin } = props;
   const [editMode, setEditMode] = useState(props.editMode);
-  const { register, handleSubmit, reset, setValue, watch } = useForm();
-  const values = watch();
+  const { register, handleSubmit, reset, setValue } = useForm();
 
   useEffect(() => {
     if (location) {
