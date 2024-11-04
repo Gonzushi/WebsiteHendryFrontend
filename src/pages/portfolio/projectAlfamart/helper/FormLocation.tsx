@@ -1,45 +1,27 @@
 import { useEffect, useState } from "react";
-import {
-  FieldValues,
-  UseFormHandleSubmit,
-  UseFormRegister,
-  UseFormReset,
-  UseFormSetValue,
-} from "react-hook-form";
-import { LocationDataID } from "./Interfaces";
+import { useForm } from "react-hook-form";
+import { LocationData, LocationDataID } from "./Interfaces";
 import deleteLocation from "../crud/deleteLocation";
 import readLocations from "../crud/readLocations";
+import createLocation from "../crud/createLocation";
+import updateLocation from "../crud/updateLocation";
 
 interface FormLocationProps {
-  handleSubmit: UseFormHandleSubmit<FieldValues, undefined>;
-  onSubmit: (data: any) => void;
-  register: UseFormRegister<FieldValues>;
-  addedPin: [number, number];
-  location?: LocationDataID;
-  setValue?: UseFormSetValue<FieldValues>;
-  state: "view" | "edit";
+  pinLocation: [number, number];
+  editMode: boolean;
   setSavedLocations: React.Dispatch<React.SetStateAction<LocationDataID[]>>;
-  reset: UseFormReset<FieldValues>;
+  setAddedPin: React.Dispatch<React.SetStateAction<[number, number] | null>>;
+  location?: LocationDataID;
 }
 
 export default function FormLocation(props: FormLocationProps) {
-  const {
-    handleSubmit,
-    onSubmit,
-    register,
-    addedPin,
-    location,
-    setValue,
-    state,
-    setSavedLocations,
-    reset,
-  } = props;
-  const [editMode, setEditMode] = useState(state === "edit");
-
-  const toggleEditMode = () => setEditMode(!editMode);
+  const { pinLocation, location, setSavedLocations, setAddedPin } = props;
+  const [editMode, setEditMode] = useState(props.editMode);
+  const { register, handleSubmit, reset, setValue, watch } = useForm();
+  const values = watch();
 
   useEffect(() => {
-    if (location && setValue) {
+    if (location) {
       setValue("phoneNumber", location.phone_number);
       setValue("area", location.area);
       setValue("type", location.type);
@@ -53,7 +35,6 @@ export default function FormLocation(props: FormLocationProps) {
 
   const handleDelete = () => {
     if (location) {
-      console.log(location.id);
       deleteLocation(location.id).then(() => {
         readLocations().then((data) => {
           setSavedLocations(data);
@@ -63,10 +44,68 @@ export default function FormLocation(props: FormLocationProps) {
     }
   };
 
+  const handleCancel = () => {
+    if (location) {
+      setEditMode(false);
+      reset();
+      setValue("phoneNumber", location.phone_number);
+      setValue("area", location.area);
+      setValue("type", location.type);
+      setValue(
+        "price",
+        location.price ? new Intl.NumberFormat().format(location.price) : "",
+      );
+      setValue("comment", location.comment);
+    }
+  };
+
+  const onUpdate = (data: any) => {
+    console.log(data);
+    if (location) {
+      const locationData: LocationData = {
+        latitude: location.latitude,
+        longitude: location.longitude,
+        phone_number: data.phoneNumber,
+        area: data.area,
+        type: data.type,
+        price: data.price,
+        comment: data.comment,
+      };
+      updateLocation(location.id, locationData).then(() => {
+        setEditMode(false)
+        location.phone_number = data.phoneNumber;
+        location.type = data.type;
+        location.area = data.area;
+        location.price = data.price;
+        location.comment = data.comment;
+      });
+    }
+  };
+
+  const onSubmit = (data: any) => {
+    const locationData: LocationData = {
+      latitude: pinLocation ? pinLocation[0] : 0,
+      longitude: pinLocation ? pinLocation[1] : 0,
+      phone_number: data.phoneNumber,
+      area: data.area,
+      type: data.type,
+      price: data.price,
+      comment: data.comment,
+    };
+    console.log("onSubmit", locationData);
+    createLocation(locationData).then(() => {
+      readLocations().then((data) => {
+        setSavedLocations(data);
+      });
+    });
+    reset();
+    setAddedPin(null);
+  };
+
   return (
     <>
       <a
-        href={`https://www.google.com/maps?q=${addedPin[0]},${addedPin[1]}`}
+        href={`https://www.google.com/maps?q=${pinLocation[0]},${pinLocation[1]}`}
         target="_blank"
         rel="noopener noreferrer"
         className="block text-xl font-medium text-gray-700"
@@ -76,6 +115,7 @@ export default function FormLocation(props: FormLocationProps) {
       <div className="relative">
         <form onSubmit={handleSubmit(onSubmit)} className="mt-5 w-48">
           {/* Input fields remain unchanged */}
+
           <div className="mb-2">
             <label className="block text-sm text-gray-700">Phone Number:</label>
             <input
@@ -86,6 +126,7 @@ export default function FormLocation(props: FormLocationProps) {
               defaultValue={location?.phone_number}
             />
           </div>
+
           <div className="mb-1">
             <label className="block text-sm text-gray-700">Area:</label>
             <input
@@ -96,6 +137,7 @@ export default function FormLocation(props: FormLocationProps) {
               defaultValue={location?.area}
             />
           </div>
+
           <div className="mb-2">
             <label className="block text-sm text-gray-700">Type:</label>
             <select
@@ -113,6 +155,7 @@ export default function FormLocation(props: FormLocationProps) {
               <option value="Toko">Toko</option>
             </select>
           </div>
+
           <div className="mb-2">
             <label className="block text-sm text-gray-700">Price:</label>
             <div className="relative">
@@ -145,12 +188,13 @@ export default function FormLocation(props: FormLocationProps) {
               />
             </div>
           </div>
+
           <div className="mb-4">
             <label className="block text-sm text-gray-700">Comment:</label>
             <textarea
               {...register("comment")}
               rows={3}
-              className="mt-1 block w-full rounded-md border-2 border-gray-300 px-3 py-2 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+              className="mt-1 block min-h-16 w-full rounded-md border-2 border-gray-300 px-3 py-2 shadow-sm focus:border-blue-500 focus:ring-blue-500"
               placeholder="Enter your comments here"
               disabled={!editMode}
               defaultValue={location?.comment}
@@ -158,28 +202,47 @@ export default function FormLocation(props: FormLocationProps) {
           </div>
 
           {editMode ? (
-            <button
-              type="submit"
-              className="w-full rounded-md bg-blue-600 py-2 text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
-              onClick={handleSubmit(onSubmit)}
-            >
-              Submit
-            </button>
+            location ? (
+              <div className="flex gap-2">
+                <button
+                  type="button"
+                  onClick={handleCancel}
+                  className="w-full rounded-md bg-red-600 py-2 text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                >
+                  Cancel
+                </button>
+                <button
+                  type="button"
+                  onClick={handleSubmit(onUpdate)}
+                  className="w-full rounded-md bg-blue-600 py-2 text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2"
+                >
+                  Update
+                </button>
+              </div>
+            ) : (
+              <button
+                type="submit"
+                className="w-full rounded-md bg-blue-600 py-2 text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                onClick={handleSubmit(onSubmit)}
+              >
+                Submit
+              </button>
+            )
           ) : (
             <div className="flex gap-2">
-              <button
-                type="button"
-                onClick={toggleEditMode}
-                className="w-full rounded-md bg-blue-600 py-2 text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
-              >
-                Edit
-              </button>
               <button
                 type="button"
                 onClick={handleDelete}
                 className="w-full rounded-md bg-red-600 py-2 text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2"
               >
                 Delete
+              </button>
+              <button
+                type="button"
+                onClick={() => setEditMode(true)}
+                className="w-full rounded-md bg-blue-600 py-2 text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+              >
+                Edit
               </button>
             </div>
           )}

@@ -8,8 +8,7 @@ import {
   useMap,
 } from "react-leaflet";
 import MarkerClusterGroup from "react-leaflet-markercluster";
-import { useForm } from "react-hook-form";
-import { LocationData, Props } from "./helper/Interfaces";
+import { Props } from "./helper/Interfaces";
 import {
   alfamartIcon,
   indomaretIcon,
@@ -21,8 +20,6 @@ import ClickHandler from "./helper/ClickHandler";
 import "leaflet/dist/leaflet.css";
 import "react-leaflet-markercluster/dist/styles.min.css";
 import { RotateMap } from "./helper/RotateMap";
-import createLocation from "./crud/createLocation";
-import readLocations from "./crud/readLocations";
 import FormLocation from "./helper/FormLocation";
 
 const TypedMarkerClusterGroup = MarkerClusterGroup as React.ComponentType<any>;
@@ -69,30 +66,7 @@ const MapComponent: React.FC<Props> = ({
   const [showIndomaretCircles, setShowIndomaretCircles] = useState(false);
   const [addedPin, setAddedPin] = useState<[number, number] | null>(null);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
-  const { register, handleSubmit, reset, setValue } = useForm();
   const popupRef = useRef<any>(null);
-
-  console.log(savedLocations);
-
-  const onSubmit = (data: any) => {
-    const locationData: LocationData = {
-      latitude: addedPin ? addedPin[0] : 0,
-      longitude: addedPin ? addedPin[1] : 0,
-      phone_number: data.phoneNumber,
-      area: data.area,
-      type: data.type,
-      price: data.price,
-      comment: data.comment,
-    };
-    console.log("Test", locationData)
-    createLocation(locationData).then(() => {
-      readLocations().then((data) => {
-        setSavedLocations(data);
-      });
-    });
-    reset();
-    setAddedPin(null);
-  };
 
   useEffect(() => {
     if (navigator.geolocation) {
@@ -261,13 +235,10 @@ const MapComponent: React.FC<Props> = ({
           <Marker position={addedPin} icon={sellIcon}>
             <Popup ref={popupRef}>
               <FormLocation
-                register={register}
-                handleSubmit={handleSubmit}
-                onSubmit={onSubmit}
-                addedPin={addedPin}
-                state="edit"
+                pinLocation={addedPin}
+                editMode={true}
                 setSavedLocations={setSavedLocations}
-                reset={reset}
+                setAddedPin={setAddedPin}
               />
             </Popup>
           </Marker>
@@ -316,15 +287,11 @@ const MapComponent: React.FC<Props> = ({
           >
             <Popup>
               <FormLocation
-                register={register}
-                handleSubmit={handleSubmit}
-                onSubmit={onSubmit}
-                addedPin={[location.latitude, location.longitude]}
+                pinLocation={[location.latitude, location.longitude]}
                 location={location}
-                setValue={setValue}
-                state="view"
+                editMode={false}
                 setSavedLocations={setSavedLocations}
-                reset={reset}
+                setAddedPin={setAddedPin}
               />
             </Popup>
           </Marker>
