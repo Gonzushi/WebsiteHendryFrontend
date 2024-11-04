@@ -37,7 +37,7 @@ const FocusToUserLocationButton: React.FC<{
 
   return (
     <button
-      className="absolute bottom-24 right-4 rounded-full bg-white p-4 text-left text-white shadow-lg"
+      className="absolute bottom-8 right-4 rounded-full bg-white p-4 text-left text-white shadow-lg"
       onClick={handleFocus}
       style={{ zIndex: 400 }}
     >

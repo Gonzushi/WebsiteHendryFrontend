@@ -36,7 +36,7 @@ export const indomaretIcon = L.icon({
 });
 
 export const arrowIcon = L.icon({
-    iconUrl: "/arrow.svg",
+    iconUrl: "/arrow2.svg",
     iconSize: [26, 42],
     iconAnchor: [12, 25], 
     popupAnchor: [0, -20],
