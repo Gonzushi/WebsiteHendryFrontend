@@ -65,7 +65,7 @@ export const RotateControl = () => {
   };
 
   return (
-    <div className="absolute right-2 top-2 space-x-2" style={{ zIndex: 2000 }}>
+    <div className="absolute right-2 top-2 space-x-2 sm:top-2 sm:right-8" style={{ zIndex: 2000 }}>
       <button
         onClick={rotateLeft}
         className="rounded-md bg-blue-500 px-4 py-2 text-white shadow-md transition duration-200 hover:bg-blue-600"
