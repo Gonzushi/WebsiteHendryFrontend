@@ -68,8 +68,18 @@ const MapComponent: React.FC<Props> = ({
   const [addedPin, setAddedPin] = useState<[number, number] | null>(null);
   const [searchLat, setSearchLat] = useState<string>("");
   const [searchLng, setSearchLng] = useState<string>("");
+  const [showSearch, setShowSearch] = useState(false);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const popupRef = useRef<any>(null);
+  const mapRef = useRef<any>(null);
+
+  const MapInitializer: React.FC = () => {
+    const map = useMap();
+    useEffect(() => {
+      mapRef.current = map; 
+    }, [map]);
+    return null; 
+  };
 
   useEffect(() => {
     if (navigator.geolocation) {
@@ -105,6 +115,9 @@ const MapComponent: React.FC<Props> = ({
 
     if (!isNaN(lat) && !isNaN(lng)) {
       setAddedPin([lat, lng]);
+      if (mapRef.current) {
+        mapRef.current.setView([lat, lng], 18);
+      }
     } else {
       alert("Please enter valid latitude and longitude values.");
     }
@@ -116,6 +129,8 @@ const MapComponent: React.FC<Props> = ({
       zoom={14}
       className="relative h-full w-full"
     >
+      <MapInitializer />
+
       <TileLayer
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -135,34 +150,38 @@ const MapComponent: React.FC<Props> = ({
       />
 
       {/* Search Box */}
-      <form
-        onSubmit={handleSearch}
-        className="absolute bottom-9 left-4 w-full max-w-xs rounded-lg bg-white p-2 shadow-lg sm:bottom-9 sm:left-4 sm:max-w-md"
-        style={{ zIndex: 2000 }}
-      >
-        <div className="flex flex-col space-y-2 sm:flex-row sm:space-x-2 sm:space-y-0">
-          <input
-            type="text"
-            placeholder="Latitude"
-            value={searchLat}
-            onChange={(e) => setSearchLat(e.target.value)}
-            className="w-full rounded border p-2"
-          />
-          <input
-            type="text"
-            placeholder="Longitude"
-            value={searchLng}
-            onChange={(e) => setSearchLng(e.target.value)}
-            className="w-full rounded border p-2"
-          />
-          <button
-            type="submit"
-            className="w-full rounded bg-blue-500 p-2 text-white sm:w-auto"
-          >
-            Go
-          </button>
-        </div>
-      </form>
+      {showSearch ? (
+        <form
+          onSubmit={handleSearch}
+          className="absolute bottom-8 left-4 w-full max-w-xs rounded-lg bg-white p-2 shadow-lg sm:bottom-8 sm:left-4 sm:max-w-md"
+          style={{ zIndex: 2000 }}
+        >
+          <div className="flex flex-col space-y-2 sm:flex-row sm:space-x-2 sm:space-y-0">
+            <input
+              type="text"
+              placeholder="Latitude"
+              value={searchLat}
+              onChange={(e) => setSearchLat(e.target.value)}
+              className="w-full rounded border p-2"
+            />
+            <input
+              type="text"
+              placeholder="Longitude"
+              value={searchLng}
+              onChange={(e) => setSearchLng(e.target.value)}
+              className="w-full rounded border p-2"
+            />
+            <button
+              type="submit"
+              className="w-full rounded bg-blue-500 p-2 text-white sm:w-auto"
+            >
+              Go
+            </button>
+          </div>
+        </form>
+      ) : (
+        ""
+      )}
 
       {showAlfamart && (
         <TypedMarkerClusterGroup>
@@ -318,6 +337,12 @@ const MapComponent: React.FC<Props> = ({
             onClick={() => setShowIndomaretCircles(!showIndomaretCircles)}
           >
             {showIndomaretCircles ? "Indo O" : "Indo O"}
+          </button>
+          <button
+            className={`rounded px-4 py-2 text-white ${showSearch ? "bg-blue-600" : "bg-gray-400"}`}
+            onClick={() => setShowSearch(!showSearch)}
+          >
+            {!showSearch ? "Search" : "Search"}
           </button>
         </div>
       )}
