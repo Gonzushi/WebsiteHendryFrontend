@@ -76,9 +76,9 @@ const MapComponent: React.FC<Props> = ({
   const MapInitializer: React.FC = () => {
     const map = useMap();
     useEffect(() => {
-      mapRef.current = map; 
+      mapRef.current = map;
     }, [map]);
-    return null; 
+    return null;
   };
 
   useEffect(() => {
@@ -121,6 +121,12 @@ const MapComponent: React.FC<Props> = ({
     } else {
       alert("Please enter valid latitude and longitude values.");
     }
+  };
+
+  const clearSiteData = () => {
+    localStorage.clear();
+    sessionStorage.clear();
+    window.location.reload();
   };
 
   return (
@@ -343,6 +349,12 @@ const MapComponent: React.FC<Props> = ({
             onClick={() => setShowSearch(!showSearch)}
           >
             {!showSearch ? "Search" : "Search"}
+          </button>
+          <button
+            className={`rounded bg-blue-600 px-4 py-2 text-white hover:bg-blue-700`}
+            onClick={clearSiteData}
+          >
+            Clear
           </button>
         </div>
       )}
