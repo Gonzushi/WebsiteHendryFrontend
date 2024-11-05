@@ -164,7 +164,7 @@ export default function FormLocation(props: FormLocationProps) {
   const openWhatsApp = () => {
     const formattedPhoneNumber = formatPhoneNumber(location?.phone_number!);
     const whatsappLink = `https://wa.me/${formattedPhoneNumber}`;
-    window.open(whatsappLink, "_blank");
+    window.location.href = whatsappLink;
   };
 
   return (
