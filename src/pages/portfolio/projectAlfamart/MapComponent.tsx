@@ -126,9 +126,13 @@ const MapComponent: React.FC<Props> = ({
     }
   };
 
-  const clearSiteData = () => {
-    localStorage.clear();
-    sessionStorage.clear();
+  const clearCache = async () => {
+    const cacheNames = await caches.keys();
+    await Promise.all(
+      cacheNames.map((cacheName) => {
+        return caches.delete(cacheName);
+      }),
+    );
     window.location.reload();
   };
 
@@ -170,7 +174,7 @@ const MapComponent: React.FC<Props> = ({
             placeholder="(-6.475683, 106.843919)"
             value={searchInput}
             onChange={(e) => setSearchInput(e.target.value)}
-            className="w-full rounded border p-2 mb-2"
+            className="mb-2 w-full rounded border p-2"
           />
           <button
             type="submit"
@@ -344,7 +348,7 @@ const MapComponent: React.FC<Props> = ({
           </button>
           <button
             className={`rounded bg-blue-600 px-4 py-2 text-white hover:bg-blue-700`}
-            onClick={clearSiteData}
+            onClick={clearCache}
           >
             Clear
           </button>
