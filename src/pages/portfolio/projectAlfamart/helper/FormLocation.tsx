@@ -27,7 +27,7 @@ const ConfirmationModal = ({
   setDeleteInput: React.Dispatch<React.SetStateAction<string>>;
 }) => {
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 px-4">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 px-4 rounded-xl">
       <div className="w-full max-w-md rounded-md bg-white p-6 shadow-lg">
         <h2 className="text-lg font-semibold text-gray-700">
           Confirm Deletion
