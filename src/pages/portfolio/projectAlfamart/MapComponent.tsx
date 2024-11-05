@@ -66,8 +66,7 @@ const MapComponent: React.FC<Props> = ({
   const [showAlfamartCircles, setShowAlfamartCircles] = useState(false);
   const [showIndomaretCircles, setShowIndomaretCircles] = useState(false);
   const [addedPin, setAddedPin] = useState<[number, number] | null>(null);
-  const [searchLat, setSearchLat] = useState<string>("");
-  const [searchLng, setSearchLng] = useState<string>("");
+  const [searchInput, setSearchInput] = useState<string>("");
   const [showSearch, setShowSearch] = useState(false);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const popupRef = useRef<any>(null);
@@ -110,16 +109,20 @@ const MapComponent: React.FC<Props> = ({
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
-    const lat = parseFloat(searchLat);
-    const lng = parseFloat(searchLng);
+    const regex = /^\s*\(\s*(-?\d+\.\d+)\s*,\s*(-?\d+\.\d+)\s*\)\s*$/;
+    const match = searchInput.match(regex);
 
-    if (!isNaN(lat) && !isNaN(lng)) {
+    if (match) {
+      const lat = parseFloat(match[1]);
+      const lng = parseFloat(match[2]);
       setAddedPin([lat, lng]);
       if (mapRef.current) {
         mapRef.current.setView([lat, lng], 18);
       }
     } else {
-      alert("Please enter valid latitude and longitude values.");
+      alert(
+        "Please enter a valid coordinate in the format: (latitude, longitude)",
+      );
     }
   };
 
@@ -156,37 +159,26 @@ const MapComponent: React.FC<Props> = ({
       />
 
       {/* Search Box */}
-      {showSearch ? (
+      {showSearch && (
         <form
           onSubmit={handleSearch}
           className="absolute bottom-8 left-4 w-full max-w-xs rounded-lg bg-white p-2 shadow-lg sm:bottom-8 sm:left-4 sm:max-w-md"
           style={{ zIndex: 2000 }}
         >
-          <div className="flex flex-col space-y-2 sm:flex-row sm:space-x-2 sm:space-y-0">
-            <input
-              type="text"
-              placeholder="Latitude"
-              value={searchLat}
-              onChange={(e) => setSearchLat(e.target.value)}
-              className="w-full rounded border p-2"
-            />
-            <input
-              type="text"
-              placeholder="Longitude"
-              value={searchLng}
-              onChange={(e) => setSearchLng(e.target.value)}
-              className="w-full rounded border p-2"
-            />
-            <button
-              type="submit"
-              className="w-full rounded bg-blue-500 p-2 text-white sm:w-auto"
-            >
-              Go
-            </button>
-          </div>
+          <input
+            type="text"
+            placeholder="(-6.475683, 106.843919)"
+            value={searchInput}
+            onChange={(e) => setSearchInput(e.target.value)}
+            className="w-full rounded border p-2 mb-2"
+          />
+          <button
+            type="submit"
+            className="w-full rounded bg-blue-500 p-2 text-white"
+          >
+            Go
+          </button>
         </form>
-      ) : (
-        ""
       )}
 
       {showAlfamart && (

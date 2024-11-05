@@ -27,7 +27,7 @@ const ConfirmationModal = ({
   setDeleteInput: React.Dispatch<React.SetStateAction<string>>;
 }) => {
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 px-4 rounded-xl">
+    <div className="fixed inset-0 z-50 flex items-center justify-center rounded-xl bg-black bg-opacity-50 px-4">
       <div className="w-full max-w-md rounded-md bg-white p-6 shadow-lg">
         <h2 className="text-lg font-semibold text-gray-700">
           Confirm Deletion
@@ -149,6 +149,22 @@ export default function FormLocation(props: FormLocationProps) {
     });
     reset();
     setAddedPin(null);
+  };
+
+  const formatPhoneNumber = (phoneNumber: string | null) => {
+    // Format the phone number to international format
+    if (phoneNumber) {
+      if (phoneNumber.startsWith("0")) {
+        return `62${phoneNumber.slice(1)}`; // Change 0 to 62
+      }
+      return phoneNumber; // Return as is if it doesn't start with 0
+    }
+  };
+
+  const openWhatsApp = () => {
+    const formattedPhoneNumber = formatPhoneNumber(location?.phone_number!);
+    const whatsappLink = `https://wa.me/${formattedPhoneNumber}`;
+    window.open(whatsappLink, "_blank");
   };
 
   return (
@@ -311,6 +327,15 @@ export default function FormLocation(props: FormLocationProps) {
               >
                 Edit
               </button>
+              {!editMode && location?.phone_number && (
+                <button
+                  onClick={openWhatsApp}
+                  rel="noopener noreferrer"
+                  className="w-full rounded-md bg-green-600 py-2 text-center text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2"
+                >
+                  WA
+                </button>
+              )}
             </div>
           )}
         </form>
