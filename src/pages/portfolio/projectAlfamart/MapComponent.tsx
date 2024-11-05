@@ -169,13 +169,23 @@ const MapComponent: React.FC<Props> = ({
           className="absolute bottom-8 left-4 w-full max-w-xs rounded-lg bg-white p-2 shadow-lg sm:bottom-8 sm:left-4 sm:max-w-md"
           style={{ zIndex: 2000 }}
         >
-          <input
-            type="text"
-            placeholder="(-6.475683, 106.843919)"
-            value={searchInput}
-            onChange={(e) => setSearchInput(e.target.value)}
-            className="mb-2 w-full rounded border p-2"
-          />
+          <div className="mb-2 flex items-center">
+            <input
+              type="text"
+              placeholder="(-6.475683, 106.843919)"
+              value={searchInput}
+              onChange={(e) => setSearchInput(e.target.value)}
+              className="w-full rounded border p-2"
+            />
+            <button
+              type="button"
+              onClick={() => setSearchInput("")}
+              className="ml-2 p-2 text-blue-500"
+              title="Clear"
+            >
+              X
+            </button>
+          </div>
           <button
             type="submit"
             className="w-full rounded bg-blue-500 p-2 text-white"
