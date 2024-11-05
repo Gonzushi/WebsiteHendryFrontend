@@ -15,30 +15,36 @@ export const blueDotIcon = L.divIcon({
 });
 
 export const sellIcon = L.icon({
-    iconUrl: "/sell_pin.svg", 
-    iconSize: [26, 42],
-    iconAnchor: [12, 25], 
-    popupAnchor: [0, -20], 
-  });
+  iconUrl: "/sell_pin.svg",
+  iconSize: [26, 42],
+  iconAnchor: [12, 25],
+  popupAnchor: [0, -20],
+});
 
 export const alfamartIcon = L.icon({
-  iconUrl: "/alfamart_pin.svg", 
+  iconUrl: "/alfamart_pin.svg",
   iconSize: [26, 42],
-  iconAnchor: [12, 25], 
-  popupAnchor: [0, -20], 
+  iconAnchor: [12, 25],
+  popupAnchor: [0, -20],
 });
 
 export const indomaretIcon = L.icon({
-  iconUrl: "/indomaret_pin.svg", 
+  iconUrl: "/indomaret_pin.svg",
   iconSize: [26, 42],
-  iconAnchor: [12, 25], 
-  popupAnchor: [0, -20], 
+  iconAnchor: [12, 25],
+  popupAnchor: [0, -20],
 });
 
 export const arrowIcon = L.icon({
-    iconUrl: "/arrow2.svg",
-    iconSize: [26, 42],
-    iconAnchor: [12, 25], 
-    popupAnchor: [0, -20],
-  });
-  
+  iconUrl: "/arrow2.svg",
+  iconSize: [26, 42],
+  iconAnchor: [12, 25],
+  popupAnchor: [0, -20],
+});
+
+export const greenIcon = L.icon({
+  iconUrl: "/greenIcon.svg",
+  iconSize: [26, 42],
+  iconAnchor: [12, 25],
+  popupAnchor: [0, -20],
+});

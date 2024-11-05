@@ -14,6 +14,7 @@ import {
   indomaretIcon,
   arrowIcon,
   sellIcon,
+  greenIcon,
 } from "./helper/MapComponentIcon";
 import RotatableMarker from "./helper/RotatableMarker";
 import ClickHandler from "./helper/ClickHandler";
@@ -65,6 +66,8 @@ const MapComponent: React.FC<Props> = ({
   const [showAlfamartCircles, setShowAlfamartCircles] = useState(false);
   const [showIndomaretCircles, setShowIndomaretCircles] = useState(false);
   const [addedPin, setAddedPin] = useState<[number, number] | null>(null);
+  const [searchLat, setSearchLat] = useState<string>("");
+  const [searchLng, setSearchLng] = useState<string>("");
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const popupRef = useRef<any>(null);
 
@@ -95,6 +98,18 @@ const MapComponent: React.FC<Props> = ({
     }
   }, [popupRef.current]);
 
+  const handleSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    const lat = parseFloat(searchLat);
+    const lng = parseFloat(searchLng);
+
+    if (!isNaN(lat) && !isNaN(lng)) {
+      setAddedPin([lat, lng]);
+    } else {
+      alert("Please enter valid latitude and longitude values.");
+    }
+  };
+
   return (
     <MapContainer
       center={[centerLatitude, centerLongitude]}
@@ -118,6 +133,36 @@ const MapComponent: React.FC<Props> = ({
         color="green"
         fillOpacity={0}
       />
+
+      {/* Search Box */}
+      <form
+        onSubmit={handleSearch}
+        className="absolute bottom-9 left-4 w-full max-w-xs rounded-lg bg-white p-2 shadow-lg sm:bottom-9 sm:left-4 sm:max-w-md"
+        style={{ zIndex: 2000 }}
+      >
+        <div className="flex flex-col space-y-2 sm:flex-row sm:space-x-2 sm:space-y-0">
+          <input
+            type="text"
+            placeholder="Latitude"
+            value={searchLat}
+            onChange={(e) => setSearchLat(e.target.value)}
+            className="w-full rounded border p-2"
+          />
+          <input
+            type="text"
+            placeholder="Longitude"
+            value={searchLng}
+            onChange={(e) => setSearchLng(e.target.value)}
+            className="w-full rounded border p-2"
+          />
+          <button
+            type="submit"
+            className="w-full rounded bg-blue-500 p-2 text-white sm:w-auto"
+          >
+            Go
+          </button>
+        </div>
+      </form>
 
       {showAlfamart && (
         <TypedMarkerClusterGroup>
@@ -283,7 +328,7 @@ const MapComponent: React.FC<Props> = ({
           <Marker
             key={location.id}
             position={[location.latitude, location.longitude]}
-            icon={sellIcon}
+            icon={greenIcon}
           >
             <Popup>
               <FormLocation

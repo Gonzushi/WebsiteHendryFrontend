@@ -14,9 +14,55 @@ interface FormLocationProps {
   location?: LocationDataID;
 }
 
+// Confirmation Modal Component
+const ConfirmationModal = ({
+  onConfirm,
+  onCancel,
+  deleteInput,
+  setDeleteInput,
+}: {
+  onConfirm: () => void;
+  onCancel: () => void;
+  deleteInput: string;
+  setDeleteInput: React.Dispatch<React.SetStateAction<string>>;
+}) => {
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+      <div className="w-full max-w-md rounded-md bg-white p-6 shadow-lg">
+        <h2 className="text-lg font-semibold text-gray-700">
+          Confirm Deletion
+        </h2>
+        <p className="mt-2 text-sm text-gray-600">Type "delete" to confirm.</p>
+        <input
+          type="text"
+          value={deleteInput}
+          onChange={(e) => setDeleteInput(e.target.value)}
+          className="mt-4 w-full rounded-md border-2 border-gray-300 px-3 py-2 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+        />
+        <div className="mt-4 flex gap-2">
+          <button
+            onClick={onConfirm}
+            className="w-full rounded-md bg-red-600 py-2 text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2"
+          >
+            Confirm
+          </button>
+          <button
+            onClick={onCancel}
+            className="w-full rounded-md bg-gray-600 py-2 text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2"
+          >
+            Cancel
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 export default function FormLocation(props: FormLocationProps) {
   const { pinLocation, location, setSavedLocations, setAddedPin } = props;
   const [editMode, setEditMode] = useState(props.editMode);
+  const [confirmDelete, setConfirmDelete] = useState(false);
+  const [deleteInput, setDeleteInput] = useState("");
   const { register, handleSubmit, reset, setValue } = useForm();
 
   useEffect(() => {
@@ -33,14 +79,21 @@ export default function FormLocation(props: FormLocationProps) {
   }, [location, setValue]);
 
   const handleDelete = () => {
-    if (location) {
+    if (deleteInput.toLowerCase() === "delete" && location) {
       deleteLocation(location.id).then(() => {
         readLocations().then((data) => {
           setSavedLocations(data);
         });
       });
       reset();
+      setConfirmDelete(false);
+      setDeleteInput("");
     }
+  };
+
+  const handleCancelDelete = () => {
+    setConfirmDelete(false);
+    setDeleteInput("");
   };
 
   const handleCancel = () => {
@@ -59,7 +112,6 @@ export default function FormLocation(props: FormLocationProps) {
   };
 
   const onUpdate = (data: any) => {
-    console.log(data);
     if (location) {
       const locationData: LocationData = {
         latitude: location.latitude,
@@ -71,7 +123,7 @@ export default function FormLocation(props: FormLocationProps) {
         comment: data.comment,
       };
       updateLocation(location.id, locationData).then(() => {
-        setEditMode(false)
+        setEditMode(false);
         location.phone_number = data.phoneNumber;
         location.type = data.type;
         location.area = data.area;
@@ -91,7 +143,6 @@ export default function FormLocation(props: FormLocationProps) {
       price: data.price,
       comment: data.comment,
     };
-    console.log("onSubmit", locationData);
     createLocation(locationData).then(() => {
       readLocations().then((data) => {
         setSavedLocations(data);
@@ -120,7 +171,7 @@ export default function FormLocation(props: FormLocationProps) {
             <input
               type="number"
               {...register("phoneNumber")}
-              className="mt-1 block h-8 w-full rounded-md border-2 border-gray-300 px-3 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+              className="mt-1 block h-10 w-full rounded-md border-2 border-gray-300 px-3 shadow-sm focus:border-blue-500 focus:ring-blue-500"
               disabled={!editMode}
               defaultValue={location?.phone_number}
             />
@@ -131,7 +182,7 @@ export default function FormLocation(props: FormLocationProps) {
             <input
               type="number"
               {...register("area", { setValueAs: (value) => Number(value) })}
-              className="mt-1 block h-8 w-full rounded-md border-2 border-gray-300 px-3 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+              className="mt-1 block h-10 w-full rounded-md border-2 border-gray-300 px-3 shadow-sm focus:border-blue-500 focus:ring-blue-500"
               disabled={!editMode}
               defaultValue={location?.area}
             />
@@ -141,7 +192,7 @@ export default function FormLocation(props: FormLocationProps) {
             <label className="block text-sm text-gray-700">Type:</label>
             <select
               {...register("type")}
-              className="mt-1 block h-8 w-full rounded-md border-2 border-gray-300 bg-white px-3 pr-8 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+              className="mt-1 block h-10 w-full rounded-md border-2 border-gray-300 bg-white px-3 pr-8 shadow-sm focus:border-blue-500 focus:ring-blue-500"
               disabled={!editMode}
               defaultValue={location?.type}
             >
@@ -183,7 +234,7 @@ export default function FormLocation(props: FormLocationProps) {
                   );
                   e.target.value = formattedValue;
                 }}
-                className="mt-1 block h-8 w-full rounded-md border-2 border-gray-300 px-10 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                className="mt-1 block h-10 w-full rounded-md border-2 border-gray-300 px-10 shadow-sm focus:border-blue-500 focus:ring-blue-500"
               />
             </div>
           </div>
@@ -200,20 +251,29 @@ export default function FormLocation(props: FormLocationProps) {
             />
           </div>
 
+          {confirmDelete && (
+            <ConfirmationModal
+              onConfirm={handleDelete}
+              onCancel={handleCancelDelete}
+              deleteInput={deleteInput}
+              setDeleteInput={setDeleteInput}
+            />
+          )}
+
           {editMode ? (
             location ? (
               <div className="flex gap-2">
                 <button
                   type="button"
                   onClick={handleCancel}
-                  className="w-full rounded-md bg-red-600 py-2 text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                  className="w-full rounded-md bg-red-600 py-2 text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2"
                 >
                   Cancel
                 </button>
                 <button
                   type="button"
                   onClick={handleSubmit(onUpdate)}
-                  className="w-full rounded-md bg-blue-600 py-2 text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2"
+                  className="w-full rounded-md bg-blue-600 py-2 text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
                 >
                   Update
                 </button>
@@ -231,7 +291,7 @@ export default function FormLocation(props: FormLocationProps) {
             <div className="flex gap-2">
               <button
                 type="button"
-                onClick={handleDelete}
+                onClick={() => setConfirmDelete(true)}
                 className="w-full rounded-md bg-red-600 py-2 text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2"
               >
                 Delete
