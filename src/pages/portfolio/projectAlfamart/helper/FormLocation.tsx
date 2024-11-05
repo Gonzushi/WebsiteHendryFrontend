@@ -85,7 +85,6 @@ export default function FormLocation(props: FormLocationProps) {
           setSavedLocations(data);
         });
       });
-      reset();
       setConfirmDelete(false);
       setDeleteInput("");
     }
@@ -163,7 +162,16 @@ export default function FormLocation(props: FormLocationProps) {
         Location
       </a>
       <div className="relative">
-        <form onSubmit={handleSubmit(onSubmit)} className="mt-5 w-48">
+        <form
+          onSubmit={(e) => {
+            if (confirmDelete) {
+              e.preventDefault(); // Prevent form submission when in delete confirmation mode
+            } else {
+              handleSubmit(onSubmit)(e);
+            }
+          }}
+          className="mt-5 w-48"
+        >
           {/* Input fields remain unchanged */}
 
           <div className="mb-2">
