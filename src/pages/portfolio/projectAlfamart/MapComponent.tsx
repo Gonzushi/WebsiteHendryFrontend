@@ -22,6 +22,7 @@ import "leaflet/dist/leaflet.css";
 import "react-leaflet-markercluster/dist/styles.min.css";
 import { RotateMap } from "./helper/RotateMap";
 import FormLocation from "./helper/FormLocation";
+import MemoizedMarker from "./helper/MemoizedMarker";
 
 const TypedMarkerClusterGroup = MarkerClusterGroup as React.ComponentType<any>;
 
@@ -68,7 +69,6 @@ const MapComponent: React.FC<Props> = ({
   const [addedPin, setAddedPin] = useState<[number, number] | null>(null);
   const [searchInput, setSearchInput] = useState<string>("");
   const [showSearch, setShowSearch] = useState(false);
-  const [isPopupOpen, setIsPopupOpen] = useState(false);
   const popupRef = useRef<any>(null);
   const mapRef = useRef<any>(null);
 
@@ -100,13 +100,6 @@ const MapComponent: React.FC<Props> = ({
     }
   }, []);
 
-  useEffect(() => {
-    if (popupRef.current) {
-      console.log(popupRef.current);
-      setIsPopupOpen(false);
-    }
-  }, [popupRef.current]);
-
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
     const regex = /^\s*\(\s*(-?\d+\.\d+)\s*,\s*(-?\d+\.\d+)\s*\)\s*$/;
@@ -125,39 +118,6 @@ const MapComponent: React.FC<Props> = ({
       );
     }
   };
-
-  const AlfamartMarkers = React.useMemo(
-    () =>
-      alfamartLocations.map((location) => (
-        <Marker
-          key={location.place_id}
-          position={[
-            location.geometry.location.lat,
-            location.geometry.location.lng,
-          ]}
-          icon={alfamartIcon}
-        >
-          <Popup>
-            <strong>
-              <a
-                href={`https://www.google.com/maps?q=${location.geometry.location.lat},${location.geometry.location.lng}`}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                {location.name}
-              </a>
-            </strong>
-            <br />
-            {location.vicinity}
-          </Popup>
-        </Marker>
-      )),
-    [alfamartLocations],
-  );
-
-  const AlfamartClusterGroup = React.memo(() => (
-    <TypedMarkerClusterGroup>{AlfamartMarkers}</TypedMarkerClusterGroup>
-  ));
 
   const clearCache = async () => {
     const cacheNames = await caches.keys();
@@ -228,33 +188,38 @@ const MapComponent: React.FC<Props> = ({
         </form>
       )}
 
-      {showAlfamart && <AlfamartClusterGroup />}
+      {showAlfamart && (
+        <TypedMarkerClusterGroup>
+          {alfamartLocations.map((location) => (
+            <MemoizedMarker
+              key={location.place_id}
+              position={[
+                location.geometry.location.lat,
+                location.geometry.location.lng,
+              ]}
+              icon={alfamartIcon}
+              name={location.name}
+              vicinity={location.vicinity}
+              place_id={location.place_id}
+            />
+          ))}
+        </TypedMarkerClusterGroup>
+      )}
 
       {showIndomaret && (
         <TypedMarkerClusterGroup>
           {indomaretLocations.map((location) => (
-            <Marker
+            <MemoizedMarker
               key={location.place_id}
               position={[
                 location.geometry.location.lat,
                 location.geometry.location.lng,
               ]}
               icon={indomaretIcon}
-            >
-              <Popup>
-                <strong>
-                  <a
-                    href={`https://www.google.com/maps?q=${location.geometry.location.lat},${location.geometry.location.lng}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    {location.name}
-                  </a>
-                </strong>
-                <br />
-                {location.vicinity}
-              </Popup>
-            </Marker>
+              name={location.name}
+              vicinity={location.vicinity}
+              place_id={location.place_id}
+            />
           ))}
         </TypedMarkerClusterGroup>
       )}
@@ -327,49 +292,47 @@ const MapComponent: React.FC<Props> = ({
         </div>
       )}
 
-      {!isPopupOpen && (
-        <div
-          className="absolute right-2 top-2 flex flex-col space-y-2 sm:left-14 sm:top-4 sm:flex-row sm:space-x-2 sm:space-y-0"
-          style={{ zIndex: 400 }}
+      <div
+        className="absolute right-2 top-2 flex flex-col space-y-2 sm:left-14 sm:top-4 sm:flex-row sm:space-x-2 sm:space-y-0"
+        style={{ zIndex: 400 }}
+      >
+        <button
+          className={`rounded px-4 py-2 text-white ${showAlfamart ? "bg-blue-600" : "bg-gray-400"}`}
+          onClick={() => setShowAlfamart(!showAlfamart)}
         >
-          <button
-            className={`rounded px-4 py-2 text-white ${showAlfamart ? "bg-blue-600" : "bg-gray-400"}`}
-            onClick={() => setShowAlfamart(!showAlfamart)}
-          >
-            {showAlfamart ? "Alfa" : "Alfa"}
-          </button>
-          <button
-            className={`rounded px-4 py-2 text-white ${showAlfamartCircles ? "bg-blue-600" : "bg-gray-400"}`}
-            onClick={() => setShowAlfamartCircles(!showAlfamartCircles)}
-          >
-            {showAlfamartCircles ? "Alfa O" : "Alfa O"}
-          </button>
-          <button
-            className={`rounded px-4 py-2 text-white ${showIndomaret ? "bg-red-600" : "bg-gray-400"}`}
-            onClick={() => setShowIndomaret(!showIndomaret)}
-          >
-            {showIndomaret ? "Indo" : "Indo"}
-          </button>
-          <button
-            className={`rounded px-4 py-2 text-white ${showIndomaretCircles ? "bg-red-600" : "bg-gray-400"}`}
-            onClick={() => setShowIndomaretCircles(!showIndomaretCircles)}
-          >
-            {showIndomaretCircles ? "Indo O" : "Indo O"}
-          </button>
-          <button
-            className={`rounded px-4 py-2 text-white ${showSearch ? "bg-blue-600" : "bg-gray-400"}`}
-            onClick={() => setShowSearch(!showSearch)}
-          >
-            {!showSearch ? "Search" : "Search"}
-          </button>
-          <button
-            className={`rounded bg-blue-600 px-4 py-2 text-white hover:bg-blue-700`}
-            onClick={clearCache}
-          >
-            Clear
-          </button>
-        </div>
-      )}
+          {showAlfamart ? "Alfa" : "Alfa"}
+        </button>
+        <button
+          className={`rounded px-4 py-2 text-white ${showAlfamartCircles ? "bg-blue-600" : "bg-gray-400"}`}
+          onClick={() => setShowAlfamartCircles(!showAlfamartCircles)}
+        >
+          {showAlfamartCircles ? "Alfa O" : "Alfa O"}
+        </button>
+        <button
+          className={`rounded px-4 py-2 text-white ${showIndomaret ? "bg-red-600" : "bg-gray-400"}`}
+          onClick={() => setShowIndomaret(!showIndomaret)}
+        >
+          {showIndomaret ? "Indo" : "Indo"}
+        </button>
+        <button
+          className={`rounded px-4 py-2 text-white ${showIndomaretCircles ? "bg-red-600" : "bg-gray-400"}`}
+          onClick={() => setShowIndomaretCircles(!showIndomaretCircles)}
+        >
+          {showIndomaretCircles ? "Indo O" : "Indo O"}
+        </button>
+        <button
+          className={`rounded px-4 py-2 text-white ${showSearch ? "bg-blue-600" : "bg-gray-400"}`}
+          onClick={() => setShowSearch(!showSearch)}
+        >
+          {!showSearch ? "Search" : "Search"}
+        </button>
+        <button
+          className={`rounded bg-blue-600 px-4 py-2 text-white hover:bg-blue-700`}
+          onClick={clearCache}
+        >
+          Clear
+        </button>
+      </div>
 
       {/* Add Saved Location Pin */}
       {savedLocations &&
