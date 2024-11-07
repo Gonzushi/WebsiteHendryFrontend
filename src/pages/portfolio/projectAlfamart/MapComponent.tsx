@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef, useMemo } from "react";
 import {
   MapContainer,
   TileLayer,
@@ -71,6 +71,15 @@ const MapComponent: React.FC<Props> = ({
   const [showSearch, setShowSearch] = useState(false);
   const popupRef = useRef<any>(null);
   const mapRef = useRef<any>(null);
+
+  const memoizedAlfamartLocations = useMemo(
+    () => alfamartLocations,
+    [alfamartLocations],
+  );
+  const memoizedIndomaretLocations = useMemo(
+    () => indomaretLocations,
+    [indomaretLocations],
+  );
 
   const MapInitializer: React.FC = () => {
     const map = useMap();
@@ -190,7 +199,7 @@ const MapComponent: React.FC<Props> = ({
 
       {showAlfamart && (
         <TypedMarkerClusterGroup>
-          {alfamartLocations.map((location) => (
+          {memoizedAlfamartLocations.map((location) => (
             <MemoizedMarker
               key={location.place_id}
               position={[
@@ -208,7 +217,7 @@ const MapComponent: React.FC<Props> = ({
 
       {showIndomaret && (
         <TypedMarkerClusterGroup>
-          {indomaretLocations.map((location) => (
+          {memoizedIndomaretLocations.map((location) => (
             <MemoizedMarker
               key={location.place_id}
               position={[
@@ -225,7 +234,7 @@ const MapComponent: React.FC<Props> = ({
       )}
 
       {showAlfamartCircles &&
-        alfamartLocations.map((location) => (
+        memoizedAlfamartLocations.map((location) => (
           <Circle
             key={location.place_id}
             center={[
@@ -239,7 +248,7 @@ const MapComponent: React.FC<Props> = ({
         ))}
 
       {showIndomaretCircles &&
-        indomaretLocations.map((location) => (
+        memoizedIndomaretLocations.map((location) => (
           <Circle
             key={location.place_id}
             center={[
