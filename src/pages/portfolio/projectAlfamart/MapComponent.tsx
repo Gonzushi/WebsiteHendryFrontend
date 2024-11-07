@@ -76,7 +76,7 @@ const MapComponent: React.FC<Props> = ({
     const map = useMap();
     useEffect(() => {
       mapRef.current = map;
-    }, [map]);
+    }, []);
     return null;
   };
 
