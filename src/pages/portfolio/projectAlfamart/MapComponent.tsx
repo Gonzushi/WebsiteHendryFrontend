@@ -126,6 +126,39 @@ const MapComponent: React.FC<Props> = ({
     }
   };
 
+  const AlfamartMarkers = React.useMemo(
+    () =>
+      alfamartLocations.map((location) => (
+        <Marker
+          key={location.place_id}
+          position={[
+            location.geometry.location.lat,
+            location.geometry.location.lng,
+          ]}
+          icon={alfamartIcon}
+        >
+          <Popup>
+            <strong>
+              <a
+                href={`https://www.google.com/maps?q=${location.geometry.location.lat},${location.geometry.location.lng}`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {location.name}
+              </a>
+            </strong>
+            <br />
+            {location.vicinity}
+          </Popup>
+        </Marker>
+      )),
+    [alfamartLocations],
+  );
+
+  const AlfamartClusterGroup = React.memo(() => (
+    <TypedMarkerClusterGroup>{AlfamartMarkers}</TypedMarkerClusterGroup>
+  ));
+
   const clearCache = async () => {
     const cacheNames = await caches.keys();
     await Promise.all(
@@ -195,34 +228,7 @@ const MapComponent: React.FC<Props> = ({
         </form>
       )}
 
-      {showAlfamart && (
-        <TypedMarkerClusterGroup>
-          {alfamartLocations.map((location) => (
-            <Marker
-              key={location.place_id}
-              position={[
-                location.geometry.location.lat,
-                location.geometry.location.lng,
-              ]}
-              icon={alfamartIcon}
-            >
-              <Popup>
-                <strong>
-                  <a
-                    href={`https://www.google.com/maps?q=${location.geometry.location.lat},${location.geometry.location.lng}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    {location.name}
-                  </a>
-                </strong>
-                <br />
-                {location.vicinity}
-              </Popup>
-            </Marker>
-          ))}
-        </TypedMarkerClusterGroup>
-      )}
+      {showAlfamart && <AlfamartClusterGroup />}
 
       {showIndomaret && (
         <TypedMarkerClusterGroup>
