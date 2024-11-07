@@ -28,13 +28,28 @@ const TypedMarkerClusterGroup = MarkerClusterGroup as React.ComponentType<any>;
 
 const FocusToUserLocationButton: React.FC<{
   userPosition: [number, number] | null;
-}> = ({ userPosition }) => {
+  getCurrentPosition: () => Promise<[number, number, number | null]>;
+  setUserPosition: React.Dispatch<
+    React.SetStateAction<[number, number] | null>
+  >;
+  setHeading: React.Dispatch<React.SetStateAction<number | null>>;
+}> = ({ userPosition, getCurrentPosition, setUserPosition, setHeading }) => {
   const map = useMap();
 
   const handleFocus = () => {
-    if (userPosition) {
-      map.setView(userPosition, 18);
-    }
+    getCurrentPosition()
+      .then(([lat, lng, heading]) => {
+        setUserPosition([lat, lng]);
+        setHeading(heading);
+      })
+      .then(() => {
+        if (userPosition) {
+          map.setView(userPosition, 18);
+        }
+      })
+      .catch((error) => {
+        console.error(error.message);
+      });
   };
 
   return (
@@ -89,24 +104,36 @@ const MapComponent: React.FC<Props> = ({
     return null;
   };
 
-  useEffect(() => {
-    if (navigator.geolocation) {
-      const watchId = navigator.geolocation.watchPosition(
-        (position) => {
-          const { latitude, longitude, heading } = position.coords;
-          setUserPosition([latitude, longitude]);
-          if (heading !== null) setHeading(heading);
-        },
-        () => {
-          // alert("Unable to retrieve your location.");
-        },
-        { enableHighAccuracy: true },
-      );
+  const getCurrentPosition = (): Promise<[number, number, number | null]> => {
+    return new Promise((resolve, reject) => {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+          (position) => {
+            const { latitude, longitude, heading } = position.coords;
+            resolve([latitude, longitude, heading ?? null]);
+          },
+          (error) => {
+            if (error) {
+              reject(new Error("Unable to retrieve your location."));
+            }
+          },
+          { enableHighAccuracy: true },
+        );
+      } else {
+        reject(new Error("Geolocation is not supported by this browser."));
+      }
+    });
+  };
 
-      return () => navigator.geolocation.clearWatch(watchId);
-    } else {
-      alert("Geolocation is not supported by this browser.");
-    }
+  useEffect(() => {
+    getCurrentPosition()
+      .then(([lat, lng, heading]) => {
+        setUserPosition([lat, lng]);
+        setHeading(heading);
+      })
+      .catch((error) => {
+        console.error(error.message);
+      });
   }, []);
 
   const handleSearch = (e: React.FormEvent) => {
@@ -153,7 +180,7 @@ const MapComponent: React.FC<Props> = ({
 
       <RotateMap />
 
-      <FocusToUserLocationButton userPosition={userPosition} />
+      <FocusToUserLocationButton userPosition={userPosition} getCurrentPosition={getCurrentPosition} setHeading={setHeading} setUserPosition={setUserPosition}/>
 
       <ClickHandler setAddedPin={setAddedPin} />
 
