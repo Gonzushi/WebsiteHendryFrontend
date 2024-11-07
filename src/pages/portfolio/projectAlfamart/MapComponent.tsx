@@ -80,8 +80,6 @@ const MapComponent: React.FC<Props> = ({
     () => indomaretLocations,
     [indomaretLocations],
   );
-  const MemoizedAlfamartMarker = React.memo(MemoizedMarker);
-  const MemoizedIndomaretMarker = React.memo(MemoizedMarker);
 
   const MapInitializer: React.FC = () => {
     const map = useMap();
@@ -202,7 +200,7 @@ const MapComponent: React.FC<Props> = ({
       {showAlfamart && (
         <TypedMarkerClusterGroup>
           {memoizedAlfamartLocations.map((location) => (
-            <MemoizedAlfamartMarker
+            <MemoizedMarker
               key={location.place_id}
               position={[
                 location.geometry.location.lat,
@@ -220,7 +218,7 @@ const MapComponent: React.FC<Props> = ({
       {showIndomaret && (
         <TypedMarkerClusterGroup>
           {memoizedIndomaretLocations.map((location) => (
-            <MemoizedIndomaretMarker
+            <MemoizedMarker
               key={location.place_id}
               position={[
                 location.geometry.location.lat,
