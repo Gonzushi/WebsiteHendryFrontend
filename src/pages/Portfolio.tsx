@@ -127,6 +127,48 @@ export default function Portfolio() {
                 </div>
               </div>
             </Link>
+
+            <Link to="project-kost/jakarta">
+              <div className="items-center rounded-lg border border-gray-300 px-4 py-4 shadow-md  hover:shadow-lg sm:flex">
+                <div className="relative mx-auto size-48 min-w-48 overflow-hidden rounded-lg border-2 border-gray-200 py-14 shadow-md">
+                  <img
+                    src={WebsiteAnalyticsLogo}
+                    alt="Kost di Jakarta"
+                    className="absolute top-0 mx-auto"
+                  />
+                </div>
+                <div className="p-5 text-center">
+                  <h3 className="text-gray-90 text-xl font-bold tracking-tight">
+                    Kost di Jakarta
+                  </h3>
+                  <span className="text-gray-500">Scrapping Rumah 123</span>
+                  <p className="mb-4 mt-3 font-normal text-gray-500">
+                    To check kost that is being sold in Jakarta. To get some insight.
+                  </p>
+                </div>
+              </div>
+            </Link>
+
+            <Link to="project-kost/depok">
+              <div className="items-center rounded-lg border border-gray-300 px-4 py-4 shadow-md  hover:shadow-lg sm:flex">
+                <div className="relative mx-auto size-48 min-w-48 overflow-hidden rounded-lg border-2 border-gray-200 py-14 shadow-md">
+                  <img
+                    src={WebsiteAnalyticsLogo}
+                    alt="Kost di Depok"
+                    className="absolute top-0 mx-auto"
+                  />
+                </div>
+                <div className="p-5 text-center">
+                  <h3 className="text-gray-90 text-xl font-bold tracking-tight">
+                    Kost di Depok
+                  </h3>
+                  <span className="text-gray-500">Scrapping Rumah 123</span>
+                  <p className="mb-4 mt-3 font-normal text-gray-500">
+                    To check kost that is being sold in Depok. To get some insight.
+                  </p>
+                </div>
+              </div>
+            </Link>
           </div>
         </div>
       </section>

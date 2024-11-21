@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import jsonData from "./pg_bandung.json";
+import jsonData from "./pg_depok.json";
 
 // Define the structure of the JSON data
 interface Property {
@@ -58,7 +58,7 @@ const PropertyTable: React.FC = () => {
         {" "}
         {/* Set max width and padding */}
         <h2 className="mb-6 text-center text-2xl font-bold text-gray-800">
-          Property Listings Bandung
+          Property Listings Depok
         </h2>
         {data.length > 0 ? (
           <div className="overflow-x-auto">
