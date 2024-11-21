@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import IconWip from "../assetts/icons/IconWip";
 import CrudLogo from "../assetts/crud_application.jpg";
 import WebsiteAnalyticsLogo from "../assetts/website_analytics.jpg";
 

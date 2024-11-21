@@ -78,13 +78,13 @@ const calculateLoan = (
 
 const App: React.FC = () => {
   const [principal, setPrincipal] = useState<number>(0);
-  const [rates, setRates] = useState<InterestRate[]>([
+  const rates: InterestRate[] = [
     { startMonth: 1, endMonth: 12, rate: 2.79 },
     { startMonth: 13, endMonth: 36, rate: 5.79 },
     { startMonth: 37, endMonth: 72, rate: 8.1 },
     { startMonth: 73, endMonth: 120, rate: 10.1 },
     { startMonth: 121, endMonth: 240, rate: 12.0 },
-  ]);
+  ];
   const [results, setResults] = useState<LoanCalculationResult[]>([]);
 
   const handleCalculation = () => {
