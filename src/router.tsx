@@ -14,6 +14,8 @@ import LocationLog from "./pages/portfolio/LocationLog";
 import ProjectCrudHome from "./pages/portfolio/projectCrud/ProjectCrudHome";
 import ProjectCrudBrand from "./pages/portfolio/projectCrud/ProjectCrudBrand";
 import ProjectCrudProduct from "./pages/portfolio/projectCrud/ProjectCrudProduct";
+import LoanCalculator from "./pages/portfolio/projectCalculator/LoanCalculator";
+import Bandung from "./pages/portfolio/projectKost/Bandung"
 import Resume from "./pages/Resume";
 import NotFound from "./pages/NotFound";
 // import InProgress from "./pages/InProgress";
@@ -34,9 +36,11 @@ const router = createBrowserRouter(
           <Route path="brand" element={<ProjectCrudBrand />} />
           <Route path="product" element={<ProjectCrudProduct />} />
         </Route>
+        <Route path="project-kost/bandung" element={<Bandung />} />
         <Route path="website-analytics" element={<WebsiteAnalytics />} />
         <Route path="alfamart-locations" element={<AlfamartLocations />} />
         <Route path="location-log" element={<LocationLog />} />
+        <Route path="calculator" element={<LoanCalculator />} />
       </Route>
       <Route path="resume" element={<Resume />} />
 
