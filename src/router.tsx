@@ -18,6 +18,7 @@ import LoanCalculator from "./pages/portfolio/projectCalculator/LoanCalculator";
 import Bandung from "./pages/portfolio/projectKost/Bandung";
 import Jakarta from "./pages/portfolio/projectKost/Jakarta";
 import Depok from "./pages/portfolio/projectKost/Depok";
+import Rumah123 from "./pages/portfolio/projectKost/Rumah123";
 import Resume from "./pages/Resume";
 import NotFound from "./pages/NotFound";
 // import InProgress from "./pages/InProgress";
@@ -41,6 +42,7 @@ const router = createBrowserRouter(
         <Route path="project-kost/bandung" element={<Bandung />} />
         <Route path="project-kost/jakarta" element={<Jakarta />} />
         <Route path="project-kost/depok" element={<Depok />} />
+        <Route path="project-kost/rumah123" element={<Rumah123 />} />
         <Route path="website-analytics" element={<WebsiteAnalytics />} />
         <Route path="alfamart-locations" element={<AlfamartLocations />} />
         <Route path="location-log" element={<LocationLog />} />
