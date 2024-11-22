@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import jsonData from "./pg_bandung.json";
 
 // Define the structure of the JSON data
@@ -17,12 +17,19 @@ interface Property {
   "Area per Bedroom": number;
 }
 
+interface PropertyWithScoreAndRatio extends Property {
+  Score: number;
+  "Floor Ratio": number;
+}
+
 const PropertyTable: React.FC = () => {
   // State for the data, columns, and sorting
-  const [data, setData] = useState<Property[]>(jsonData);
+  const [data, setData] = useState<PropertyWithScoreAndRatio[]>([]);
   const [columns] = useState<string[]>([
     "Title",
     "Price",
+    "Score",
+    "Floor Ratio",
     "Price per Bedroom",
     "Detail",
     "Location",
@@ -36,21 +43,37 @@ const PropertyTable: React.FC = () => {
   // State for selected row
   const [selectedRow, setSelectedRow] = useState<number | null>(null);
 
+  // Function to calculate Score and Floor Ratio
+  const calculateDerivedFields = (): PropertyWithScoreAndRatio[] => {
+    return jsonData.map((property) => ({
+      ...property,
+      Score: (0.2 * property.Price) / (property["Building Area"] / 20) / 12,
+      "Floor Ratio": property["Building Area"] / property["Land Area"],
+    }));
+  };
+
+  // Initialize data with calculated fields
+  useEffect(() => {
+    setData(calculateDerivedFields());
+  }, []);
+
   // Function to format numbers to 2 decimal places
   const formatNumber = (num: number): string => num.toFixed(2);
 
   // Function to handle sorting
   const handleSort = (column: string) => {
     const sortedData = [...data].sort((a, b) => {
-      const aValue = a[column as keyof Property];
-      const bValue = b[column as keyof Property];
+      const aValue = a[column as keyof PropertyWithScoreAndRatio];
+      const bValue = b[column as keyof PropertyWithScoreAndRatio];
 
       // Handle sorting of numbers and strings
       if (typeof aValue === "number" && typeof bValue === "number") {
         return sortAsc ? aValue - bValue : bValue - aValue;
       }
       if (typeof aValue === "string" && typeof bValue === "string") {
-        return sortAsc ? aValue.localeCompare(bValue) : bValue.localeCompare(aValue);
+        return sortAsc
+          ? aValue.localeCompare(bValue)
+          : bValue.localeCompare(aValue);
       }
       return 0; // Fallback for unhandled types
     });
@@ -76,7 +99,7 @@ const PropertyTable: React.FC = () => {
     <div className="flex min-h-screen flex-col items-center bg-white p-4">
       <div className="w-full max-w-screen-xl px-0 lg:px-6 xl:px-8">
         <h2 className="mb-6 text-center text-2xl font-bold text-gray-800">
-          Property Listings Bandung
+          Property Listings
         </h2>
         {data.length > 0 ? (
           <div className="overflow-x-auto">
@@ -86,33 +109,31 @@ const PropertyTable: React.FC = () => {
                   {columns.map((col, index) => (
                     <th
                       key={index}
-                      className="px-4 py-2 text-center text-sm font-medium cursor-pointer"
+                      className="cursor-pointer px-4 py-2 text-center text-sm font-medium"
                       onClick={() => handleSort(col)}
                       style={
                         col === "Title"
                           ? { width: "12rem" }
-                          : col === "Price"
-                          ? { width: "4rem" }
-                          : col === "Price per Bedroom"
-                          ? { width: "4rem" }
-                          : col === "Detail"
-                          ? { width: "10rem" }
-                          : col === "Location"
-                          ? { width: "6rem" }
-                          : col === "Cost per Bedroom"
-                          ? { width: "6rem" }
-                          : col === "Area per Bedroom"
-                          ? { width: "6rem" }
-                          : col === "Agent Name"
-                          ? { width: "8rem" }
-                          : { width: "8rem" }
+                          : col === "Price" || col === "Score"
+                            ? { width: "6rem" }
+                            : col === "Floor Ratio"
+                              ? { width: "6rem" }
+                              : col === "Detail"
+                                ? { width: "10rem" }
+                                : col === "Location"
+                                  ? { width: "6rem" }
+                                  : col === "Cost per Bedroom"
+                                    ? { width: "6rem" }
+                                    : col === "Area per Bedroom"
+                                      ? { width: "6rem" }
+                                      : col === "Agent Name"
+                                        ? { width: "8rem" }
+                                        : { width: "8rem" }
                       }
                     >
                       {col}
                       {sortColumn === col && (
-                        <span className="ml-2">
-                          {sortAsc ? "↑" : "↓"}
-                        </span> // Show sorting direction
+                        <span className="ml-2">{sortAsc ? "↑" : "↓"}</span> // Show sorting direction
                       )}
                     </th>
                   ))}
@@ -127,18 +148,20 @@ const PropertyTable: React.FC = () => {
                       selectedRow === rowIndex
                         ? "bg-green-200"
                         : rowIndex % 2 === 0
-                        ? "bg-gray-100"
-                        : "bg-white"
+                          ? "bg-gray-100"
+                          : "bg-white"
                     }`}
                   >
                     {columns.map((col, colIndex) => (
                       <td
                         key={colIndex}
                         className={`px-4 py-2 text-sm text-gray-700 ${
+                          col === "Price" ||
+                          col === "Score" ||
+                          col === "Floor Ratio" ||
                           col === "Price per Bedroom" ||
                           col === "Cost per Bedroom" ||
                           col === "Area per Bedroom" ||
-                          col === "Price" ||
                           col === "Detail"
                             ? "text-center"
                             : ""
@@ -162,12 +185,18 @@ const PropertyTable: React.FC = () => {
                           >
                             {`${row.Bedrooms} / ${row.Bathrooms} / ${row["Land Area"]} / ${row["Building Area"]}`}
                           </a>
-                        ) : col === "Price per Bedroom" ||
+                        ) : col === "Score" ||
+                          col === "Floor Ratio" ||
+                          col === "Price per Bedroom" ||
                           col === "Cost per Bedroom" ||
                           col === "Area per Bedroom" ? (
-                          formatNumber(row[col as keyof Property] as number)
+                          formatNumber(
+                            row[
+                              col as keyof PropertyWithScoreAndRatio
+                            ] as number,
+                          )
                         ) : (
-                          row[col as keyof Property] || "-"
+                          row[col as keyof PropertyWithScoreAndRatio] || "-"
                         )}
                       </td>
                     ))}
