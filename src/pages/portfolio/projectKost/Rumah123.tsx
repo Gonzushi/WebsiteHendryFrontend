@@ -53,23 +53,6 @@ const PropertyTableWithForm: React.FC = () => {
   const [sortAsc, setSortAsc] = useState<boolean>(true);
   const [selectedRow, setSelectedRow] = useState<number | null>(null);
 
-  // Fetch data based on the form query
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const query = new URLSearchParams(formData as any).toString();
-        const response = await axios.get(
-          `https://api.hendrywidyanto.com/rumah123/?${query}`,
-        );
-        setData(response.data); // Update state with fetched data
-      } catch (error) {
-        console.error("Error fetching data", error);
-      }
-    };
-
-    fetchData();
-  }, [formData]);
-
   // Function to format numbers to 2 decimal places
   const formatNumber = (num: string | number): string => {
     const numericValue = typeof num === "number" ? num : parseFloat(num);
